@@ -3,5 +3,3 @@
 ?>
     
 <?php
-    echo "hello world ";
-?>
