@@ -41,7 +41,7 @@
         $vkey = $_GET['vkey'];
         $email = $_GET['email'];
 
-        $to   = $username;
+        $to   = $email;
         $from = 'hello@lavizadevelops.com';
         $name = 'Devicks';
         $subj = 'Email Verification from Devicks';
