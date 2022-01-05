@@ -47,7 +47,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && $_POST['password'] ==
             $uid = $row['id'];
         }
 
-        header("Location: ../mailer/mail.php?email=$email&vkey=$vkey");
+        header("Location: ../mailer/verificationMail.php?email=$email&vkey=$vkey");
         exit();
 
         /*$to = $username;
