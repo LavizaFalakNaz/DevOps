@@ -49,7 +49,7 @@
         $msg = "<h3>Thankyou for choosing Devicks</h3>";
         $msg .= "<p>We received a registration request from your email and this email is sent to confirm your registration.</p>";
         /*UPDATE URL WHEN PUSHING THE CODE TO THE REPO*/
-        $msg .= "<a href='localhost/DevOps/verify.php?vkey=$vkey'>";
+        $msg .= "<a href='https://devops-fyp.herokuapp.com//verify.php?vkey=$vkey'>";
         $msg .= "Click here to Verify your account ";
         $msg .= "</a>";
         $msg .= "<hr>";
