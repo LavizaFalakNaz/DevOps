@@ -1,15 +1,14 @@
-<html>
 <?php
-require "../config/config.php";
-if (!isset($_SESSION['email']) && !isset($_SESSION['id'])) {
+session_start();
+include "../config/config.php";
+
+if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     //we close php here so that whatever happens after it is in loop
 ?>
-    <p>This is home page
-        <button onclick="window.location.href = '../index.php';">Logout</button>
 
-</html>
+<?php echo $_SESSION['email']; ?>
+
 <?php } else {
-    header("Location: ../index.php");
+    header("Location: login.php/?error=Please login to your account first.");
 }
-
 ?>
