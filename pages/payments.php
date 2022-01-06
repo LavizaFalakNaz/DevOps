@@ -85,8 +85,8 @@ try {
                 $plancurrency
                 $planinterval - $subsData['plan']['interval'];
                 $planIntervalcount = $subsData['plan']['interval_count'];
-                Screated = date("Y-m-d H:i:s", $subsData[ 'created']);
-                Scurrent period_start = date( "Y-m-d H:i:s", $subsData['current_period_start']);
+                $created = date("Y-m-d H:i:s", $subsData[ 'created']);
+                $current period_start = date( "Y-m-d H:i:s", $subsData['current_period_start']);
                       SsubsData[ 'plan']['id'];
                         - $subsData[ 'plan']['currency'];
                                                     od end),
