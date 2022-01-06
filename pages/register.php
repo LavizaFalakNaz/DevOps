@@ -34,7 +34,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && $_POST['password'] ==
     //the time stamp changes every second and the user may only have one email
     // in this way, this vkey becomes very unique
     $vkey = md5(time() . $email);
-    $insert = "INSERT INTO registrations (name, email, password, cpassword, token) VALUES ('$name','$email','$pass','$cpass', '$vkey')";
+    $insert = "INSERT INTO registrations (name, email, password, token) VALUES ('$name','$email','$pass', '$vkey')";
 
     if (!mysqli_query($con, $insert)) {
         die('Error: ' . mysqli_error($con));
