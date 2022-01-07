@@ -33,7 +33,7 @@ if (isset($_POST['reset-password'])) {
         if (!mysqli_query($db, $insert)) {
             die('Error: ' . mysqli_error($db));
         } else {
-            $query = "SELECT id  FROM passwords_reset WHERE email = '$email' AND status = '$vkey'";
+            $query = "SELECT id FROM passwords_reset WHERE email = '$email' AND status = '$vkey'";
             $result = mysqli_query($con, $query);
             if (mysqli_num_rows($result) === 1) {
                 $row = mysqli_fetch_assoc($result);
