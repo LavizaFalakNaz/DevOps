@@ -70,7 +70,7 @@ if (isset($_POST['new_password'])) {
             $sql = "UPDATE registrations SET password='$new_pass' WHERE email='$email'";
             $results = mysqli_query($mysqli, $sql);
             $update = $mysqli->query("UPDATE passwords_reset SET status = 1 WHERE token = '$token' LIMIT 1");
-            header('location: ../pageslogin.php?error=Password Updated! you can  now login.');
+            header('location: ../pages/login.php?error=Password Updated! you can  now login.');
         }
     }
 }
