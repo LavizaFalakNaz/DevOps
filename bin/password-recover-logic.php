@@ -38,9 +38,9 @@ if (isset($_POST['reset-password'])) {
             if (mysqli_num_rows($result) === 1) {
                 $row = mysqli_fetch_assoc($result);
                 $uid = $row['id'];
+                header("Location: ../mailer/passwordResetMail.php?vkey=$vkey&email=$email");
+                exit();
             }
-            header("Location: ../mailer/passwordResetMail.php?vkey=$vkey&email=$email");
-            exit();
         }
     }
 }
