@@ -85,7 +85,7 @@ if (!isset($_SESSION['email']) && !isset($_SESSION['id'])) {
                     <!-- /.social-auth-links -->
 
                     <p class="mb-1">
-                        <a href="forgot-password.html">I forgot my password</a>
+                        <a href="forgot-password.php">I forgot my password</a>
                     </p>
                     <p class="mb-0">
                         <a href="signup.php" class="text-center">Register a new membership</a>

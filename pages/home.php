@@ -7,8 +7,9 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 ?>
 
 <?php echo $_SESSION['email']; ?>
+<button onclick="location.href='logout.php'">Logout</button>
 
 <?php } else {
-    header("Location: login.php/?error=Please login to your account first.");
+    header("Location: login.php?error=Please login to your account first.");
 }
 ?>
