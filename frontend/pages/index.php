@@ -1,6 +1,7 @@
 <?php 
 // Include configuration file  
-require_once 'C:\laragon\www\devops\pagesconfig.php'; 
+require_once '
+config.php'; 
 ?>
 <div class="panel">
     <form action="payment.php" method="POST" id="paymentFrm">
