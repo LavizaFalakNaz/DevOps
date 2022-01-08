@@ -22,3 +22,6 @@
     if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
     }
+    //ye dosri wali hai
+    //uski wali kholo
+    
