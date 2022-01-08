@@ -3,8 +3,7 @@
 require_once '../config/config.php'; 
  
 // Get user ID from current SESSION 
-$userID = isset($_SESSION['loggedInUserID'])?$_SESSION['loggedInUserID']:1; 
- 
+$userID = isset($_SESSION['id'])?$_SESSION['id']:1; 
 $payment_id = $statusMsg = $api_error = ''; 
 $ordStatus = 'error'; 
  
@@ -103,7 +102,7 @@ if(!empty($_POST['subscr_plan']) && !empty($_POST['stripeToken'])){
                     // Update subscription id in the users table  
                     if($insert && !empty($userID)){  
                         $subscription_id = $db->insert_id;  
-                        $update = $db->query("UPDATE users SET subscription_id = {$subscription_id} WHERE id = {$userID}");  
+                        $update = $db->query("UPDATE registrations SET subscription_id = {$subscription_id} WHERE id = {$userID}");  
                     } 
                      
                     $ordStatus = 'success'; 
@@ -143,5 +142,5 @@ if(!empty($_POST['subscr_plan']) && !empty($_POST['stripeToken'])){
             <p><b>Status:</b> <?php echo $status; ?></p>
         <?php } ?>
     </div>
-    <a href="index.php" class="btn-link">Back to Subscription Page</a>
+    <a href="pricing.php" class="btn-link">Back to Pricing Page</a>
 </div>
