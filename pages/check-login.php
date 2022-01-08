@@ -37,7 +37,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     header("Location: login.php?error=Account not verified. Please check your email");
                 }
             } else {
-                header("Location: login.php?error=Password");
+                header("Location: login.php?error=Incorrect Password");
             }
         } else {
             header("Location: login.php?error=Incorrect credentials");
