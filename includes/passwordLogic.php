@@ -55,16 +55,21 @@ if (isset($_POST['new_password'])) {
     if (empty($new_pass) || empty($new_pass_c)) array_push($errors, "Password is required");
     if ($new_pass !== $new_pass_c) array_push($errors, "Password do not match");
     if (count($errors) == 0) {
+        $servername = "us-cdbr-east-05.cleardb.net";
+        $username = "bcc77e1841a73a";
+        $password = "dd32e024";
+        $database = "heroku_7fce67cb249adf3";
+        $mysqli = new MySQLi($servername, $username, $password, $database);
 
         // select email address of user from the password_reset table 
         $sql = "SELECT email FROM passwords_reset WHERE token='$token' and status='0' LIMIT 1";
-        $results = mysqli_query($db, $sql);
+        $results = mysqli_query($mysqli, $sql);
         $email = mysqli_fetch_assoc($results)['email'];
         if ($email) {
             $new_pass = md5($new_pass);
             $sql = "UPDATE registrations SET password='$new_pass' WHERE email='$email'";
-            $results = mysqli_query($db, $sql);
-            $update = $db->query("UPDATE passwords_reset SET status = 1 WHERE token = '$token' LIMIT 1");
+            $results = mysqli_query($mysqli, $sql);
+            $update = $mysqli->query("UPDATE passwords_reset SET status = 1 WHERE token = '$token' LIMIT 1");
             header('location: ../pages/login.php?error=Password Updated! you can  now login.');
         }
     }
