@@ -1,7 +1,11 @@
 <?php 
 // Include configuration file  
 require_once 'pricing.php'; 
+$userID = isset($_SESSION['loggedInUserID']) ;
+if($userID){
+    //echo $userID;    
 ?>
+
 <!DOCTYPE html>
   <html lang="en">
 
@@ -162,3 +166,10 @@ function stripeTokenHandler(token) {
 </script>
 </body>
 </html>
+<?php } 
+    else{
+        ?>
+        <div><h1>NOT FOUND </h1></div>
+        <?php
+    }
+    ?>
