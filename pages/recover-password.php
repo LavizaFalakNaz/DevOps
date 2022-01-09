@@ -40,7 +40,7 @@ if (!isset($_SESSION['email']) && !isset($_SESSION['id'])) {
         <div class="card-body login-card-body">
           <p class="login-box-msg"><?php echo $titleText; ?></p>
 
-          <form action="../operations/password-recover-logic.php" method="post">
+          <form action="../includes/passwordLogic.php" method="post">
             <div class="input-group mb-3">
               <input type="password" class="form-control" placeholder="Password" name='password' required>
               <div class="input-group-append">

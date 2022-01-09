@@ -38,7 +38,7 @@ if (!isset($_SESSION['email']) && !isset($_SESSION['id'])) {
       <div class="card">
         <div class="card-body login-card-body">
           <p class="login-box-msg"><?php echo $titleText; ?></p>
-          <form action="../operations/password-recover-logic.php" method="post">
+          <form action="../includes/passwordLogic.php" method="post">
             <div class="input-group mb-3">
               <input type="email" class="form-control" placeholder="Email" name='email' required>
               <div class="input-group-append">
