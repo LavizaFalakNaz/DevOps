@@ -1,7 +1,7 @@
 <?php 
 // Include configuration file  
 require_once 'pricing.php'; 
-$userID = isset($_SESSION['id']) ;
+$userID = isset($_SESSION["PHPSESSID"]) ;
 if($userID){
     //echo $userID;    
 ?>

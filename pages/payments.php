@@ -5,7 +5,7 @@ session_start();
 require_once 'pricing.php'; 
 // Get user ID from current SESSION 
 // ?$_SESSION['loggedInUserID']:1;
-$userID = isset($_SESSION['id']) ;
+$userID = isset($_SESSION["PHPSESSID"]) ;
 if($userID){
    // echo $userID;
     //  $userID=1;
