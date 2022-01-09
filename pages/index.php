@@ -2,15 +2,30 @@
 // Include configuration file  
 require_once 'pricing.php'; 
 ?>
-<div class="panel">
+<!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stripe subscription API Integration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="https://js.stripe.com/v3/"></script>
+	</head>
+	<body>
+	<div class='container'>
+	<h1>Stripe subscription API Integration</h1>
+	<div class="panel">
+    
     <form action="payments.php" method="POST" id="paymentFrm">
         <div class="panel-heading">
             <h3 class="panel-title">Plan Subscription with Stripe</h3>
 			
             <!-- Plan Info -->
             <p>
-                <b>Select Plan:</b>
-                <select name="subscr_plan" id="subscr_plan">
+            <label class="form-label">SELECT PLAN</label>
+                <select name="subscr_plan" id="subscr_plan" class="form-select">
                     <?php foreach($plans as $id=>$plan){ ?>
                         <option value="<?php echo $id; ?>"><?php echo $plan['name'].' [$'.$plan['price'].'/'.$plan['interval'].']'; ?></option>
                     <?php } ?>
@@ -23,36 +38,43 @@ require_once 'pricing.php';
 			
             <!-- Payment form -->
             <div class="form-group">
-                <label>NAME</label>
-                <input type="text" name="name" id="name" class="field" placeholder="Enter name" required="" autofocus="">
+                <label class="form-label">NAME</label>
+                <input type="text" name="name" id="name" class="field form-control" placeholder="Enter name" required="" autofocus="">
             </div>
+            <br>
             <div class="form-group">
-                <label>EMAIL</label>
-                <input type="email" name="email" id="email" class="field" placeholder="Enter email" required="">
+                <label class="form-label">EMAIL</label>
+                <input type="email" name="email" id="email" class="field form-control" placeholder="Enter email" required="">
             </div>
+            <br>
             <div class="form-group">
-                <label>CARD NUMBER</label>
-                <div id="card_number" class="field"></div>
+                <label class="form-label">CARD NUMBER</label>
+                <div id="card_number" class="field form-control"></div>
             </div>
+            <br>
             <div class="row">
                 <div class="left">
                     <div class="form-group">
-                        <label>EXPIRY DATE</label>
-                        <div id="card_expiry" class="field"></div>
+                        <label class="form-label">EXPIRY DATE</label>
+                        <div id="card_expiry" class="field form-control"></div>
                     </div>
                 </div>
+                <br>
                 <div class="right">
+                    <br>
                     <div class="form-group">
-                        <label>CVC CODE</label>
-                        <div id="card_cvc" class="field"></div>
+                        <label class="form-label">CVC CODE</label>
+                        <div id="card_cvc" class="field form-control"></div>
                     </div>
                 </div>
             </div>
+            <br>
             <button type="submit" class="btn btn-success" id="payBtn">Submit Payment</button>
         </div>
     </form>
 </div>
-<script src="https://js.stripe.com/v3/"></script>
+</div>
+
 <script>
 // Create an instance of the Stripe object
 // Set your publishable API key
@@ -138,3 +160,5 @@ function stripeTokenHandler(token) {
     form.submit();
 }
 </script>
+</body>
+</html>

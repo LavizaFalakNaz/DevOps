@@ -1,15 +1,16 @@
 <?php 
 // Include configuration file  
-require_once '../config/config.php'; 
- 
+// require_once '../config/config.php'; 
+require_once 'pricing.php'; 
 // Get user ID from current SESSION 
 $userID = isset($_SESSION['loggedInUserID'])?$_SESSION['loggedInUserID']:1; 
- 
+//return $userID;
+ //$userID=1;
 $payment_id = $statusMsg = $api_error = ''; 
 $ordStatus = 'error'; 
-  //&& !empty($_POST['stripeToken'])
+  //
 // Check whether stripe token is not empty 
-if(!empty($_POST['subscr_plan'])){ 
+if(!empty($_POST['subscr_plan']) && !empty($_POST['stripeToken'])){ 
      
     // Retrieve stripe token and user info from the submitted form data 
     $token  = $_POST['stripeToken']; 
@@ -24,7 +25,7 @@ if(!empty($_POST['subscr_plan'])){
     $planInterval = $planInfo['interval']; 
      
     // Include Stripe PHP library 
-    require_once 'stripe-php/init.php'; 
+    require_once 'stripe-php-7.108.0/init.php'; 
      
     // Set API key 
     \Stripe\Stripe::setApiKey(STRIPE_API_KEY); 
@@ -94,12 +95,13 @@ if(!empty($_POST['subscr_plan'])){
                     $status = $subsData['status']; 
                      
                     // Include database connection file  
-                    include_once 'dbConnect.php'; 
-         
+                   include_once 'dbConnect.php'; 
+                   
                     // Insert transaction data into the database 
                     $sql = "INSERT INTO user_subscriptions(user_id,stripe_subscription_id,stripe_customer_id,stripe_plan_id,plan_amount,plan_amount_currency,plan_interval,plan_interval_count,payer_email,created,plan_period_start,plan_period_end,status) VALUES('".$userID."','".$subscrID."','".$custID."','".$planID."','".$planAmount."','".$planCurrency."','".$planinterval."','".$planIntervalCount."','".$email."','".$created."','".$current_period_start."','".$current_period_end."','".$status."')"; 
                     $insert = $db->query($sql);  
-                      
+                   // var_dump($db);
+                     // var_dump([1,$subscrID,$custID,$planID,$planAmount,$planCurrency,$planinterval,$planIntervalCount,$email,$created,$current_period_start,$current_period_end,$status]);
                     // Update subscription id in the users table  
                     if($insert && !empty($userID)){  
                         $subscription_id = $db->insert_id;  
