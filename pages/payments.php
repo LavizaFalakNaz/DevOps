@@ -7,9 +7,9 @@ $userID = isset($_SESSION['loggedInUserID'])?$_SESSION['loggedInUserID']:1;
  
 $payment_id = $statusMsg = $api_error = ''; 
 $ordStatus = 'error'; 
- 
+  //&& !empty($_POST['stripeToken'])
 // Check whether stripe token is not empty 
-if(!empty($_POST['subscr_plan']) && !empty($_POST['stripeToken'])){ 
+if(!empty($_POST['subscr_plan'])){ 
      
     // Retrieve stripe token and user info from the submitted form data 
     $token  = $_POST['stripeToken']; 

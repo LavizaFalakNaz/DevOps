@@ -1,7 +1,6 @@
 <?php 
 // Include configuration file  
-require_once '
-config.php'; 
+require_once 'config.php'; 
 ?>
 <div class="panel">
     <form action="payment.php" method="POST" id="paymentFrm">
