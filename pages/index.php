@@ -2,9 +2,10 @@
 // Include configuration file  
 session_start();
 require_once 'pricing.php'; 
-$userID = isset($_SESSION["id"]) ;
-if($userID){
-    echo $userID;    
+if(isset($_SESSION["id"])){
+    // echo $userID;
+     //  $userID=1;
+     $userID = $_SESSION["id"] ;  
 ?>
 
 <!DOCTYPE html>

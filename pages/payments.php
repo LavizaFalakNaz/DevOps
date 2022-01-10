@@ -5,10 +5,11 @@ session_start();
 require_once 'pricing.php'; 
 // Get user ID from current SESSION 
 // ?$_SESSION['loggedInUserID']:1;
-$userID = isset($_SESSION["id"]) ;
-if($userID){
+
+if(isset($_SESSION["id"])){
    // echo $userID;
     //  $userID=1;
+    $userID = $_SESSION["id"] ;
     $payment_id = $statusMsg = $api_error = ''; 
     $ordStatus = 'error'; 
       //
@@ -103,7 +104,6 @@ if($userID){
                         // Insert transaction data into the database 
                         $sql = "INSERT INTO user_subscriptions(user_id,stripe_subscription_id,stripe_customer_id,stripe_plan_id,plan_amount,plan_amount_currency,plan_interval,plan_interval_count,payer_email,created,plan_period_start,plan_period_end,status) VALUES('".$userID."','".$subscrID."','".$custID."','".$planID."','".$planAmount."','".$planCurrency."','".$planinterval."','".$planIntervalCount."','".$email."','".$created."','".$current_period_start."','".$current_period_end."','".$status."')"; 
                         $insert = $db->query($sql);  
-                       // var_dump($db);
                          // var_dump([1,$subscrID,$custID,$planID,$planAmount,$planCurrency,$planinterval,$planIntervalCount,$email,$created,$current_period_start,$current_period_end,$status]);
                         // Update subscription id in the users table  
                         if($insert && !empty($userID)){  
