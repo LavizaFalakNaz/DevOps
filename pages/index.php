@@ -3,7 +3,7 @@
 require_once 'pricing.php'; 
 $userID = isset($_SESSION["PHPSESSID"]) ;
 if($userID){
-    //echo $userID;    
+    echo $userID;    
 ?>
 
 <!DOCTYPE html>
