@@ -148,7 +148,7 @@ if(isset($_SESSION["id"])){
                 <p><b>Status:</b> <?php echo $status; ?></p>
             <?php } ?>
         </div>
-        <a href="index.php" class="btn-link">Back to Subscription Page</a>
+        <a href="subscribe.php" class="btn-link">Back to Subscription Page</a>
     </div>
  <?php  
 }
