@@ -32,6 +32,15 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['id'] = $row['id'];
+                    /*
+                     * 
+                     * check if session variable 'from-subscribe' has true;
+                     * redirect to subscribe page again
+                     * dont go to homepage
+                     * if else loop will work.
+                     * once redirected,set from-subscribe to false again.
+                     * 
+                     */
                     header("Location: home.php");
                 } else {
                     header("Location: login.php?error=Account not verified. Please check your email");

@@ -153,7 +153,11 @@ if(isset($_SESSION["id"])){
  <?php  
 }
 else{
-  ?><div> <h1> NOT FOUND </h1></div>
-  <?php  
+    /*
+     * declare session variable from-subscribe (default false)
+     * set true
+     * goto lgin page for login
+     */
+    header("Location: login.php?error=Please login first");
 }
 ?>
