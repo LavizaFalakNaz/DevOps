@@ -43,6 +43,16 @@
           </li>
 
 
+          <li class="nav-item">
+            <a href="task.php" class="nav-link" >
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Task
+              </p>
+            </a>
+          </li>
+
+
 
         </ul>
       </nav>

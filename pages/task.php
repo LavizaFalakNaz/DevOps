@@ -1,7 +1,7 @@
 <?php
     include "../includes/auth.php";
     $pageInfo = [
-        'title' => 'Projects'
+        'title' => 'Tasks'
     ];
 ?>
 
@@ -21,10 +21,12 @@
     include_once "../layout/sidebar.php";
     
     $rec["id"] = null;
-    $rec["name"] = "";
-    $rec["desc"] = "";
+    $rec["pid"] = "";
+    $rec["title"] = "";
+    $rec["sdate"] = "";
+    $rec["edate"] = "";
     $rec["uid"] = $_SESSION["id"];
-    $ftitle = "Create Project";
+    $ftitle = "Create Task";
     $msg = "";
     
     if(isset($_GET["id"]) && isset($_GET["act"])){
@@ -32,27 +34,30 @@
         $act=$_GET["act"];
 
         if($act=="edit"){
-            $res=$asfun->dbcon->query("select * from projects where id='$id'"); 
+            $res=$asfun->dbcon->query("select * from task where id='$id'"); 
             $rec =$res->fetch_array();
-            $ftitle = "Edit Project";
+            $ftitle = "Edit Task";
             
         }elseif($act=="delete"){
      }
     }
 
 
-    if(isset($_POST["name"])){
-        $name = $_POST["name"];
-        $desc = $_POST["desc"];
-        $id = $_POST["id"];
+    if(isset($_POST["title"])){
+        $title = $_POST["title"];
+        $pid = $_POST["pid"];
+        $edate = $_POST["edate"];
+        $sdate = $_POST["sdate"];
         $uid = $_POST["uid"];
+        $id = $_POST["id"];
+        
 
 if($id>0){
-    $asfun->dbcon->query("update projects set `name`='$name', `desc`='$desc' where id='$id'");
-    $msg = "Project has been updated!"; 
+    $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid' where id='$id'");
+    $msg = "Task has been updated!"; 
 }else{
-    $asfun->dbcon->query("insert into projects(`uid`, `name`, `desc`) values('$uid', '$name', '$desc')") or die("Error"); 
-    $msg = "Project has been created!";
+    $asfun->dbcon->query("insert into task(`uid`, `title`, `pid`, `sdate`, `edate`) values('$uid', '$title', '$pid', '$sdate', '$edate')") or die("Error"); 
+    $msg = "Task has been created!";
 }
 
         
@@ -100,11 +105,39 @@ if($id>0){
             <div class="card-header">
                     <h5 class="m-0"><?php echo $ftitle; ?></h5></div>
                     <div class="card-body">
-                        <div class="form-group"><label>Name</label>
-                        <input class="form-control" type="text" placeholder="Enter Name" value="<?php echo $rec["name"] ?>" name="name" required></div>
-                        <div class="form-group"><label>Description</label>
-                        <textarea  class="form-control" placeholder="Enter Description" name="desc"><?php echo $rec["desc"] ?></textarea>
-                    </div>
+                    
+                    <div class="form-group"><label>Project</label>
+                        <select class="form-control"   name="pid" id="pid" required>
+                            <option value="">Select Project</option>
+                        <?php
+        $uid = $_SESSION["id"];
+        $q = $asfun->dbcon->query("select * from projects where uid='$uid'");
+        while($row=mysqli_fetch_assoc($q)){
+            ?>
+            <option value="<?php echo $row["id"] ?>"><?php echo ucwords($row["name"]) ?></option>
+            <?php
+        }
+        ?>
+
+                    </select>
+
+                        </div>
+                    
+
+                    
+                    <div class="form-group"><label>Title</label>
+                        <input class="form-control" type="text" placeholder="Enter Title" value="<?php echo $rec["title"] ?>" name="title" required></div>
+                        
+                   
+                        
+                        <div class="form-group"><label>Start Date</label>
+                        <input class="form-control" type="date"  value="<?php echo $rec["sdate"] ?>" name="sdate" required></div>
+
+                   
+                        <div class="form-group"><label>End Date</label>
+                        <input class="form-control" type="date"  value="<?php echo $rec["edate"] ?>" name="edate" required></div>
+                        
+                        
                 </div>
                 
                 <div class="card-footer">
@@ -132,27 +165,31 @@ if($id>0){
           <div class="card">
              
           <div class="card-header">
-                  <h5 class="m-0">Project Record</h5></div>
+                  <h5 class="m-0">Task Record</h5></div>
 
                   <div class="card-body">
             <table class="table">
             <thead>    
             <tr>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>Title</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th>Options</th>
+                    
                  </tr>
                 </thead>
 
     <tbody>
         <?php
         $uid = $_SESSION["id"];
-        $q = $asfun->dbcon->query("select * from projects where uid='$uid'");
+        $q = $asfun->dbcon->query("select * from task where uid='$uid'");
         while($row=mysqli_fetch_assoc($q)){
                ?>
                <tr>
-                   <td><b><?php echo ucwords($row["name"]); ?></b></td>
-                   <td><?php echo $row["desc"]; ?></td>
+                   <td><?php echo $row["title"]; ?> | <b><?php echo ucwords($asfun->getProjectName($row["pid"])); ?></b></td>
+                   <td><?php echo $row["sdate"]; ?></td>
+                   <td><?php echo $row["edate"]; ?></td>
+                   
                    <td>
                    <a href="?act=edit&id=<?php echo $row["id"] ?>" class="link">Edit</a> |
                    <a href="?act=delete&id=<?php echo $row["id"] ?>" class="link">Delete</a>
@@ -186,6 +223,11 @@ if($id>0){
     include_once "../layout/footer.php";
 ?>
 
+
+<script>
+
+    $("#pid").val(<?php echo $rec["pid"] ?>);
+</script>
 
 </body>
 </html>

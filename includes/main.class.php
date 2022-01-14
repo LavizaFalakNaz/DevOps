@@ -26,6 +26,13 @@ public function auth(){
       
       }
 
+
+      public function getProjectName($id){
+        $res = $this->dbcon->query("select * from projects where id='$id'");    
+        $row = $res->fetch_array();
+        return $row["name"];
+      }
+
 }
 
 
