@@ -12,7 +12,7 @@
           <img src="../frontend/dist/img/avatar5.png" class="img-circle " alt="User Image">
         </div>
         <div class="info">
-          <a href="#"  class="d-block">John Doe</a>
+          <a href="#"  class="d-block"><?php echo $asfun->getUsername($_SESSION["email"]); ?></a>
         </div>
       </div>
 
@@ -28,6 +28,16 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashborad
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="project.php" class="nav-link" >
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Projects
               </p>
             </a>
           </li>

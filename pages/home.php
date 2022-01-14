@@ -1,21 +1,8 @@
 <?php
-session_start();
-include "../config/config.php";
-
-if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
-    //we close php here so that whatever happens after it is in loop
-?>
-
-<!--
-    <?php echo $_SESSION['email']; ?>
-    <button onclick="location.href='logout.php'">Logout</button>
--->
-<?php } else {
-    header("Location: login.php?error=Please login to your account first.");
-}
-
-
-$title = "Dashboard";
+    include "../includes/auth.php";
+    $pageInfo = [
+        'title' => 'Dashboard'
+    ];
 ?>
 
 
@@ -43,7 +30,7 @@ $title = "Dashboard";
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0"><?php echo $title; ?></h1>
+            <h1 class="m-0"><?php echo $pageInfo["title"]; ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
