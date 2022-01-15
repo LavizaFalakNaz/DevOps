@@ -39,6 +39,7 @@
             $ftitle = "Edit Task";
             
         }elseif($act=="delete"){
+                    //for delete code
      }
     }
 
