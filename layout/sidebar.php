@@ -27,12 +27,10 @@
             <a href="home.php" class="nav-link" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashborad
+                Dashboard
               </p>
             </a>
           </li>
-
-
           <li class="nav-item">
             <a href="project.php" class="nav-link" >
               <i class="nav-icon fas fa-list"></i>
