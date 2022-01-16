@@ -32,6 +32,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['id'] = $row['id'];
+                    $_SESSION['mail-server'] = $row['mail-server'];
                     /*
                      * 
                      * check if session variable 'from-subscribe' has true;

@@ -1,78 +1,66 @@
 <?php
-    include "../includes/auth.php";
-    $pageInfo = [
-        'title' => 'Dashboard'
-    ];
+if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
+  include "../includes/auth.php";
+  session_start();
+  $title = "SET_THE_TITLE_HERE";
+  include 'top.php';
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
-    include_once "../layout/head.php";
-    ?>
-</head>
-<body class="sidebar-mini layout-fixed" style="height:auto">
-<div class="wrapper">
-
-<?php
-    include_once "../layout/navbar.php";
-    include_once "../layout/sidebar.php";
-
-?>
-
-
-
-<div class="content-wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0"><?php echo $pageInfo["title"]; ?></h1>
-          </div><!-- /.col -->
+            <h1>Sprint Board</h1>
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Projects</a></li>
+              <li class="breadcrumb-item active">Sprint Board</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+          </div>
+        </div>
       </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+    </section>
 
     <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- /.col-md-6 -->
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
+    <section class="content">
 
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Title</h3>
 
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
           </div>
-
-
-       
-          <!-- /.col-md-6 -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+        <div class="card-body">
+          Start creating your amazing application!
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          Footer
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
     <!-- /.content -->
   </div>
-</div>
-<?php
-    include_once "../layout/footer.php";
-?>
-</body>
-</html>
+  <!-- /.content-wrapper -->
+
+  <?php include 'bottom.php'; ?>
+
+<?php } else {
+  header("Location: login.php?error=Please enter your email and password to start.");
+  exit();
+}
