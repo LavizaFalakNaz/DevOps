@@ -37,6 +37,7 @@
             $ftitle = "Edit Project";
             
         }elseif($act=="delete"){
+          //for delete code
      }
     }
 
