@@ -6,10 +6,12 @@ require_once 'pricing.php';
 // Get user ID from current SESSION 
 // ?$_SESSION['loggedInUserID']:1;
 
-if(isset($_SESSION["id"])){
+if(isset($_SESSION["id"])&& isset($_SESSION["email"]) && isset($_SESSION["name"])){
    // echo $userID;
     //  $userID=1;
     $userID = $_SESSION["id"] ;
+    $email= $_SESSION["email"] ;
+    $name=$_SESSION["name"] ;
     $payment_id = $statusMsg = $api_error = ''; 
     $ordStatus = 'error'; 
       //
@@ -18,8 +20,8 @@ if(isset($_SESSION["id"])){
          
         // Retrieve stripe token and user info from the submitted form data 
         $token  = $_POST['stripeToken']; 
-        $name = $_POST['name']; 
-        $email = $_POST['email']; 
+        // $name = $_POST['name']; 
+        // $email = $_POST['email']; 
          
         // Plan info 
         $planID = $_POST['subscr_plan']; 
@@ -129,10 +131,11 @@ if(isset($_SESSION["id"])){
         $statusMsg = "Error on form submission, please try again."; 
     } 
     ?>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <div class="container">
         <div class="status">
-            <h1 class="<?php echo $ordStatus; ?>"><?php echo $statusMsg; ?></h1>
+            <h1 class="<?php echo $ordStatus; ?> msg"><?php echo $statusMsg; ?></h1>
             <?php if(!empty($subscrID)){ ?>
                 <h4>Payment Information</h4>
                 <p><b>Reference Number:</b> <?php echo $subscription_id; ?></p>
@@ -148,12 +151,26 @@ if(isset($_SESSION["id"])){
                 <p><b>Status:</b> <?php echo $status; ?></p>
             <?php } ?>
         </div>
-        <a href="index.php" class="btn-link">Back to Subscription Page</a>
+        <br>
+        <a href="index.php" class="btn btn-outline-primary" role="button">Back to Subscription Page</a>
+       <!-- <button type="button" class="btn btn-outline-primary"><a href="index.php" class="btn-link">Back to Subscription Page</a></button>  -->
     </div>
+    <style>
+        .status{
+           background: darkgray;
+           box-shadow: 4px 3px 8px 1px #969696;
+           padding: 3%;
+           margin-top: 5%;
+           ;
+        }
+        .msg{
+            color:green;
+            text-align: center;
+        }
+    </style>
  <?php  
 }
 else{
-  ?><div> <h1> NOT FOUND </h1></div>
-  <?php  
+  header ('Location: login.php?error= you need to login first!');
 }
 ?>

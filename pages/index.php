@@ -43,7 +43,7 @@ if(isset($_SESSION["id"])){
             <div id="paymentResponse"></div>
 			
             <!-- Payment form -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="form-label">NAME</label>
                 <input type="text" name="name" id="name" class="field form-control" placeholder="Enter name" required="" autofocus="">
             </div>
@@ -52,7 +52,7 @@ if(isset($_SESSION["id"])){
                 <label class="form-label">EMAIL</label>
                 <input type="email" name="email" id="email" class="field form-control" placeholder="Enter email" required="">
             </div>
-            <br>
+            <br> -->
             <div class="form-group">
                 <label class="form-label">CARD NUMBER</label>
                 <div id="card_number" class="field form-control"></div>
@@ -170,8 +170,9 @@ function stripeTokenHandler(token) {
 </html>
 <?php } 
     else{
-        ?>
-        <div><h1>NOT FOUND </h1></div>
-        <?php
+        
+        header ('Location: login.php?error= you need to login first!');
+        // <!-- <div><h1>NOT FOUND </h1></div> -->
+        
     }
     ?>
