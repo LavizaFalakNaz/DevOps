@@ -1,16 +1,18 @@
 <?php
-  session_start();
+if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
+  //session_start();
+  $title = "SET_THE_TITLE_HERE";
   include 'top.php';
 ?>
 
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Blank Page</h1>
+            <h1><?php echo $title; ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -55,4 +57,9 @@
   </div>
   <!-- /.content-wrapper -->
 
-<?php include 'bottom.php'; ?>
+  <?php include 'bottom.php'; ?>
+
+<?php } else {
+  header("Location: login.php?error=Please enter your email and password to start.");
+  exit();
+}
