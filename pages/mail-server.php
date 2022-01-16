@@ -1,15 +1,15 @@
 <?php
-if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
+/*if (isset($_SESSION['email']) && isset($_SESSION['id'])) {*/
     session_start();
     $title = "Server Setup";
     include 'top.php';
 
-    if ($_SESSION['mail-server'] === 'setup1_completedNicely') {
+   /* if ($_SESSION['mail-server'] === 'setup1_completedNicely') {
         //shift to mailbox
         header("Location: fetchMailServer.php");
         exit();
     } else {
-        //continue with this page
+        //continue with this page */
 ?>
 
         <body class="sidebar-mini layout-fixed" style="height:auto">
@@ -78,10 +78,10 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                 </div>
 
             </div>
-            <?php include 'bottom.php'; ?>
+            <?php include 'bottom.php'; /*?>
     <?php } //for the inner else loop
 } //for the if loop 
 else {
     header("Location: login.php?error=Please enter your email and password to start.");
     exit();
-}
+} */
