@@ -225,7 +225,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/pages/project.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Projects</p>
                 </a>
@@ -239,7 +239,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="../frontend/pages/kanban.html" class="nav-link">
+            <a href="/pages/sprints.php" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Kanban Board

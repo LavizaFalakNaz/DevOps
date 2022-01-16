@@ -23,6 +23,8 @@
     $rec["id"] = null;
     $rec["pid"] = "";
     $rec["title"] = "";
+    $rec["asg"] = "";
+    $rec["status"] = "1";
     $rec["sdate"] = "";
     $rec["edate"] = "";
     $rec["uid"] = $_SESSION["id"];
@@ -45,19 +47,23 @@
 
 
     if(isset($_POST["title"])){
-        $title = $_POST["title"];
-        $pid = $_POST["pid"];
-        $edate = $_POST["edate"];
-        $sdate = $_POST["sdate"];
-        $uid = $_POST["uid"];
-        $id = $_POST["id"];
+        $rec= $_POST;
+        $title = $rec["title"];
+        $pid = $rec["pid"];
+        $edate = $rec["edate"];
+        $sdate = $rec["sdate"];
+        $uid = $rec["uid"];
+        $id = $rec["id"];
+        $asg = $rec["asg"];
+        $status = $rec["status"];
+        
         
 
 if($id>0){
-    $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid' where id='$id'");
+    $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid', `asg`='$asg', `status`='$status' where id='$id'");
     $msg = "Task has been updated!"; 
 }else{
-    $asfun->dbcon->query("insert into task(`uid`, `title`, `pid`, `sdate`, `edate`) values('$uid', '$title', '$pid', '$sdate', '$edate')") or die("Error"); 
+    $asfun->dbcon->query("insert into task(`uid`, `title`, `pid`, `sdate`, `edate`, `asg`, `status`) values('$uid', '$title', '$pid', '$sdate', '$edate', '$asg', '$status')") or die("Error"); 
     $msg = "Task has been created!";
 }
 
@@ -130,6 +136,35 @@ if($id>0){
                         <input class="form-control" type="text" placeholder="Enter Title" value="<?php echo $rec["title"] ?>" name="title" required></div>
                         
                    
+                        <div class="form-group"><label>Assign</label>
+                        <select class="form-control"   name="asg" id="asg" required>
+                            <option value="">Select User</option>
+                        <?php
+        $uid = $_SESSION["id"];
+        $q = $asfun->dbcon->query("select * from registrations");
+        while($row=mysqli_fetch_assoc($q)){
+            ?>
+            <option value="<?php echo $row["id"] ?>"><?php echo ucwords($asfun->getUsername($row["email"])) ?></option>
+            <?php
+        }
+        ?>
+
+                    </select>
+
+                        </div>
+
+
+                        <div class="form-group"><label>Status</label>
+                        <select class="form-control"   name="status" id="status" required>
+                            <option value="1">ToDo</option>
+                            <option value="2">Doing</option>
+                            <option value="3">Done</option>
+                            
+                    </select>
+
+                        </div>
+
+
                         
                         <div class="form-group"><label>Start Date</label>
                         <input class="form-control" type="date"  value="<?php echo $rec["sdate"] ?>" name="sdate" required></div>
@@ -173,6 +208,7 @@ if($id>0){
             <thead>    
             <tr>
                     <th>Title</th>
+                    <th>Project</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Options</th>
@@ -187,7 +223,8 @@ if($id>0){
         while($row=mysqli_fetch_assoc($q)){
                ?>
                <tr>
-                   <td><?php echo $row["title"]; ?> | <b><?php echo ucwords($asfun->getProjectName($row["pid"])); ?></b></td>
+                   <td><a href="sprints.php?pid=<?php echo $row["pid"] ?>"><b><?php echo ucwords($row["title"]); ?></b></a></td>
+                   <td><?php echo ucwords($asfun->getProjectName($row["pid"])); ?></td>
                    <td><?php echo $row["sdate"]; ?></td>
                    <td><?php echo $row["edate"]; ?></td>
                    
@@ -228,7 +265,22 @@ if($id>0){
 <script>
 
     $("#pid").val(<?php echo $rec["pid"] ?>);
+    $("#asg").val(<?php echo $rec["asg"] ?>);
+    $("#status").val(<?php echo $rec["status"] ?>);
+    
 </script>
+
+
+<?php
+if(isset($_GET["pid"])){
+  ?>
+  <script>
+    $("#pid").val(<?php echo $_GET["pid"] ?>)
+  </script>
+  
+  <?php
+}
+?>
 
 </body>
 </html>

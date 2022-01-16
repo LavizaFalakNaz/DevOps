@@ -152,7 +152,7 @@ if($id>0){
         while($row=mysqli_fetch_assoc($q)){
                ?>
                <tr>
-                   <td><b><?php echo ucwords($row["name"]); ?></b></td>
+                   <td><a href="sprints.php?pid=<?php echo $row["id"] ?>"><b><?php echo ucwords($row["name"]); ?></b></a></td>
                    <td><?php echo $row["desc"]; ?></td>
                    <td>
                    <a href="?act=edit&id=<?php echo $row["id"] ?>" class="link">Edit</a> |
