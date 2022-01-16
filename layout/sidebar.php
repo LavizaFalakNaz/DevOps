@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="../index.php" class="brand-link">
       <img src="../frontend/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Devicks &copy;</span>
     </a>
@@ -12,7 +12,7 @@
           <img src="../frontend/dist/img/avatar5.png" class="img-circle " alt="User Image">
         </div>
         <div class="info">
-          <a href="#"  class="d-block"><?php echo $asfun->getUsername($_SESSION["email"]); ?></a>
+          <a href="home.php"  class="d-block"><?php echo $asfun->getUsername($_SESSION["email"]); ?></a>
         </div>
       </div>
 
@@ -24,7 +24,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           <li class="nav-item">
-            <a href="home.php" class="nav-link" >
+            <a href="sprints.php" class="nav-link" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
