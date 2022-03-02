@@ -3,6 +3,7 @@
     $pageInfo = [
         'title' => 'Taskboard'
     ];
+
 ?>
 
 
@@ -42,6 +43,60 @@
      <div class="row mb-2">
        <div class="col-sm-6">
        <h1 class="m-0"> 
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php
+    include_once "../layout/head.php";
+    ?>
+</head>
+<body class="sidebar-mini layout-fixed" style="height:auto">
+<div class="wrapper">
+
+<?php
+    include_once "../layout/navbar.php";
+    include_once "../layout/sidebar.php";
+
+    if(isset($_GET["pid"])){
+      $pid = $_GET["pid"];
+      
+      if(isset($_GET["status"]) && isset($_GET["id"])){
+       $asfun->taskStatusUpdate($_GET["id"],$_GET["status"]);
+      }
+    
+    
+    }else{
+      $pid=null;
+    }
+
+
+
+
+?>
+
+
+
+<div class="content-wrapper">
+if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
+  include "../includes/auth.php";
+  session_start();
+  $title = "SET_THE_TITLE_HERE";
+  include 'top.php';
+?>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"> 
+
             <div class="dropdown">
             <?php echo $pageInfo["title"]; ?>
   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

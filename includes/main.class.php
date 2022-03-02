@@ -8,7 +8,6 @@ class Main
   private $database = "heroku_7fce67cb249adf3";
   public $dbcon;
   
-  
   public $todo =  [
     'id'=> 1,
     'name' => 'ToDo',

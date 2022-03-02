@@ -19,8 +19,82 @@
   <body class="sidebar-mini layout-fixed" style="height:auto">
     <div class="wrapper">
 
+      <?php
+      include_once "../layout/navbar.php";
+      include_once "../layout/sidebar.php";
 
-<?php
+      $rec["id"] = null;
+      $rec["pid"] = "";
+      $rec["title"] = "";
+      $rec["sdate"] = "";
+      $rec["edate"] = "";
+      $rec["uid"] = $_SESSION["id"];
+      $ftitle = "Create Task";
+      $msg = "";
+
+      if (isset($_GET["id"]) && isset($_GET["act"])) {
+        $id = $_GET["id"];
+        $act = $_GET["act"];
+
+        if ($act == "edit") {
+          $res = $asfun->dbcon->query("select * from task where id='$id'");
+          $rec = $res->fetch_array();
+          $ftitle = "Edit Task";
+        } elseif ($act == "delete") {
+          //for delete code
+        }
+      }
+
+    include_once "../layout/navbar.php";
+    include_once "../layout/sidebar.php";
+    
+    $rec["id"] = null;
+    $rec["pid"] = "";
+    $rec["title"] = "";
+    $rec["asg"] = "";
+    $rec["status"] = "1";
+    $rec["sdate"] = "";
+    $rec["edate"] = "";
+    $rec["uid"] = $_SESSION["id"];
+    $ftitle = "Create Task";
+    $msg = "";
+    
+    if(isset($_GET["id"]) && isset($_GET["act"])){
+        $id=$_GET["id"];
+        $act=$_GET["act"];
+
+        if($act=="edit"){
+            $res=$asfun->dbcon->query("select * from task where id='$id'"); 
+            $rec =$res->fetch_array();
+            $ftitle = "Edit Task";
+            
+        }elseif($act=="delete"){
+                    //for delete code
+     }
+    }
+
+
+    if(isset($_POST["title"])){
+        $rec= $_POST;
+        $title = $rec["title"];
+        $pid = $rec["pid"];
+        $edate = $rec["edate"];
+        $sdate = $rec["sdate"];
+        $uid = $rec["uid"];
+        $id = $rec["id"];
+        $asg = $rec["asg"];
+        $status = $rec["status"];
+        
+        
+
+if($id>0){
+    $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid', `asg`='$asg', `status`='$status' where id='$id'");
+    $msg = "Task has been updated!"; 
+}else{
+    $asfun->dbcon->query("insert into task(`uid`, `title`, `pid`, `sdate`, `edate`, `asg`, `status`) values('$uid', '$title', '$pid', '$sdate', '$edate', '$asg', '$status')") or die("Error"); 
+    $msg = "Task has been created!";
+}
+
     include_once "../layout/navbar.php";
     include_once "../layout/sidebar.php";
     

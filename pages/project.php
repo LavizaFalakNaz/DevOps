@@ -154,6 +154,37 @@
 
             </table>
 
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Description</th>
+                          <th>Options</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <?php
+                        $uid = $_SESSION["id"];
+                        $q = $asfun->dbcon->query("select * from projects where uid='$uid'");
+                        while ($row = mysqli_fetch_assoc($q)) {
+                        ?>
+                          <tr>
+                            <td><b><?php echo ucwords($row["name"]); ?></b></td>
+                            <td><?php echo $row["desc"]; ?></td>
+                            <td>
+                              <a href="?act=edit&id=<?php echo $row["id"] ?>" class="link">Edit</a> |
+                              <a href="?act=delete&id=<?php echo $row["id"] ?>" class="link">Delete</a>
+
+                            </td>
+
+                          </tr>
+                        <?php
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+
                   </div>
                 </div>
               </div>
