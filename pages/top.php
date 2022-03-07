@@ -31,11 +31,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="../frontend/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
-
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
@@ -304,13 +299,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="project.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i><!--list-check-->
                     <p>All Projects</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="sprints.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i><!--square-kanban-->
                     <p>Kanban Board</p>
                   </a>

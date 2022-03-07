@@ -1,5 +1,4 @@
 <?php
-echo $_GET['email'];
 require "PHPMailer/PHPMailerAutoload.php";
 
 function smtpmailer($to, $from, $from_name, $subject, $body)

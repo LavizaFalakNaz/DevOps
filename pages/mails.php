@@ -89,6 +89,14 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     </div>
     <!-- /.content-wrapper -->
 
+    <?php
+    }
+
+    else if (isset($_SESSION['mail-server']))
+    {
+
+    ?>
+
     <?php include 'bottom.php'; ?>
 
 <?php
