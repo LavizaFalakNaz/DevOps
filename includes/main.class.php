@@ -119,6 +119,24 @@ public function taskCard($type, $data){
 }
 
 
+public function progress($pid){
+  $res = $this->dbcon->query("select * from task where pid='$pid'");
+  // return mysqli_num_rows($res); 
+
+   if(mysqli_num_rows($res)>0){
+    $total_task=mysqli_num_rows($res);
+    $res = $this->dbcon->query("select * from task where pid='$pid' and status=3");
+    $task_done=mysqli_num_rows($res);
+    $remain_task=$total_task-$task_done;
+
+     return round(($task_done/$total_task)*100); 
+
+   }else{
+     return -1;
+   }
+
+}
+
 
 
 }

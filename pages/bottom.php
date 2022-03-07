@@ -1,3 +1,4 @@
+
 <!-- footer wrapper -->
 <footer class="main-footer">
   <strong>Copyright &copy; 2014-2021 <a href="../index.php">Devicks &copy;</a>.</strong>
@@ -38,6 +39,8 @@
 <!-- daterangepicker -->
 <script src="../frontend/plugins/moment/moment.min.js"></script>
 <script src="../frontend/plugins/daterangepicker/daterangepicker.js"></script>
+
+
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="../frontend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
@@ -50,6 +53,8 @@
 <script src="../frontend/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../frontend/dist/js/pages/dashboard.js"></script>
+<script src="../frontend/plugins/moment/moment.min.js"></script>
+<script src="../frontend/plugins/fullcalendar/main.js"></script>
 </body>
 
 </html>

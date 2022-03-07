@@ -40,6 +40,7 @@
 
 
 <div class="content-wrapper">
+  <?php
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   include "../includes/auth.php";
   session_start();
