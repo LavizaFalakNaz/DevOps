@@ -29,78 +29,127 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
         </div>
         <!-- /.content-header -->
 
-        <!-- Main content -->
-        <section class="content">
-            <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
-                <section class="col-lg-6 connectedSortable">
-                    <!-- Horizontal Form -->
-                    <div class="card card-danger">
-                        <div class="card-header">
-                            <h3 class="card-title">Your Mail Server is not setp yet. Please Provide the details below.</h3>
+        <?php
+        if (!isset($_SESSION['mail-server'])) { //reach this loop when server is set
+        ?>
+            <!-- Main content -->
+            <section class="content">
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-6 connectedSortable">
+                        <!-- Horizontal Form -->
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Your Mail Server is not setp yet. Please Provide the details below.</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form class="form-horizontal" method="post" action="../mailer/testMailServer.php">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="email" class="form-control" name="mail-email" placeholder="Email" readonly onfocus="this.removeAttribute('readonly');">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="password" class="form-control" name="mail-password" placeholder="Password" readonly onfocus="this.removeAttribute('readonly');">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <input type="text" class="form-control" name="mail-host" placeholder="Host Link" readonly onfocus="this.removeAttribute('readonly');">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <input type="number" class="form-control" name="mail-port" placeholder="Port" readonly onfocus="this.removeAttribute('readonly');">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-danger">Register</button>
+                                    <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                </div>
+                                <!-- /.card-footer -->
+                            </form>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal" method="post" action="../mailer/testMailServer.php">
-                            <div class="card-body">
-                                <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <input type="email" class="form-control" name="mail-email" placeholder="Email" readonly onfocus="this.removeAttribute('readonly');">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <input type="password" class="form-control" name="mail-password" placeholder="Password" readonly onfocus="this.removeAttribute('readonly');">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        <input type="text" class="form-control" name="mail-host" placeholder="Host Link" readonly onfocus="this.removeAttribute('readonly');">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <input type="number" class="form-control" name="mail-port" placeholder="Port" readonly onfocus="this.removeAttribute('readonly');">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-danger">Register</button>
-                                <button type="submit" class="btn btn-default float-right">Cancel</button>
-                            </div>
-                            <!-- /.card-footer -->
-                        </form>
-                    </div>
-                    <!-- /.card -->
-                    <!-- /.card -->
-                </section>
-                <!-- /.Left col -->
-                <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                <section class="col-lg-5 connectedSortable">
+                        <!-- /.card -->
+                        <!-- /.card -->
+                    </section>
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5 connectedSortable">
 
 
-                </section>
-                <!-- right col -->
-            </div>
-            <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+                    </section>
+                    <!-- right col -->
+                </div>
+                <!-- /.row (main row) -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.container-fluid -->
+    </section>
 
+<?php } else if (isset($_SESSION['mail-server'])) {
+            //reach this loop when server is set
+?>
+    <!-- POP UP FOR MESSAGE ALERTS -->
+    <div class="row">
+        <div class="col">
+            <div class="card-body">
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><i class="icon fas fa-check"></i> Success!</h5>
+                    <?php echo $_GET['msg']; ?>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+    <!-- END OF ALERT -->
+
+    <!-- START OF EMAIL INPUT SECTION -->
+
+    <!-- general form elements -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Target Emails</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form action="" method="post">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.card -->
     <?php
-    }
-
-    else if (isset($_SESSION['mail-server']))
-    {
+        # APP LOGIC TO STORE EMAILS 
 
     ?>
+    <!-- END OF INPUT SECTION -->
 
-    <?php include 'bottom.php'; ?>
+<?php
+        }
+?>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<?php include 'bottom.php'; ?>
 
 <?php
 } else {
     header("Location: login.php?error=Please enter your email and password to start.");
     exit();
 }
+?>

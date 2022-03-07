@@ -41,7 +41,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
         $em = $_POST['mail-email'];
         $pwd = $_POST['mail-password'];
         $hst = $_POST['mail-host'];
-        $sql = "INSERT INTO mail_server('email', 'password', 'server' 'port', 'activity-status') VALUES ('$em', '$pwd', '$hst', '$port', 'active')";
+        $sql = "INSERT INTO mail_server(email,pass,host,port,activity_status) VALUES ('$em', '$pwd', '$hst', '$port', 'active')";
         if (!mysqli_query($con, $sql)) {
             die('Error: ' . mysqli_error($con));
         } else {
