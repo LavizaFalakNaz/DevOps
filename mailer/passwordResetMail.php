@@ -12,7 +12,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Host = 'smtpout.secureserver.net';
     $mail->Port = 465;
     $mail->Username = 'hello@lavizadevelops.com';
-    $mail->Password = 'Hello12eF';
+    $mail->Password = 'March25@2001';
 
     //   $path = 'reseller.pdf';
     //   $mail->AddAttachment($path);
@@ -56,5 +56,6 @@ if (isset($_GET['email']) && isset($_GET['vkey'])) {
 
     $error = smtpmailer($to, $from, $name, $subj, $msg);
 } else {
-    echo "no credentials";
+    header("Location: ../pages/forgot-password.php?msg=Couldn't send email");
+        exit();
 }

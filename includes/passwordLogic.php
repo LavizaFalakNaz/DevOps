@@ -74,3 +74,5 @@ if (isset($_POST['new_password'])) {
         }
     }
 }
+header("Location: ../mailer/passwordResetMail.php?error=It Didn't work!");
+exit();
