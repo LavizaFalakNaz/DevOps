@@ -42,7 +42,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                      * once redirected,set from-subscribe to false again.
                      * 
                      */
-                    header("Location: project.php");
+                    header("Location: home.php");
                 } else {
                     header("Location: login.php?error=Account not verified. Please check your email");
                 }

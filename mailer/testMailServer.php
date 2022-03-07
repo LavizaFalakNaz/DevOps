@@ -13,7 +13,10 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Port = $_POST['mail-port'];
     $mail->Username = $_POST['mail-email'];
     $mail->Password = $_POST['mail-password'];
-    
+
+    //   $path = 'reseller.pdf';
+    //   $mail->AddAttachment($path);
+
     $mail->IsHTML(true);
     $mail->From = $from;
     $mail->FromName = $from_name;
@@ -23,24 +26,25 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Body = $body;
     $mail->AddAddress($to);
     if (!$mail->Send()) {
-        header("Location: ../pages/mails.php?error-msg=SOMETHING WENT WRONG...");
+        header("Location: ../pages/mails.php?msg=Please try Later, Error Occured while Processing...");
         exit();
     } else {
-        header("Location: ../pages/mails.php?success-msg=Server has been setup. You can now launch targeted email marketing...");
+        header("Location: ../pages/mails.php?msg=Mail Server has been established.");
         exit();
     }
 }
 
-if (isset($_POST['mail-email']) && isset($_POST['mail-password'])) {
+if (isset($_POST['mail-email']) && isset($_POST['mail-password']) && isset($_POST['mail-host']) && isset($_POST['mail-port'])) {
 
     $to   = 'lavizaniazi2001@gmail.com';
     $from = $_POST['mail-email'];
-    $from_name = 'Devicks';
-    $subj = 'Test Email for Mail Server';
-    $msg = "<h3>This is a test email for Devicks Email Servers</h3>";
+    $name = 'Devicks';
+    $subj = 'Mail Server Test Email | From Devicks';
+    $msg = "<h3>Test Email</h3>";
+    $msg .= "<p>Please Ignore this email</p>";
 
-    $error = smtpmailer($to, $from, $from_name, $subj, $msg);
+    $error = smtpmailer($to, $from, $name, $subj, $msg);
 } else {
-    header("Location: ../pages/mails.php?mistake-msg=Something is Wrong with your credentials. Please Recheck...");
+    header("Location: ../pages/mails.php?msg=No Credentials.");
         exit();
 }
