@@ -1,12 +1,13 @@
 <?php
 session_start();
+include "../config/config.php";
+
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 ?>
 
     <?php
     $title = "Mails";
     include 'top.php';
-
     ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -80,8 +81,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
                     <section class="col-lg-5 connectedSortable">
-
-
                     </section>
                     <!-- right col -->
                 </div>
@@ -93,51 +92,66 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 <?php } else if (isset($_SESSION['mail-server'])) {
             //reach this loop when server is set
 ?>
-    <!-- POP UP FOR MESSAGE ALERTS -->
-    <div class="row">
-        <div class="col">
-            <div class="card-body">
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h5><i class="icon fas fa-check"></i> Success!</h5>
-                    <?php echo $_GET['msg']; ?>
+    <?php if (isset($_GET['msg'])) {
+    ?>
+        <!-- POP UP FOR MESSAGE ALERTS -->
+        <div class="row">
+            <div class="col">
+                <div class="card-body">
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-check"></i> Success!</h5>
+                        <?php echo $_GET['msg']; ?>
+                    </div>
                 </div>
+                <!-- /.card-body -->
             </div>
-            <!-- /.card-body -->
+            <!-- /.card -->
         </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-    <!-- END OF ALERT -->
+        <!-- /.col -->
+        <!-- END OF ALERT -->
+    <?php } ?>
 
     <!-- START OF EMAIL INPUT SECTION -->
 
-    <!-- general form elements -->
-    <div class="card card-primary">
-        <div class="card-header">
-            <h3 class="card-title">Target Emails</h3>
-        </div>
-        <!-- /.card-header -->
-        <!-- form start -->
-        <form action="" method="post">
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+    <div class="row card-body">
+        <div class="col">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Target Emails</h3>
                 </div>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
-    <!-- /.card -->
-    <?php
-        # APP LOGIC TO STORE EMAILS 
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="mails.php?emails=$emails_list" method="post">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" name="new-email" placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h5>Existing Emails List</h5>
+                            <?php
 
-    ?>
-    <!-- END OF INPUT SECTION -->
+
+                            ?>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+            <!-- END OF INPUT SECTION -->
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
 
 <?php
         }
