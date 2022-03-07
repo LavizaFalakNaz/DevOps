@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
+  session_start();
   $title = "Home";
   include 'top.php';
 ?>
