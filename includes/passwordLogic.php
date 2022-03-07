@@ -33,13 +33,15 @@ if (isset($_POST['reset-password'])) {
         if (!mysqli_query($db, $insert)) {
             die('Error: ' . mysqli_error($db));
         } else {
-            $query = "SELECT id FROM passwords_reset WHERE email = '$email' AND status = '$vkey'";
+            $query = "SELECT id FROM passwords_reset WHERE email = '$email' AND status = '$vkey' LIMIT 1";
             $result = mysqli_query($db, $query);
-            if (mysqli_num_rows($result) === 1) {
+            if ($result) {
                 $row = mysqli_fetch_assoc($result);
                 $uid = $row['id'];
                 header("Location: ../mailer/passwordResetMail.php?vkey=$vkey&email=$email");
                 exit();
+            } else {
+                header('location: ../pages/forgot-password.php?error=Something is wrong with your email. Please try again');
             }
         }
     }
@@ -52,8 +54,12 @@ if (isset($_POST['new_password'])) {
 
     // Grab to token that came from the email link
     $token = $_POST['new_password'];
-    if (empty($new_pass) || empty($new_pass_c)) array_push($errors, "Password is required");
-    if ($new_pass !== $new_pass_c) array_push($errors, "Password do not match");
+    if (empty($new_pass) || empty($new_pass_c)) {
+        array_push($errors, "Password is required");
+    }
+    if ($new_pass !== $new_pass_c) {
+        array_push($errors, "Password do not match");
+    }
     if (count($errors) == 0) {
         $servername = "us-cdbr-east-05.cleardb.net";
         $username = "bcc77e1841a73a";
@@ -71,8 +77,8 @@ if (isset($_POST['new_password'])) {
             $results = mysqli_query($mysqli, $sql);
             $update = $mysqli->query("UPDATE passwords_reset SET status = 1 WHERE token = '$token' LIMIT 1");
             header('location: ../pages/login.php?error=Password Updated! you can  now login.');
+        } else {
+            header('location: ../pages/forgot-password.php?error=Invalid Token. Please try again.');
         }
     }
 }
-header("Location: ../mailer/passwordResetMail.php?error=It Didn't work!");
-exit();

@@ -16,7 +16,7 @@ if(isset($_POST['submit']))
         die('Error: ' . mysqli_error($con));
     } 
     else{
-        echo "Account Deleted with email";
+        echo "Account Deleted with email ".$email;
     }
 }
 ?>
