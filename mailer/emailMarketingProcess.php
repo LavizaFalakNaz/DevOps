@@ -1,6 +1,7 @@
 <?php
 include_once "../config/config.php";
 require "PHPMailer/PHPMailerAutoload.php";
+session_start();
 
 function smtpmailer($to, $from, $from_name, $subject, $body)
 {
@@ -39,21 +40,25 @@ if (isset($_POST['clear-email'])) {
 }
 
 if (isset($_POST['send-email'])) {
+    $uid = $_SESSION['id'];
     $query = "SELECT email FROM marketing_emails where uid = '$uid'";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
         while ($array = mysqli_fetch_row($result)) {
             if (isset($_POST['message']) && isset($_POST['subject'])) {
                 $email = $array[0];
-
                 $to   = $email;
                 $from = 'hello@lavizadevelops.com';
-                $name = 'Devicks';
+                $from_name = 'Devicks';
                 $subj = $_POST['subject'];
                 $msg = $_POST['message'];
-                $msg .= "<p><strong>If you received this email without consent or have not registered for Devicks, please dont click on the provided link as the malicious user may get access to your account unintentionally. Please discard this email immediately.</strong><p>";
+                $msg .= "<br><br><hr><p><strong>If you received this email without consent or have not registered for Devicks, please dont click on the provided link as the malicious user may get access to your account unintentionally. Please discard this email immediately.</strong><p>";
 
-                $error = smtpmailer($to, $from, $name, $subj, $msg);
+                $error = smtpmailer($to, $from, $from_name, $subj, $msg);
+                if ($error) {
+                    header("Location: ../pages/mails.php?error='.$error.'");
+                    exit();
+                }
             } else {
                 echo "no credentials";
             }
@@ -62,7 +67,6 @@ if (isset($_POST['send-email'])) {
         header("Location: ../pages/mails.php?error=Your Emails list is empty. Please add some emails first...");
         exit();
     }
+    header("Location: ../pages/mails.php?msg=Mails Sent...");
+    exit();
 }
-
-header("Location: ../pages/mails.php?msg=Mails Sent...");
-exit();

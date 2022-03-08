@@ -179,7 +179,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                     ?>
                                             <tr>
                                                 <td scope="row"><?php echo $array[1]; ?></th>
-                                                <td><a href="../includes/delete-process.php?id=<?php echo $array[0]; ?>">X</a></td>
+                                                <td><a class="btn btn-danger btn-md" href="../includes/delete-process.php?id=<?php echo $array[0]; ?>">X</a></td>
                                             </tr>
                                         <?php }
                                         //once the loop is complete, make it empty
@@ -233,7 +233,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                         </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" name="email-save" class="btn btn-warning">Send</button>
+                    <button type="submit" name="send-email" class="btn btn-warning">Send</button>
                     <button type="submit" name="clear-email" class="btn btn-default float-right">Cancel</button>
                 </div>
                 </form>

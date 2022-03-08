@@ -125,7 +125,7 @@
               <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            <a href="messages.php" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
         </li>
         <!-- Notifications Dropdown Menu -->
@@ -264,7 +264,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="messages.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i><!--envelope-->
                     <p>Messages</p>
                   </a>
