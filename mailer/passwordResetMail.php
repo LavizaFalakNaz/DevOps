@@ -1,5 +1,4 @@
 <?php
-echo $_GET['email'];
 require "PHPMailer/PHPMailerAutoload.php";
 
 function smtpmailer($to, $from, $from_name, $subject, $body)
@@ -12,7 +11,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Host = 'smtpout.secureserver.net';
     $mail->Port = 465;
     $mail->Username = 'hello@lavizadevelops.com';
-    $mail->Password = 'Hello12eF';
+    $mail->Password = 'March25@2001';
 
     //   $path = 'reseller.pdf';
     //   $mail->AddAttachment($path);
@@ -46,7 +45,7 @@ if (isset($_GET['email']) && isset($_GET['vkey'])) {
     $msg .= "<p>We received a password recovery request from your email account.</p>";
     $msg .= "<p>If this was you, please click on the given link to proceed.</p>";
     /*UPDATE URL WHEN PUSHING THE CODE TO THE REPO*/
-    $msg .= "<a href='https://devops-fyp.herokuapp.com/pages/recover-password.php?vkey=$vkey'>";
+    $msg .= "<a href='localhost/devops/pages/recover-password.php?vkey=$vkey'>";
     $msg .= "Click here to Reset your Account ";
     $msg .= "</a>";
     $msg .= "<hr>";

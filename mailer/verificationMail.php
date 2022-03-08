@@ -1,5 +1,4 @@
 <?php
-echo $_GET['email'];
 require "PHPMailer/PHPMailerAutoload.php";
 
 function smtpmailer($to, $from, $from_name, $subject, $body)
@@ -12,7 +11,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Host = 'smtpout.secureserver.net';
     $mail->Port = 465;
     $mail->Username = 'hello@lavizadevelops.com';
-    $mail->Password = 'Hello12eF';
+    $mail->Password = 'March25@2001';
 
     //   $path = 'reseller.pdf';
     //   $mail->AddAttachment($path);
@@ -45,7 +44,7 @@ if (isset($_GET['email']) && isset($_GET['vkey'])) {
     $msg = "<h3>Thankyou for choosing Devicks</h3>";
     $msg .= "<p>We received a registration request from your email and this email is sent to confirm your registration.</p>";
     /*UPDATE URL WHEN PUSHING THE CODE TO THE REPO*/
-    $msg .= "<a href='https://devops-fyp.herokuapp.com/verify.php?vkey=$vkey'>";
+    $msg .= "<a href='localhost/devops/verify.php?vkey=$vkey'>";
     $msg .= "Click here to Verify your account ";
     $msg .= "</a>";
     $msg .= "<hr>";
