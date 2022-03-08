@@ -6,6 +6,16 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 ?>
 
     <?php
+    if (isset($_POST['email-save'])) {
+        $uid = $_SESSION['id'];
+        $new_email = $_POST['new_email'];
+        $insert = "INSERT INTO marketing_emails (email, uid) VALUES ('$new_email' , '$uid')";
+        if (!mysqli_query($con, $insert)) {
+            die('Error: ' . mysqli_error($con));
+        }
+    }
+    ?>
+    <?php
     $title = "Mails";
     include 'top.php';
     ?>
@@ -42,7 +52,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                         <!-- Horizontal Form -->
                         <div class="card card-danger">
                             <div class="card-header">
-                                <h3 class="card-title">Your Mail Server is not setp yet. Please Provide the details below.</h3>
+                                <h3 class="card-title">Your Mail Server is not setup yet. Please Provide the details below.</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -112,6 +122,26 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
         <!-- END OF ALERT -->
     <?php } ?>
 
+    <?php if (isset($_GET['error'])) {
+    ?>
+        <!-- POP UP FOR MESSAGE ERRORS -->
+        <div class="row">
+            <div class="col">
+                <div class="card-body">
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-check"></i> Error</h5>
+                        <?php echo $_GET['error']; ?>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+        <!-- END OF ALERT -->
+    <?php } ?>
+
     <!-- START OF EMAIL INPUT SECTION -->
 
     <div class="row card-body">
@@ -123,33 +153,94 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="mails.php?emails=$emails_list" method="post">
+                <form action="mails.php" method="post">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" name="new-email" placeholder="Enter email">
+                            <input type="email" class="form-control" id="exampleInputEmail1" name="new_email" placeholder="Enter email">
                         </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <button type="submit" name="email-save" class="btn btn-primary">Add</button>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
                             <h5>Existing Emails List</h5>
                             <?php
-
-
+                            $uid = $_SESSION['id'];
+                            $query = "SELECT id,email FROM marketing_emails where uid = '$uid'";
+                            $result = mysqli_query($con, $query);
                             ?>
+                            <table class="table">
+                                <tbody>
+                                    <?php if ($result->num_rows > 0) {
+                                        while ($array = mysqli_fetch_row($result)) {
+                                    ?>
+                                            <tr>
+                                                <td scope="row"><?php echo $array[1]; ?></th>
+                                                <td><a href="../includes/delete-process.php?id=<?php echo $array[0]; ?>">X</a></td>
+                                            </tr>
+                                        <?php }
+                                        //once the loop is complete, make it empty
+                                        mysqli_free_result($result);
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="1" rowspan="1" headers="">No Data Found</td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+
                         </div>
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>
             <!-- /.card -->
             <!-- END OF INPUT SECTION -->
         </div>
-        <div class="col">
 
+        <!--START OF EMAIL EDIT SECTION -->
+        <div class="col">
+            <!-- general form elements disabled -->
+            <div class="card card-warning">
+                <div class="card-header">
+                    <h3 class="card-title">Email Contents</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form action="../mailer/emailMarketingProcess.php" method="POST">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <input type="text" class="form-control" name="subject" placeholder="Enter Your Subject ...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Message Content</label>
+                                    <textarea rows="7" style="height:100%;" class="form-control" rows="3" name="message" placeholder="Enter Your Email Content..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" name="email-save" class="btn btn-warning">Send</button>
+                    <button type="submit" name="clear-email" class="btn btn-default float-right">Cancel</button>
+                </div>
+                </form>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <!-- general form elements disabled -->
         </div>
     </div>
 
