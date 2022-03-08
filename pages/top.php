@@ -293,7 +293,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="projectnew.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i> <!--layer-plus-->
                     <p>Add New Project</p>
                   </a>
@@ -304,8 +304,7 @@
                     <p>All Projects</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="sprints.php" class="nav-link">
+                <li class="kanban.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i><!--square-kanban-->
                     <p>Kanban Board</p>
                   </a>

@@ -1,4 +1,12 @@
 <?php
+<<<<<<< HEAD
+session_start();
+  
+if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
+  
+  $title = "Home";
+  include 'top.php';
+=======
 
   include "../includes/auth.php";
   $pageInfo = [
@@ -31,15 +39,52 @@
       $rec["uid"] = $_SESSION["id"];
       $ftitle = "Create Task";
       $msg = "";
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
 
-      if (isset($_GET["id"]) && isset($_GET["act"])) {
-        $id = $_GET["id"];
-        $act = $_GET["act"];
+  error_reporting(0);
+  include "../includes/main.class.php";
+  $asfun = new Main();
+  
+  $rec["id"] = null;
+  $rec["pid"] = "";
+  $rec["title"] = "";
+  $rec["asg"] = "";
+  $rec["status"] = "1";
+  $rec["sdate"] = "";
+  $rec["edate"] = "";
+  $rec["uid"] = $_SESSION["id"];
+  $ftitle = "Create Task";
+  $msg = "";
+  
+  if(isset($_GET["id"]) && isset($_GET["act"])){
+      $id=$_GET["id"];
+      $act=$_GET["act"];
 
-        if ($act == "edit") {
-          $res = $asfun->dbcon->query("select * from task where id='$id'");
-          $rec = $res->fetch_array();
+      if($act=="edit"){
+          $res=$asfun->dbcon->query("select * from task where id='$id'"); 
+          $rec =$res->fetch_array();
           $ftitle = "Edit Task";
+<<<<<<< HEAD
+          
+      }elseif($act=="delete"){
+                  //for delete code
+   }
+  }
+
+
+  if(isset($_POST["title"])){
+      $rec= $_POST;
+      $title = $rec["title"];
+      $pid = $rec["pid"];
+      $edate = $rec["edate"];
+      $sdate = $rec["sdate"];
+      $uid = $rec["uid"];
+      $id = $rec["id"];
+      $asg = $rec["asg"];
+      $status = $rec["status"];
+      
+      
+=======
         } elseif ($act == "delete") {
           //for delete code
         }
@@ -86,15 +131,22 @@
         $status = $rec["status"];
         
         
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
 
 if($id>0){
-    $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid', `asg`='$asg', `status`='$status' where id='$id'");
-    $msg = "Task has been updated!"; 
+  $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid', `asg`='$asg', `status`='$status' where id='$id'");
+  $msg = "Task has been updated!"; 
 }else{
-    $asfun->dbcon->query("insert into task(`uid`, `title`, `pid`, `sdate`, `edate`, `asg`, `status`) values('$uid', '$title', '$pid', '$sdate', '$edate', '$asg', '$status')") or die("Error"); 
-    $msg = "Task has been created!";
+  $asfun->dbcon->query("insert into task(`uid`, `title`, `pid`, `sdate`, `edate`, `asg`, `status`) values('$uid', '$title', '$pid', '$sdate', '$edate', '$asg', '$status')") or die("Error"); 
+  $msg = "Task has been created!";
+  $s = $asfun->getUser($asg);
+  $email = $s["email"];
+  header("Location: ../mailer/taskemail.php?email=$email");
 }
 
+<<<<<<< HEAD
+}  
+=======
     include_once "../layout/navbar.php";
     include_once "../layout/sidebar.php";
     
@@ -148,12 +200,13 @@ if($id>0){
 }  
 
       ?>
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
 
+?>
 
+<div class="content-wrapper" style="min-height: 2646.44px; padding:10px;">
 
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
+<div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
@@ -313,7 +366,7 @@ if($id>0){
         while($row=mysqli_fetch_assoc($q)){
                ?>
                <tr>
-                   <td><a href="sprints.php?pid=<?php echo $row["pid"] ?>"><b><?php echo ucwords($row["title"]); ?></b></a></td>
+                   <td><a href="kanban.php?pid=<?php echo $row["pid"] ?>"><b><?php echo ucwords($row["title"]); ?></b></a></td>
                    <td><?php echo ucwords($asfun->getProjectName($row["pid"])); ?></td>
                    <td><?php echo $row["sdate"]; ?></td>
                    <td><?php echo $row["edate"]; ?></td>
@@ -338,6 +391,18 @@ if($id>0){
               <!-- /.row -->
             </div><!-- /.container-fluid -->
           </div>
+<<<<<<< HEAD
+
+
+     </div>
+ 
+  <?php include 'bottom.php'; ?>
+
+<?php } else {
+  header("Location: login.php?error=Please enter your email and password to start.");
+  exit();
+}
+=======
           <!-- /.content -->
         </div>
 
@@ -371,3 +436,4 @@ if(isset($_GET["pid"])){
   <?php
 }
 ?>
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
