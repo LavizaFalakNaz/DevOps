@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php echo $title; ?> | Devicks &copy;</title>
+  <title><?php echo $title; ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -26,17 +26,10 @@
   <link rel="stylesheet" href="../frontend/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="../frontend/plugins/summernote/summernote-bs4.min.css">
-   <!-- fullCalendar -->
-   <link rel="stylesheet" href="../frontend/plugins/fullcalendar/main.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="../frontend/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -46,7 +39,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="home.php" class="nav-link">Home</a>
+          <a href="index3.html" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -132,7 +125,7 @@
               <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            <a href="messages.php" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
         </li>
         <!-- Notifications Dropdown Menu -->
@@ -172,6 +165,12 @@
             <i class="fas fa-th-large"></i>
           </a>
         </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">
+            <i class="far fa-circle"></i>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -179,9 +178,9 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../index.php" class="brand-link">
+      <a href="#" class="brand-link">
         <img src="../frontend/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Devicks &copy;</span>
+        <span class="brand-text font-weight-light">Devicks</span>
       </a>
 
       <!-- Sidebar -->
@@ -213,156 +212,113 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="home.php" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>General</p>
-                </a>
-              </li>
 
-              <li class="nav-item">
-                <a href="projectlist.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Projects</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>DevOps</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="calender.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Calender</p>
-                </a>
-              </li>
-
-              
-              <li class="nav-item">
-                <a href="logs.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Logs</p>
-                </a>
-              </li>
-              
-
-
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="kanban.php" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
-              <p>
-                Kanban Board
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Mailbox
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inbox</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Compose</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Read</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Pages
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Invoice</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/profile.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Profile</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="projectlist.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Projects</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="projectnew.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Project Add</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/project-detail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Project Detail</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/contacts.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Contacts</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/faq.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>FAQ</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/contact-us.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Contact us</p>
-                </a>
-              </li>
-            </ul>
-          </li>            
-        
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-                  </ul>
+            <!--
+                ----- ADD EACH NAV ITEM HERE.
+            -->
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  General
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-tachometer-alt nav-icon"></i>
+                    <p>Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-user nav-icon"></i>
+                    <p>Profile</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i>
+                    <p>Team & Contacts</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--
+                ----- END EACH NAV ITEM HERE.
+            -->
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Communications
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="mails.php" class="nav-link">
+                    <i class="fas fa-envelope nav-icon"></i>
+                    <p>Mails</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="messages.php" class="nav-link">
+                    <i class="fas fa-circle nav-icon"></i><!--envelope-->
+                    <p>Messages</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-bell nav-icon"></i>
+                    <p>Notifications</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-flag nav-icon"></i>
+                    <p>Tickets</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i><!--bars-progress-->
+                <p>
+                  Projects
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-circle nav-icon"></i> <!--layer-plus-->
+                    <p>Add New Project</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="project.php" class="nav-link">
+                    <i class="fas fa-circle nav-icon"></i><!--list-check-->
+                    <p>All Projects</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="sprints.php" class="nav-link">
+                    <i class="fas fa-circle nav-icon"></i><!--square-kanban-->
+                    <p>Kanban Board</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-circle nav-icon"></i><!--display-arrow-down-->
+                    <p>Query Mode Setup</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
