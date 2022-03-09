@@ -126,7 +126,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                           <?php echo $i++; ?>
                       </td>
                       <td>
-                          <a>
+                          <a href="kanban.php?pid=<?php echo $row["id"] ?>">
                               <?php echo $row["name"] ?>
                           </a>
                           <br>

@@ -235,6 +235,14 @@ include "bottom.php";
 
                 $sdate = DateTime::createFromFormat("Y-m-d", $row["sdate"]);
                 $edate = DateTime::createFromFormat("Y-m-d",  $row["edate"]);
+
+                if($row["status"]==1){
+                  $bgcolor="red";
+                }else if($row["status"]==2){
+                  $bgcolor="yellow";
+                }else{
+                  $bgcolor="green";
+                }
                 
             ?>
         {
@@ -242,6 +250,7 @@ include "bottom.php";
           start          : new Date(<?php echo $sdate->format("Y")  ?>, <?php echo $sdate->format("m")  ?>, <?php echo $sdate->format("d")  ?>),
           end            : new Date(<?php echo $edate->format("Y")  ?>, <?php echo $edate->format("m")  ?>, <?php echo $edate->format("d")  ?> ),
           borderColor    : '#f39c12', //yellow
+          backgroundColor: '<?php echo $bgcolor; ?>',
           allDay         : true,
         },
 

@@ -81,20 +81,24 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
    <div class="container-fluid">
      <d class="row">
        <!-- /.col-md-6 -->
-      
+      <?php
+         $qs = $asfun->dbcon->query("select * from projects where uid='$uid'");
+         while($row=mysqli_fetch_assoc($qs)){
+             $pid=$row["id"];
+      ?>
 
-       <div class="col-sm-4">
+       <div class="col-sm-3">
          <div class="card">
            <div class="card-header">
-             <h5 class="m-0 float-left">ToDo</h5>
-             <a href="task.php?pid=<?php echo $pid ?>" class="float-right btn btn-xs btn-danger"><i class="fas fa-plus"></i></a>
+             <h5 class="m-0 float-left"><a href="kanban.php?pid=<?php echo $pid; ?>"><?php echo $row["name"] ?></a></h5>
+             <a href="task.php?pid=<?php echo $pid ?>" class="float-right btn btn-xs btn-primary"><i class="fas fa-plus"></i></a>
            </div>
            <div class="card-body">
              
            <?php
-           $q=$asfun->dbcon->query("select * from task where pid='$pid' and status=1");
+           $q=$asfun->dbcon->query("select * from task where pid='$pid' order by sdate asc");
            while($row=mysqli_fetch_assoc($q)){
-                   $asfun->taskCard($asfun->todo, $row);
+                   $asfun->taskCardg($asfun->todo, $row);
            }
            ?>
 
@@ -103,8 +107,10 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
      </div>
 
 
+<?php } ?>
 
 
+<!--
      <div class="col-sm-4">
          <div class="card">
            <div class="card-header">
@@ -151,7 +157,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
          </div>
      </div>
 
-
+        -->
 
      </div>
          </div>

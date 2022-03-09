@@ -21,11 +21,13 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../frontend/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../frontend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="../frontend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">  
   <!-- Daterange picker -->
   <link rel="stylesheet" href="../frontend/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="../frontend/plugins/summernote/summernote-bs4.min.css">
+ <!-- fullCalendar -->
+ <link rel="stylesheet" href="../frontend/plugins/fullcalendar/main.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -243,6 +245,12 @@
                     <p>Team & Contacts</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="calender.php" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i>
+                    <p>Calender</p>
+                  </a>
+                </li>
               </ul>
             </li>
             <!--
@@ -293,19 +301,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="projectnew.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i> <!--layer-plus-->
                     <p>Add New Project</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="project.php" class="nav-link">
+                  <a href="projectlist.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i><!--list-check-->
                     <p>All Projects</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="sprints.php" class="nav-link">
+                  <a href="gkanban.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i><!--square-kanban-->
                     <p>Kanban Board</p>
                   </a>

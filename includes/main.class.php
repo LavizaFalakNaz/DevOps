@@ -120,6 +120,48 @@ public function taskCard($type, $data){
 }
 
 
+
+public function taskCardg($type, $data){
+
+  ?>
+  
+  <div class="info-box shadow">
+                <span style="display:none;" class="info-box-icon bg-<?php echo $type["class"] ?>"><i class="fas fa-<?php echo $type["icon"] ?>"></i></span>
+  
+                <div class="info-box-content">
+                  <span class="info-box-text"><b><?php echo ucwords($data["title"]); ?></b><br/>
+                  <?php echo ucwords($this->getUser($data["asg"])['name']); ?> 
+                </span>
+                  <span class="info-box-number">
+                 
+    <button style="display:none;" class="btn btn-<?php echo $type["class"] ?> btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+    <?php echo $type["name"] ?>
+    </button>
+    <div class="dropdown-menu" style="">
+    <a class="dropdown-item" href="?id=<?php echo $data["id"] ?>&pid=<?php echo $data["pid"] ?>&status=1">ToDo</a>
+      <a class="dropdown-item" href="?id=<?php echo $data["id"] ?>&pid=<?php echo $data["pid"] ?>&status=2">Doing</a>
+      <a class="dropdown-item" href="?id=<?php echo $data["id"] ?>&pid=<?php echo $data["pid"] ?>&status=3">Done</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="task.php?pid=<?php echo $data["pid"] ?>">Add New</a>
+    <a class="dropdown-item" href="task.php?id=<?php echo $data["id"] ?>&act=edit">Edit</a>
+  
+    
+  </div>
+  
+               
+                  </span>
+                  
+                </div>
+  
+                
+              </div>
+  
+  <?php
+  
+  
+  }
+
+
 public function progress($pid){
   $res = $this->dbcon->query("select * from task where pid='$pid'");
   // return mysqli_num_rows($res); 

@@ -1,10 +1,45 @@
 <?php
+<<<<<<< HEAD
 session_start();
   
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   
   $title = "Home";
   include 'top.php';
+=======
+
+  include "../includes/auth.php";
+  $pageInfo = [
+    'title' => 'Tasks'
+  ];
+?>
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <?php
+    include_once "../layout/head.php";
+    ?>
+  </head>
+
+  <body class="sidebar-mini layout-fixed" style="height:auto">
+    <div class="wrapper">
+
+      <?php
+      include_once "../layout/navbar.php";
+      include_once "../layout/sidebar.php";
+
+      $rec["id"] = null;
+      $rec["pid"] = "";
+      $rec["title"] = "";
+      $rec["sdate"] = "";
+      $rec["edate"] = "";
+      $rec["uid"] = $_SESSION["id"];
+      $ftitle = "Create Task";
+      $msg = "";
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
 
   error_reporting(0);
   include "../includes/main.class.php";
@@ -29,6 +64,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
           $res=$asfun->dbcon->query("select * from task where id='$id'"); 
           $rec =$res->fetch_array();
           $ftitle = "Edit Task";
+<<<<<<< HEAD
           
       }elseif($act=="delete"){
                   //for delete code
@@ -48,6 +84,54 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
       $status = $rec["status"];
       
       
+=======
+        } elseif ($act == "delete") {
+          //for delete code
+        }
+      }
+
+    include_once "../layout/navbar.php";
+    include_once "../layout/sidebar.php";
+    
+    $rec["id"] = null;
+    $rec["pid"] = "";
+    $rec["title"] = "";
+    $rec["asg"] = "";
+    $rec["status"] = "1";
+    $rec["sdate"] = "";
+    $rec["edate"] = "";
+    $rec["uid"] = $_SESSION["id"];
+    $ftitle = "Create Task";
+    $msg = "";
+    
+    if(isset($_GET["id"]) && isset($_GET["act"])){
+        $id=$_GET["id"];
+        $act=$_GET["act"];
+
+        if($act=="edit"){
+            $res=$asfun->dbcon->query("select * from task where id='$id'"); 
+            $rec =$res->fetch_array();
+            $ftitle = "Edit Task";
+            
+        }elseif($act=="delete"){
+                    //for delete code
+     }
+    }
+
+
+    if(isset($_POST["title"])){
+        $rec= $_POST;
+        $title = $rec["title"];
+        $pid = $rec["pid"];
+        $edate = $rec["edate"];
+        $sdate = $rec["sdate"];
+        $uid = $rec["uid"];
+        $id = $rec["id"];
+        $asg = $rec["asg"];
+        $status = $rec["status"];
+        
+        
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
 
 if($id>0){
   $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid', `asg`='$asg', `status`='$status' where id='$id'");
@@ -57,13 +141,66 @@ if($id>0){
   $msg = "Task has been created!";
   $s = $asfun->getUser($asg);
   $email = $s["email"];
-  ?>
-  <iframe src="../mailer/taskemail.php?email=<?php echo $email; ?>&name=<?php echo $title?>" style="display:none;"></iframe>
-  <?php
-  
+  header("Location: ../mailer/taskemail.php?email=$email");
+}
+
+<<<<<<< HEAD
+}  
+=======
+    include_once "../layout/navbar.php";
+    include_once "../layout/sidebar.php";
+    
+    $rec["id"] = null;
+    $rec["pid"] = "";
+    $rec["title"] = "";
+    $rec["asg"] = "";
+    $rec["status"] = "1";
+    $rec["sdate"] = "";
+    $rec["edate"] = "";
+    $rec["uid"] = $_SESSION["id"];
+    $ftitle = "Create Task";
+    $msg = "";
+    
+    if(isset($_GET["id"]) && isset($_GET["act"])){
+        $id=$_GET["id"];
+        $act=$_GET["act"];
+
+        if($act=="edit"){
+            $res=$asfun->dbcon->query("select * from task where id='$id'"); 
+            $rec =$res->fetch_array();
+            $ftitle = "Edit Task";
+            
+        }elseif($act=="delete"){
+                    //for delete code
+     }
+    }
+
+
+    if(isset($_POST["title"])){
+        $rec= $_POST;
+        $title = $rec["title"];
+        $pid = $rec["pid"];
+        $edate = $rec["edate"];
+        $sdate = $rec["sdate"];
+        $uid = $rec["uid"];
+        $id = $rec["id"];
+        $asg = $rec["asg"];
+        $status = $rec["status"];
+        
+        
+
+if($id>0){
+    $asfun->dbcon->query("update task set `title`='$title', `sdate`='$sdate', `edate`='$edate', `pid`='$pid', `asg`='$asg', `status`='$status' where id='$id'");
+    $msg = "Task has been updated!"; 
+}else{
+    $asfun->dbcon->query("insert into task(`uid`, `title`, `pid`, `sdate`, `edate`, `asg`, `status`) values('$uid', '$title', '$pid', '$sdate', '$edate', '$asg', '$status')") or die("Error"); 
+    $msg = "Task has been created!";
 }
 
 }  
+
+      ?>
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
 
 ?>
 
@@ -89,7 +226,7 @@ if($id>0){
           <div class="container-fluid">
             <div class="row">
               <!-- /.col-md-6 -->
-              <div class="col-lg-12">
+              <div class="col-lg-4">
 
 
 
@@ -200,7 +337,7 @@ if($id>0){
               </div>
 
 
-              <div class="col-lg-8" style="display:none;">
+              <div class="col-lg-8">
 
 
                 <div class="card">
@@ -254,6 +391,7 @@ if($id>0){
               <!-- /.row -->
             </div><!-- /.container-fluid -->
           </div>
+<<<<<<< HEAD
 
 
      </div>
@@ -264,3 +402,38 @@ if($id>0){
   header("Location: login.php?error=Please enter your email and password to start.");
   exit();
 }
+=======
+          <!-- /.content -->
+        </div>
+
+
+
+
+      </div>
+
+      <?php
+      include_once "../layout/footer.php";
+      ?>
+
+
+      <script>
+      
+
+    $("#pid").val(<?php echo $rec["pid"] ?>);
+    $("#asg").val(<?php echo $rec["asg"] ?>);
+    $("#status").val(<?php echo $rec["status"] ?>);
+    
+</script>
+
+
+<?php
+if(isset($_GET["pid"])){
+  ?>
+  <script>
+    $("#pid").val(<?php echo $_GET["pid"] ?>)
+  </script>
+  
+  <?php
+}
+?>
+>>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
