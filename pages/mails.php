@@ -41,7 +41,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
         <!-- /.content-header -->
 
         <?php
-        if (!isset($_SESSION['mail-server'])) { //reach this loop when server is set
+        if (!isset($_SESSION['mail-server-id'])) { //reach this loop when server is set
         ?>
             <!-- Main content -->
             <section class="content">
@@ -99,7 +99,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     <!-- /.container-fluid -->
     </section>
 
-<?php } else if (isset($_SESSION['mail-server'])) {
+<?php } else if (isset($_SESSION['mail-server-id'])) {
             //reach this loop when server is set
 ?>
     <?php if (isset($_GET['msg'])) {

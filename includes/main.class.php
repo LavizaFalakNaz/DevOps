@@ -28,8 +28,6 @@ class Main
   ];
 
 
-
-
   public function __construct()
   {
     $this->dbcon = new mysqli($this->servername, $this->username, $this->password, $this->database);
