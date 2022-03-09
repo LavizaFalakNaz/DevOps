@@ -49,8 +49,8 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
             $result = mysqli_query($con, $query);
             if (mysqli_num_rows($result) === 1) {
                 $row = mysqli_fetch_assoc($result);
-                $_SESSION['mail-server'] = $row['id'];
                 $new_id = $row['id'];
+                $_SESSION['mail-server-id'] = $row[0];
             }
             $uid = $_SESSION['id'];
             $sql = "UPDATE registrations SET mail_server_id='$new_id' WHERE id='$uid'";

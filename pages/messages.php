@@ -50,17 +50,17 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Default Modal</h4>
+                                        <h4 class="modal-title">Send a Message</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>One fine body&hellip;</p>
+                                        <p>One fine body</p>
                                     </div>
                                     <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-success">Send</button>
                                     </div>
                                 </div>
                                 <!-- /.modal-content -->
@@ -71,7 +71,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                         <div class="card-body p-0">
                             <?php
                             $uid = $_SESSION['id'];
-                            $query = "SELECT sender_id, content, timing FROM messages where receiver_id = '$uid'";
+                            $query = "SELECT sender_id, timing, is_read FROM messages where receiver_id = '$uid'";
                             $result = mysqli_query($con, $query);
                             ?>
                             <table class="table">
