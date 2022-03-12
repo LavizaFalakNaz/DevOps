@@ -85,7 +85,12 @@ public function taskCard($type, $data){
               <span class="info-box-icon bg-<?php echo $type["class"] ?>"><i class="fas fa-<?php echo $type["icon"] ?>"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text"><b><?php echo ucwords($data["title"]); ?></b><br/>
+
+                <span class="info-box-text">
+                <a href="taskdetail.php?tid=<?php echo $data["id"] ?>">   
+                <b><?php echo ucwords($data["title"]); ?></b>
+</a>
+                <br/>
                 <?php echo ucwords($this->getUser($data["asg"])['name']); ?> 
               </span>
                 <span class="info-box-number">
@@ -127,7 +132,11 @@ public function taskCardg($type, $data){
                 <span style="display:none;" class="info-box-icon bg-<?php echo $type["class"] ?>"><i class="fas fa-<?php echo $type["icon"] ?>"></i></span>
   
                 <div class="info-box-content">
-                  <span class="info-box-text"><b><?php echo ucwords($data["title"]); ?></b><br/>
+                  <span class="info-box-text">
+                  
+                  <b><?php echo ucwords($data["title"]); ?></b>
+
+                  <br/>
                   <?php echo ucwords($this->getUser($data["asg"])['name']); ?> 
                 </span>
                   <span class="info-box-number">

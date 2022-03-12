@@ -51,10 +51,11 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   }
 
 
-if(isset($_GET["pid"])){
-    $pid = $_GET["pid"];
-    $res = $asfun->dbcon->query("select * from projects where id='$pid'");
+if(isset($_GET["tid"])){
+    $tid = $_GET["tid"];
+    $res = $asfun->dbcon->query("select * from task where id='$tid'");
     $rec = $res->fetch_array();
+    $pid = $rec["pid"];
     $st = array("", "ToDo", "Doing", "Done");
 }
 
@@ -66,7 +67,7 @@ if(isset($_GET["pid"])){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Projects</h1>
+            <h1>Task</h1>
           </div>
           <div class="col-sm-6">
            
@@ -82,7 +83,7 @@ if(isset($_GET["pid"])){
 
     <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Projects Detail</h3>
+          <h3 class="card-title">Task Detail</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -100,30 +101,9 @@ if(isset($_GET["pid"])){
         <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
             
         <div class="row">
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated budget</span>
-                      <span class="info-box-number text-center text-muted mb-0"><?php echo $rec["bugete"]; ?></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Total amount spent</span>
-                      <span class="info-box-number text-center text-muted mb-0"><?php echo $rec["totalamt"]; ?></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                      <span class="info-box-number text-center text-muted mb-0"><?php echo $rec["projected"]; ?></span>
-                    </div>
-                  </div>
-                </div>
+                
+        
+
               </div>
 
 
@@ -157,7 +137,7 @@ if(isset($_GET["pid"])){
                while($row=mysqli_fetch_assoc($q)){
                        ?>
                        <tr>
-                         <td><?php echo $row["title"]; ?></td>
+                         <td><a href="taskdetail.php?tid=<?php echo $row["id"] ?>"><?php echo $row["title"]; ?></a></td>
                          <td><?php echo  $asfun->getUser($row["asg"])['name']; ?></td>
                          <td><?php echo $st[$row["status"]]; ?></td>
                          <td><?php echo $row["sdate"]; ?></td>
@@ -200,25 +180,32 @@ if(isset($_GET["pid"])){
             </div>
             
             <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <h3 class="text-primary"><i class="fas fa-paint-brush"></i> <?php echo $rec["name"]; ?></h3>
+              <h3 class="text-primary"><i class="fas fa-paint-brush"></i> <?php echo $rec["title"]; ?></h3>
               <p class="text-muted">
               <?php echo $rec["desc"]; ?>
               </p>
               <br>
               <div class="text-muted">
-                <p class="text-sm">Client Company
-                  <b class="d-block"><?php echo $rec["clientc"]; ?></b>
+                <p class="text-sm">Assign To
+                  <b class="d-block"><?php echo  $asfun->getUser($rec["asg"])['name']; ?></b>
                 </p>
-                <p class="text-sm">Project Leader
-                  <b class="d-block"><?php echo $rec["projectl"]; ?></b>
+            
+                <p class="text-sm">Start Date
+                  <b class="d-block"><?php echo $rec["sdate"]; ?></b>
                 </p>
-              </div>
+            
+                <p class="text-sm">End Date
+                  <b class="d-block"><?php echo $rec["edate"]; ?></b>
+                </p>
+            
+            </div>
+              
 
-              <h5 class="mt-5 text-muted">Project files</h5>
+              <h5 class="mt-5 text-muted">Task files</h5>
               <ul class="list-unstyled">
               <?php
               
-              $q=$asfun->dbcon->query("select * from attachment_files where pid='$pid'");
+              $q=$asfun->dbcon->query("select * from attachment_files where tid='$tid'");
                while($row=mysqli_fetch_assoc($q)){
                    ?>
                 <li>
@@ -229,8 +216,22 @@ if(isset($_GET["pid"])){
                    <?php
                }
                    ?>
-              </ul>
+
+
+            </ul>
+              <hr/>
+              <div class="text-center mt-5 mb-3">
+            </form>
+             <form method="post" enctype="multipart/form-data" action="upload.php" target="up">
+            <input type="file" name="fileToUpload" required />
+            <button class="btn btn-sm btn-primary">Upload </button>
+            <input type="hidden" name="pid" value="<?php echo $rec["pid"]; ?>" >
+            <input type="hidden" name="tid" value="<?php echo $rec["id"]; ?>" >
             
+            </form>
+              <iframe name="up" style="display:none;"></iframe>
+            </div>
+
             </div>
           </div>
         </div>
@@ -241,7 +242,7 @@ if(isset($_GET["pid"])){
 
 
     </section>
-</form>
+
     <!-- /.content -->
   </div>
  

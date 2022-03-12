@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -197,18 +196,6 @@
           </div>
         </div>
 
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-          <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-sidebar">
-                <i class="fas fa-search fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -229,25 +216,29 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="fas fa-tachometer-alt nav-icon"></i>
+                    <i class="far fa-circle nav-icon"></i><!--tachometer-->
                     <p>Dashboard</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="fas fa-user nav-icon"></i>
+                    <i class="far fa-user nav-icon"></i>
                     <p>Profile</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="fas fa-users nav-icon"></i>
+                    <i class="far fa-circle nav-icon"></i><!--users-->
                     <p>Team & Contacts</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="calender.php" class="nav-link">
+<<<<<<< HEAD
                     <i class="fas fa-users nav-icon"></i>
+=======
+                    <i class="far fa-circle nav-icon"></i> <!--calender -->
+>>>>>>> 1126f6d3dba131495c5a9ae854537bdc32d50f5b
                     <p>Calender</p>
                   </a>
                 </li>
@@ -267,25 +258,25 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="mails.php" class="nav-link">
-                    <i class="fas fa-envelope nav-icon"></i>
+                    <i class="far fa-envelope nav-icon"></i>
                     <p>Mails</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="messages.php" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i><!--envelope-->
+                    <i class="far fa-circle nav-icon"></i><!--envelope-->
                     <p>Messages</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="fas fa-bell nav-icon"></i>
+                    <i class="far fa-bell nav-icon"></i>
                     <p>Notifications</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="fas fa-flag nav-icon"></i>
+                    <i class="far fa-flag nav-icon"></i>
                     <p>Tickets</p>
                   </a>
                 </li>
