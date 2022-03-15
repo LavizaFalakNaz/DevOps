@@ -32,8 +32,17 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['id'] = $row['id'];
-                    if($row['mail-server-id'] != '0'){
+                    $_SESSION['display-photo-path'] = '../resources/images/0.jpg';
+                    if ($row['mail-server-id'] != '0') {
                         $_SESSION['mail-server-id'] = $row['mail_server_id'];
+                    }
+
+                    $uid = $row['id'];
+                    $sql1 = "SELECT photo_file_path FROM display_photos WHERE uid = '$uid' LIMIT 1";
+                    $result1 = mysqli_query($con, $sql1);
+                    if ($result1->num_rows > 0) {
+                        $row1 = mysqli_fetch_assoc($result1);
+                        $_SESSION['display-photo-path'] = $row1['photo_file_path'];
                     }
                     /*
                      * 

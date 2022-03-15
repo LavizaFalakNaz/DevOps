@@ -7,6 +7,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     <?php
     $title = "Messages";
     include 'top.php';
+    $pic = $_SESSION['display-photo-path'];
     ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -37,6 +38,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                             <div class="row">
                                 <div class="col">
                                     <h3 class="card-title">Inbox</h3>
+                                    <img src="<?php echo $pic; ?>" />
                                 </div>
                                 <div class="col-xs">
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
@@ -71,7 +73,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                         <div class="card-body p-0">
                             <?php
                             $uid = $_SESSION['id'];
-                            $query = "SELECT sender_id, timing, is_read FROM messages where receiver_id = '$uid'";
+                            $query = "SELECT DISTINCT sender_id, timing, is_read FROM messages where receiver_id = '$uid'";
                             $result = mysqli_query($con, $query);
                             ?>
                             <table class="table">
@@ -85,7 +87,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                             <tr>
                                                 <td scope="row">
                                             <tr>
-                                                <?php echo $array[1]; ?>
+                                                <?php // echo $array[1]; ?>
                                             </tr>
                                             <tr>
                                                 <?php echo $name[0]; ?>
