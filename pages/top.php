@@ -265,13 +265,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="notifications.php" class="nav-link">
                     <i class="far fa-bell nav-icon"></i>
                     <p>Notifications</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="tickets.php" class="nav-link">
                     <i class="far fa-flag nav-icon"></i>
                     <p>Tickets</p>
                   </a>
@@ -306,7 +306,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="query.php" class="nav-link">
                     <i class="fas fa-circle nav-icon"></i><!--display-arrow-down-->
                     <p>Query Mode Setup</p>
                   </a>
