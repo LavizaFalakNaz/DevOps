@@ -38,7 +38,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                             <div class="row">
                                 <div class="col">
                                     <h3 class="card-title">Inbox</h3>
-                                    <img src="<?php echo $pic; ?>" />
                                 </div>
                                 <div class="col-xs">
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
@@ -72,43 +71,48 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                         <!-- /.modal -->
                         <div class="card-body p-0">
                             <?php
-                            $uid = $_SESSION['id'];
-                            $query = "SELECT DISTINCT sender_id, timing, is_read FROM messages where receiver_id = '$uid'";
-                            $result = mysqli_query($con, $query);
+                            /*$uid = $_SESSION['id'];
+                            $query = "SELECT sender_id, timing, is_read FROM messages where receiver_id = '$uid'";
+                            $result = mysqli_query($con, $query);*/
                             ?>
-                            <table class="table">
+                            <div class=" card-body table">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>John Doe </p>
+                                        <p>14:30PM</p>
+                                    </div>
+                                    <div class="col-xs">
+                                        <a class="btn btn-warning btn-md" href=#><i class="right fas fa-angle-right"></i></a>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                            <!--<table class="table">
                                 <tbody>
-                                    <?php if ($result->num_rows > 0) {
+                                    <?php /*if ($result->num_rows > 0) {
                                         while ($array = mysqli_fetch_row($result)) {
                                             $query1 = "SELECT name FROM registrations where id = '$array[0]' LIMIT 1";
                                             $result1 = mysqli_query($con, $query1);
-                                            $name = mysqli_fetch_row($result1);
+                                            $name = mysqli_fetch_row($result1);*/
                                     ?>
-                                            <tr>
-                                                <td scope="row">
-                                            <tr>
-                                                <?php // echo $array[1]; ?>
-                                            </tr>
-                                            <tr>
-                                                <?php echo $name[0]; ?>
-                                                <?php echo $array[2]; ?>
-                                            </tr>
-                                            </td>
-                                            <td><a class="btn btn-danger btn-md" href=#>X</a></td>
-                                            </tr>
-                                        <?php }
-                                        //once the loop is complete, make it empty
-                                        mysqli_free_result($result);
-                                    } else {
-                                        ?>
-                                        <tr>
-                                            <td colspan="1" rowspan="1" headers="">No Data Found</td>
-                                        </tr>
+                                    <tr>
+                                        <td>14:30 PM</td>
+                                        <td colspan="2" rowspan="1">John Doe</td>
+                                        <td><a class="btn btn-warning btn-md" href=#><i class="right fas fa-angle-right"></i></a></td>
+                                    </tr>
+                                    <?php /*}*/
+                                    //once the loop is complete, make it empty
+                                    /*mysqli_free_result($result);
+                                    } else {*/
+                                    ?>
+                                    <tr>
+                                        <td colspan="1" rowspan="1" headers="">No Data Found</td>
+                                    </tr>
                                     <?php
-                                    }
+                                    /*}*/
                                     ?>
                                 </tbody>
-                            </table>
+                            </table> -->
                         </div>
                         <!-- /.card-body -->
                     </div>

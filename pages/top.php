@@ -228,17 +228,13 @@
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i><!--users-->
+                    <i class="fas fa-users nav-icon"></i><!--users-->
                     <p>Team & Contacts</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="calender.php" class="nav-link">
-<<<<<<< HEAD
-                    <i class="fas fa-users nav-icon"></i>
-=======
                     <i class="far fa-circle nav-icon"></i> <!--calender -->
->>>>>>> 1126f6d3dba131495c5a9ae854537bdc32d50f5b
                     <p>Calender</p>
                   </a>
                 </li>
