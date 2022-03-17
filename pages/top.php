@@ -40,10 +40,10 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="home.php" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="team.php" class="nav-link">Contact</a>
         </li>
       </ul>
 
@@ -138,22 +138,22 @@
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <span class="dropdown-item dropdown-header">15 Notifications</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="messages.php" class="dropdown-item">
               <i class="fas fa-envelope mr-2"></i> 4 new messages
               <span class="float-right text-muted text-sm">3 mins</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="team.php" class="dropdown-item">
               <i class="fas fa-users mr-2"></i> 8 friend requests
               <span class="float-right text-muted text-sm">12 hours</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="gkanban.php" class="dropdown-item">
               <i class="fas fa-file mr-2"></i> 3 new reports
               <span class="float-right text-muted text-sm">2 days</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            <a href="notifications.php" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
         </li>
         <li class="nav-item">
@@ -179,7 +179,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="#" class="brand-link">
+      <a href="../index.php" class="brand-link">
         <img src="../frontend/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Devicks</span>
       </a>
@@ -192,7 +192,7 @@
             <img src="../resources/images/0.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?php echo $_SESSION['name']; ?></a>
+            <a href="profile.php" class="d-block"><?php echo $_SESSION['name']; ?></a>
           </div>
         </div>
 
@@ -206,7 +206,7 @@
                 ----- ADD EACH NAV ITEM HERE.
             -->
             <li class="nav-item menu-open">
-              <a href="#" class="nav-link">
+              <a href="home.php" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   General
@@ -215,19 +215,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="home.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i><!--tachometer-->
                     <p>Dashboard</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="profile.php" class="nav-link">
                     <i class="far fa-user nav-icon"></i>
                     <p>Profile</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="team.php" class="nav-link">
                     <i class="fas fa-users nav-icon"></i><!--users-->
                     <p>Team & Contacts</p>
                   </a>
