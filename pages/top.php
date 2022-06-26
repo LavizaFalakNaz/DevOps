@@ -227,7 +227,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="team.php" class="nav-link">
+                  <a href="teamm.php" class="nav-link">
                     <i class="fas fa-users nav-icon"></i><!--users-->
                     <p>Team & Contacts</p>
                   </a>

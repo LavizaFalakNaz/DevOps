@@ -209,7 +209,7 @@ if(isset($_GET["tid"])){
                while($row=mysqli_fetch_assoc($q)){
                    ?>
                 <li>
-                  <a href="<?php echo $row["file_path_address"] ?>" target="_blank" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
+                  <a href="viewcode.php?file=<?php echo $row["file_path_address"] ?>" target="_blank" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
                   <?php echo basename($row["file_path_address"]) ?></a>
                 </li>
                    
@@ -222,8 +222,8 @@ if(isset($_GET["tid"])){
               <hr/>
               <div class="text-center mt-5 mb-3">
             </form>
-             <form method="post" enctype="multipart/form-data" action="upload.php" target="up">
-            <input type="file" name="fileToUpload" required />
+             <form method="post" enctype="multipart/form-data" action="upload.php" target="up" >
+            <input type="file" name="fileToUpload" accept=".php,.css*" required />
             <button class="btn btn-sm btn-primary">Upload </button>
             <input type="hidden" name="pid" value="<?php echo $rec["pid"]; ?>" >
             <input type="hidden" name="tid" value="<?php echo $rec["id"]; ?>" >
