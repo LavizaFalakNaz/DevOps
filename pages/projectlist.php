@@ -115,6 +115,23 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
              <tbody>
 
              <?php
+
+if(isset($_GET["act"])){
+  
+  $pid = $_GET["pid"];
+  $asfun->dbcon->query("delete from projects where id='$pid'");
+  ?>
+  <script>
+alert("Project has been delete!");
+
+  </script>
+  <?php
+
+}
+
+
+
+
              $i=1;
                $uid = $_SESSION["id"];
                $q = $asfun->dbcon->query("select * from projects where uid='$uid'");
@@ -137,17 +154,21 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                       <td>
                           <ul class="list-inline">
                               <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../frontend/dist/img/avatar.png">
+                                  <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
+
                               </li>
                               <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../frontend/dist/img/avatar2.png">
-                              </li>
+                              <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
+                                  
+                                </li>
                               <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../frontend/dist/img/avatar3.png">
-                              </li>
+                              <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
+                                  
+                                </li>
                               <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../frontend/dist/img/avatar4.png">
-                              </li>
+                              <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
+                                  
+                                </li>
                           </ul>
                       </td>
                       <td class="project_progress">
@@ -173,15 +194,23 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                       </td>
                       <td class="project-actions text-right">
                           <a class="btn btn-primary btn-sm" href="projectdetail.php?pid=<?php echo $row['id'] ?>">
-                              <i class="fas fa-folder">
+                              <i class="fas fa-eye">
                               </i>
-                              View
+                              
                           </a>
                           <a class="btn btn-info btn-sm" href="projectnew.php?pid=<?php echo $row['id'] ?>">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              
                           </a>
+
+                          <a class="btn btn-danger btn-sm" href="projectlist.php?pid=<?php echo $row['id'] ?>&act=dp">
+                              <i class="fas fa-trash">
+                              </i>
+                              
+                          </a>
+
+                          
                           <!--
                           <a class="btn btn-danger btn-sm" href="projectdelete.php?pid=<?php echo $row['id'] ?>">
                               <i class="fas fa-trash">

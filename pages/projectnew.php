@@ -201,6 +201,24 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
                 <ul class="list-unstyled">
               <?php
+
+              if(isset($_GET["fid"])){
+               
+                $fid =$_GET["fid"];
+               $ad =$_GET["ad"];
+               $asfun->dbcon->query("delete from attachment_files where id='$fid'");
+                unlink($ad);
+?>
+<script>
+alert("File has been delete!");
+</script>
+<?php
+
+
+              }
+
+
+
               
               $q=$asfun->dbcon->query("select * from attachment_files where pid='$pid'");
                while($row=mysqli_fetch_assoc($q)){
@@ -215,7 +233,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
                         <a href="<?php echo $row["file_path_address"] ?>" target="_blank" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a href="projectnew.php?pid=<?php echo $pid ?>&fid=<?php echo $row["id"] ?>&ad=<?php echo $row["file_path_address"] ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
                   </tr>

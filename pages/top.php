@@ -205,39 +205,34 @@
             <!--
                 ----- ADD EACH NAV ITEM HERE.
             -->
+
+            <li class="nav-item">
+<a href="home.php" class="nav-link">
+<i class="nav-icon fas fa-th"></i>
+<p>
+General
+</p>
+</a>
+</li>
+
             <li class="nav-item menu-open">
               <a href="home.php" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                  General
+                  Dashboard
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="home.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i><!--tachometer-->
-                    <p>Dashboard</p>
+
+              <li class="nav-item">
+                  <a href="gkanban.php" class="nav-link">
+                    <i class="fas fa-circle nav-icon"></i><!--square-kanban-->
+                    <p>Kanban Board</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="profile.php" class="nav-link">
-                    <i class="far fa-user nav-icon"></i>
-                    <p>Profile</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="teamm.php" class="nav-link">
-                    <i class="fas fa-users nav-icon"></i><!--users-->
-                    <p>Team & Contacts</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="calender.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i> <!--calender -->
-                    <p>Calender</p>
-                  </a>
-                </li>
+                
+
               </ul>
             </li>
             <!--
@@ -271,7 +266,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="tickets.php" class="nav-link">
+                  <a href="ticketf.php" class="nav-link">
                     <i class="far fa-flag nav-icon"></i>
                     <p>Tickets</p>
                   </a>
@@ -299,20 +294,74 @@
                     <p>All Projects</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="gkanban.php" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i><!--square-kanban-->
-                    <p>Kanban Board</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="query.php" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i><!--display-arrow-down-->
-                    <p>Query Mode Setup</p>
-                  </a>
-                </li>
+                
+                
+
               </ul>
             </li>
+
+
+
+            <li class="nav-item menu-open">
+              <a href="home.php" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  People
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="profile.php" class="nav-link">
+                    <i class="far fa-user nav-icon"></i>
+                    <p>Profile</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="team.php" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i><!--users-->
+                    <p>Team & Contacts</p>
+                  </a>
+                </li>
+          
+                
+
+              </ul>
+            </li>
+
+
+            <li class="nav-item menu-open">
+              <a href="home.php" class="nav-link">
+                <i class="nav-icon fas fa-list"></i>
+                <p>
+                  Activity
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="calender.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i> <!--calender -->
+                    <p>Calender</p>
+                  </a>
+                </li>
+         
+
+                <li class="nav-item">
+                  <a href="timeline.php" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i><!--users-->
+                    <p>Timeline</p>
+                  </a>
+                </li>
+          
+                
+
+              </ul>
+            </li>
+
+
+
+
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

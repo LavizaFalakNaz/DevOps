@@ -11,8 +11,8 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->SMTPSecure = 'ssl';
     $mail->Host = 'smtpout.secureserver.net';
     $mail->Port = 465;
-    $mail->Username = 'hello@lavizadevelops.com';
-    $mail->Password = 'March25@2001';
+    $mail->Username = 'moiz29096@gmail.com';
+    $mail->Password = 'moiz12345678';
 
     //   $path = 'reseller.pdf';
     //   $mail->AddAttachment($path);

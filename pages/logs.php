@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 session_start();
   
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
@@ -26,46 +25,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
 <div class="content-wrapper" style="min-height: 2646.44px; padding:10px;">
 
-=======
-    include "../includes/auth.php";
-    $pageInfo = [
-        'title' => 'Logs'
-    ];
-?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
-    include_once "../layout/head.php";
-    ?>
-</head>
-<body class="sidebar-mini layout-fixed" style="height:auto">
-<div class="wrapper">
-
-<?php
-    include_once "../layout/navbar.php";
-    include_once "../layout/sidebar.php";
-
-    if(isset($_GET["pid"])){
-      $pid = $_GET["pid"];
-      
-      if(isset($_GET["status"]) && isset($_GET["id"])){
-       $asfun->taskStatusUpdate($_GET["id"],$_GET["status"]);
-      }
-    
-    
-    }else{
-      $pid=null;
-    }
-
-?>
-
-<div class="content-wrapper">
-
-<!-- Content Header (Page header) -->
->>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
 <div class="content-header">
    <div class="container-fluid">
      <div class="row mb-2">
@@ -78,11 +37,8 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   <?php
-<<<<<<< HEAD
 
   $st = array("", "ToDo", "Doing", "Done");
-=======
->>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
         $uid = $_SESSION["id"];
         $q = $asfun->dbcon->query("select * from projects where uid='$uid'");
         while($row=mysqli_fetch_assoc($q)){
@@ -224,7 +180,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
      </div>
          </div>
-<<<<<<< HEAD
 
 
      </div>
@@ -235,57 +190,3 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   header("Location: login.php?error=Please enter your email and password to start.");
   exit();
 }
-=======
-     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-include "../layout/footer.php"
-?>
-  </div>
-
-  </body>
-  </html>
->>>>>>> ff7f1cdba149274fbe5d7e9ca562fec68a456562
