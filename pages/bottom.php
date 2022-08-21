@@ -1,7 +1,7 @@
 
 <!-- footer wrapper -->
 <footer class="main-footer">
-  <strong>Copyright &copy; 2014-2021 <a href="../index.php">Devicks &copy;</a>.</strong>
+  <strong>Copyright &copy; 2022 <a href="../index.php">Devicks &copy;</a>.</strong>
   All rights reserved.
   <div class="float-right d-none d-sm-inline-block">
     <b>Version</b> 1.1.1
@@ -49,9 +49,7 @@
 <script src="../frontend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../frontend/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../frontend/dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
 <script src="../frontend/dist/js/pages/dashboard.js"></script>
 <script src="../frontend/plugins/moment/moment.min.js"></script>
 <script src="../frontend/plugins/fullcalendar/main.js"></script>
