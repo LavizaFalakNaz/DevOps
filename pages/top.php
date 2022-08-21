@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,13 +21,17 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../frontend/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../frontend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">  
+  <link rel="stylesheet" href="../frontend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="../frontend/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="../frontend/plugins/summernote/summernote-bs4.min.css">
- <!-- fullCalendar -->
- <link rel="stylesheet" href="../frontend/plugins/fullcalendar/main.css">
+  <!-- fullCalendar -->
+  <link rel="stylesheet" href="../frontend/plugins/fullcalendar/main.css">
+  <!--NEW HEADER FILE LINKS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+  <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -207,13 +212,13 @@
             -->
 
             <li class="nav-item">
-<a href="home.php" class="nav-link">
-<i class="nav-icon fas fa-th"></i>
-<p>
-General
-</p>
-</a>
-</li>
+              <a href="home.php" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  General
+                </p>
+              </a>
+            </li>
 
             <li class="nav-item menu-open">
               <a href="home.php" class="nav-link">
@@ -225,13 +230,14 @@ General
               </a>
               <ul class="nav nav-treeview">
 
-              <li class="nav-item">
+                <li class="nav-item">
                   <a href="gkanban.php" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i><!--square-kanban-->
+                    <i class="fas fa-circle nav-icon"></i>
+                    <!--square-kanban-->
                     <p>Kanban Board</p>
                   </a>
                 </li>
-                
+
 
               </ul>
             </li>
@@ -255,7 +261,8 @@ General
                 </li>
                 <li class="nav-item">
                   <a href="messages.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i><!--envelope-->
+                    <i class="far fa-circle nav-icon"></i>
+                    <!--envelope-->
                     <p>Messages</p>
                   </a>
                 </li>
@@ -275,7 +282,8 @@ General
             </li>
             <li class="nav-item menu-open">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i><!--bars-progress-->
+                <i class="nav-icon fas fa-circle"></i>
+                <!--bars-progress-->
                 <p>
                   Projects
                   <i class="right fas fa-angle-left"></i>
@@ -284,18 +292,20 @@ General
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="projectnew.php" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i> <!--layer-plus-->
+                    <i class="fas fa-circle nav-icon"></i>
+                    <!--layer-plus-->
                     <p>Add New Project</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="projectlist.php" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i><!--list-check-->
+                    <i class="fas fa-circle nav-icon"></i>
+                    <!--list-check-->
                     <p>All Projects</p>
                   </a>
                 </li>
-                
-                
+
+
 
               </ul>
             </li>
@@ -311,7 +321,7 @@ General
                 </p>
               </a>
               <ul class="nav nav-treeview">
-              <li class="nav-item">
+                <li class="nav-item">
                   <a href="profile.php" class="nav-link">
                     <i class="far fa-user nav-icon"></i>
                     <p>Profile</p>
@@ -319,12 +329,13 @@ General
                 </li>
                 <li class="nav-item">
                   <a href="team.php" class="nav-link">
-                    <i class="fas fa-users nav-icon"></i><!--users-->
+                    <i class="fas fa-users nav-icon"></i>
+                    <!--users-->
                     <p>Team & Contacts</p>
                   </a>
                 </li>
-          
-                
+
+
 
               </ul>
             </li>
@@ -339,22 +350,24 @@ General
                 </p>
               </a>
               <ul class="nav nav-treeview">
-              <li class="nav-item">
+                <li class="nav-item">
                   <a href="calender.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i> <!--calender -->
+                    <i class="far fa-circle nav-icon"></i>
+                    <!--calender -->
                     <p>Calender</p>
                   </a>
                 </li>
-         
+
 
                 <li class="nav-item">
                   <a href="timeline.php" class="nav-link">
-                    <i class="fas fa-users nav-icon"></i><!--users-->
+                    <i class="fas fa-users nav-icon"></i>
+                    <!--users-->
                     <p>Timeline</p>
                   </a>
                 </li>
-          
-                
+
+
 
               </ul>
             </li>
