@@ -140,7 +140,29 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                                 while ($array = mysqli_fetch_row($result)) {
                                             ?>
                                                     <tr>
-                                                        <td colspan="1" rowspan="1" headers="">Data Found</td>
+                                                        <td><?php echo $array[1]; ?></td>
+                                                        <td colspan="1.5"><?php echo $array[2]; ?></td>
+                                                        <td>
+                                                            <?php if ($array[5] == 0) {
+                                                            ?>
+                                                                <a class="btn btn-warning btn-sm" href="../includes/test-case-operations.php?id=<?php echo $array[0]; ?>&perf=update&status=false">
+                                                                    <i class="fas fa-times">
+                                                                    </i>
+                                                                </a>
+                                                            <?php } else if ($array[5] == 1) {
+                                                            ?>
+                                                                <a class="btn btn-success btn-sm" href="../includes/test-case-operations.php?id=<?php echo $array[0]; ?>&perf=update&status=true">
+                                                                    <i class="fas fa-check">
+                                                                    </i>
+                                                                </a>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-danger btn-sm" href="../includes/test-case-operations.php?id=<?php echo $array[0]; ?>&perf=del">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 <?php }
                                                 //once the loop is complete, make it empty
@@ -166,7 +188,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="form-horizontal" method="POST" action="../includes/save_task.php">
+                                                    <form class="form-horizontal" method="POST" action="../includes/test-case-operations.php">
                                                         <div class="form-group row">
                                                             <div class="col-sm-12">
                                                                 <input type="text" class="form-control" name="test_name" placeholder="Test Case Name">
@@ -190,13 +212,12 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <input type="submit" style="margin-left:10px; width:100px;" value="Add New" data-toggle="modal" data-target="#myModal" class="btn btn-success" />
-                        <button type="submit" class="btn btn-default float-right" class="btn tn-danger">Cancel</button>
+                        <div class="card-footer">
+                            <input type="submit" style="margin-left:10px; width:100px;" value="Add New" data-toggle="modal" data-target="#myModal" class="btn btn-success" />
+                            <button type="submit" class="btn btn-default float-right" class="btn tn-danger">Cancel</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
         </section>
 
