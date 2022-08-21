@@ -53,9 +53,11 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
 if(isset($_GET["tid"])){
     $tid = $_GET["tid"];
+    $_SESSION['Activetid'] = $tid;
     $res = $asfun->dbcon->query("select * from task where id='$tid'");
     $rec = $res->fetch_array();
     $pid = $rec["pid"];
+    $_SESSION['Activepid'] = $pid;
     $st = array("", "ToDo", "Doing", "Done");
 }
 
@@ -102,18 +104,10 @@ if(isset($_GET["tid"])){
             
         <div class="row">
                 
-        
-
               </div>
-
-
-
               <div class="row">
                 <div class="col-12">
-                  
-
-                  
-                      
+                    
          <div class="card">
            <div class="card-header">
              <h5 class="m-0 float-left">Activity Feed</h5>
@@ -209,7 +203,14 @@ if(isset($_GET["tid"])){
                while($row=mysqli_fetch_assoc($q)){
                    ?>
                 <li>
-                  <a href="viewcode.php?file=<?php echo $row["file_path_address"] ?>" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
+                <!--STORE FILE DATA AS A SESSION VARIABLE-->
+                <?php
+                    $_SESSION['ActiveFile']['fid'] = $row["id"];
+                    $_SESSION['ActiveFile']['path'] = $row["file_path_address"];
+                    $_SESSION['ActiveFile']['pid'] = $row["pid"];
+                    $_SESSION['ActiveFile']['tid'] = $row["tid"];
+                  ?>  
+                <a href="viewcode.php" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
                   <?php echo basename($row["file_path_address"]) ?></a>
                 </li>
                    

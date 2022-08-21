@@ -179,9 +179,12 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                     ?>
                                             <tr>
                                                 <td scope="row"><?php echo $array[1]; ?></th>
-                                                <td><a class="btn btn-danger btn-xs" href="../includes/delete-process.php?id=<?php echo $array[0]; ?>">
-                                                X
-                                            </a></td>
+                                                <td>
+                                                    <a class="btn btn-danger btn-sm" href="../includes/delete-process.php?id=<?php echo $array[0]; ?>">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         <?php }
                                         //once the loop is complete, make it empty

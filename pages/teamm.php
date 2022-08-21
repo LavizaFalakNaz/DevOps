@@ -60,7 +60,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Team Members</h1>
-            <button onclick="sf() type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button onclick="sf();" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Add New Member
 </button>
           </div>
