@@ -9,12 +9,9 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
 
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtpout.secureserver.net';
-    $mail->Port = 465;
-    $mail->Username = 'hello@lavizadevelops.com';
-    $mail->Password = 'March25@2001';
-
+    //IMPORT THE SMTP DETAILS HERE
+    include_once "mailConfig.php";
+   
     //   $path = 'reseller.pdf';
     //   $mail->AddAttachment($path);
 
@@ -27,7 +24,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->Body = $body;
     $mail->AddAddress($to);
     if (!$mail->Send()) {
-        header("Location: ../mails.php?error=Mails couldnt be sent. Please try again later...");
+        header("Location: ../pages/mails.php?error=Mails couldnt be sent. Please try again later...");
         exit();
     } else {
         //continue executing the loop
