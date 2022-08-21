@@ -14,7 +14,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     //   $mail->AddAttachment($path);
 
     $mail->IsHTML(true);
-    $mail->From = "hello@lavizadevelops.com";
+    $mail->From = "no-reply@devicks.com";
     $mail->FromName = $from_name;
     $mail->Sender = $from;
     $mail->AddReplyTo($from, $from_name);
@@ -35,7 +35,7 @@ if (isset($_GET['email']) && isset($_GET['vkey'])) {
     $email = $_GET['email'];
 
     $to   = $email;
-    $from = 'hello@lavizadevelops.com';
+    $from = 'no-reply@devicks.com';
     $name = 'Devicks';
     $subj = 'Email Verification from Devicks';
     $msg = "<h3>Thankyou for choosing Devicks</h3>";
