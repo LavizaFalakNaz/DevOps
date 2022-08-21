@@ -122,13 +122,11 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title align-items-center">Launch Scripter</h3>
-                            <a class="btn btn-info btn-sm float-right" href="scripter.php?id=<?php echo $fid; ?>">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                            </a>
+                    <div class="card card-warning">
+                        <div class="card-header" onclick="location.href='scripter.php?id=<?php echo $fid; ?>';" style="cursor:pointer;">
+                            <h3 class="card-title">Launch Scripter</h3>
+                            <i class="fas fa-pencil-alt float-right">
+                            </i>
                         </div>
                     </div>
                     <div class="card">
@@ -209,7 +207,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                                                 <input type="text" class="form-control" name="desc" placeholder="Enter Case Description here">
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" name="fid" value="<?php echo $fid;?>">
+                                                        <input type="hidden" name="fid" value="<?php echo $fid; ?>">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input type="submit" name="new-case" class="btn btn-success" value="Add Case">
