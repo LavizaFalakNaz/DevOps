@@ -8,11 +8,8 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
 
-    $mail->SMTPSecure = 'ssl';
-    $mail->Host = 'smtpout.secureserver.net';
-    $mail->Port = 465;
-    $mail->Username = 'moiz29096@gmail.com';
-    $mail->Password = 'moiz12345678';
+    //IMPORT THE SMTP DETAILS HERE
+    include "mailConfig.php";
 
     //   $path = 'reseller.pdf';
     //   $mail->AddAttachment($path);

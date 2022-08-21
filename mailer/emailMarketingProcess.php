@@ -10,7 +10,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body)
     $mail->SMTPAuth = true;
 
     //IMPORT THE SMTP DETAILS HERE
-    include_once "mailConfig.php";
+    include "mailConfig.php";
    
     //   $path = 'reseller.pdf';
     //   $mail->AddAttachment($path);
