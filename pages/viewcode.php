@@ -89,14 +89,14 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                 $myfile = fopen($file, "r") or die("Unable to open file!");
                 $s = fread($myfile, filesize($file));
 
-                $fid = $_SESSION['ActiveFile']['id'];
+                $fid = $_SESSION['ActiveFile']['fid'];
                 ?>
 
                 <div class="col-lg-8">
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-header">
-                            <h3 class="card-title">Edit Code <?php echo $fid; ?> </h3>
+                            <h3 class="card-title">Edit Code</h3>
                         </div>
                         <!-- /.card-header -->
 
@@ -209,6 +209,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                                                 <input type="text" class="form-control" name="desc" placeholder="Enter Case Description here">
                                                             </div>
                                                         </div>
+                                                        <input type="hidden" name="fid" value="<?php echo $fid;?>">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input type="submit" name="new-case" class="btn btn-success" value="Add Case">
@@ -217,7 +218,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
