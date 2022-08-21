@@ -2,7 +2,7 @@
 include "../config/config.php";
 
 if (isset($_POST['new-case'])) {
-    $fid = $_SESSION['ActiveFile']['fid'];
+    $fid = $_SESSION['ActiveFile']['id'];
     $name = $_POST['test_name'];
     $desc = $_POST['desc'];
 

@@ -32,6 +32,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
         <!-- /.content-header -->
         <section class="content">
+
             <?php if (isset($_GET['success'])) {
             ?>
                 <!-- POP UP FOR SUCCESS ALERTS -->
@@ -84,18 +85,18 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                     fclose($myfile);
                 }
 
-                $file = $_SESSION["ActiveFile"]["path"];
+                $file = $_SESSION['ActiveFile']['path'];
                 $myfile = fopen($file, "r") or die("Unable to open file!");
                 $s = fread($myfile, filesize($file));
 
-                $fid = $_SESSION['ActivePath']['id'];
+                $fid = $_SESSION['ActiveFile']['id'];
                 ?>
 
                 <div class="col-lg-8">
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-header">
-                            <h3 class="card-title">Edit Code</h3>
+                            <h3 class="card-title">Edit Code <?php echo $fid; ?> </h3>
                         </div>
                         <!-- /.card-header -->
 
@@ -121,6 +122,15 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                 </div>
 
                 <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title align-items-center">Launch Scripter</h3>
+                            <a class="btn btn-info btn-sm float-right" href="scripter.php?id=<?php echo $fid; ?>">
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                            </a>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Test Cases</h3>
