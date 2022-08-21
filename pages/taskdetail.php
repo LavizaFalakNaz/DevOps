@@ -3,7 +3,7 @@ session_start();
   
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   
-  $title = "Home";
+  $title = "Task Details";
   include 'top.php';
 
   error_reporting(0);
@@ -209,7 +209,7 @@ if(isset($_GET["tid"])){
                while($row=mysqli_fetch_assoc($q)){
                    ?>
                 <li>
-                  <a href="viewcode.php?file=<?php echo $row["file_path_address"] ?>" target="_blank" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
+                  <a href="viewcode.php?file=<?php echo $row["file_path_address"] ?>" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
                   <?php echo basename($row["file_path_address"]) ?></a>
                 </li>
                    

@@ -3,7 +3,7 @@ session_start();
   
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   
-  $title = "Home";
+  $title = "Projects Kanban";
   include 'top.php';
 
   error_reporting(0);
@@ -70,12 +70,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
  </div>
  <!-- /.content-header -->
 
-
-
-
-
-
-
  <!-- Main content -->
  <div class="content">
    <div class="container-fluid">
@@ -108,7 +102,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
 
 <?php } ?>
-
 
 <!--
      <div class="col-sm-4">

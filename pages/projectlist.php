@@ -3,7 +3,7 @@ session_start();
   
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   
-  $title = "Home";
+  $title = "All Projects";
   include 'top.php';
 
   error_reporting(0);

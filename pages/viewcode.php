@@ -5,7 +5,7 @@ include "../config/config.php";
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 ?>
     <?php
-    $title = "ENTER PAGE TITLE HERE";
+    $title = "Code View";
     include 'top.php';
     $pic = $_SESSION['display-photo-path'];
     ?>

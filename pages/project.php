@@ -1,7 +1,7 @@
 <?php
 include "../includes/auth.php";
 $pageInfo = [
-  'title' => 'Projects'
+  'title' => 'Add Project'
 ];
 ?>
 <!DOCTYPE html>
