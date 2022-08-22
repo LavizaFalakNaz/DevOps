@@ -1,15 +1,15 @@
 <?php
 session_start();
-  
+
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
-  
+
   $title = "All Projects";
   include 'top.php';
 
   error_reporting(0);
   include "../includes/main.class.php";
   $asfun = new Main();
-  
+
 
   $rec["id"] = null;
   $rec["name"] = "";
@@ -21,11 +21,11 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
   $rec["bugete"] = "";
   $rec["totalamt"] = "";
   $rec["projected"] = "";
-  
 
 
-  if(isset($_POST["name"])){
-    
+
+  if (isset($_POST["name"])) {
+
     $name = $_POST["name"];
     $desc = $_POST["desc"];
     $uid = $_POST["uid"];
@@ -42,18 +42,18 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     $msg = "Project has been created!";
 
 ?>
-<script>
-    alert("<?php echo $msg; ?>")
-</script>
-<?php
+    <script>
+      alert("<?php echo $msg; ?>")
+    </script>
+  <?php
 
 
   }
 
 
-?>
+  ?>
 
-<div class="content-wrapper" style="min-height: 2646.44px; padding:10px;">
+  <div class="content-wrapper" style="min-height: 2646.44px; padding:10px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -71,172 +71,176 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
       </div><!-- /.container-fluid -->
     </section>
 
-    <form method="post" >
-    <!-- Main content -->
-    <section class="content">
-   
+    <form method="post">
+      <!-- Main content -->
+      <section class="content">
 
-    <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Projects</h3>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Projects</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="card-body p-0">
-          <table class="table table-striped projects">
+          <div class="card-body p-0">
+            <table class="table table-striped projects">
               <thead>
-                  <tr>
-                      <th style="width: 1%">
-                          SN#
-                      </th>
-                      <th style="width: 20%">
-                          Project Name
-                      </th>
-                      <th style="width: 30%">
-                          Team Members
-                      </th>
-                      <th>
-                          Project Progress
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          Status
-                      </th>
-                      <th style="width: 20%">
-                      </th>
-                  </tr>
+                <tr>
+                  <th style="width: 1%">
+                    SN#
+                  </th>
+                  <th style="width: 20%">
+                    Project Name
+                  </th>
+                  <th style="width: 30%">
+                    Team Members
+                  </th>
+                  <th>
+                    Project Progress
+                  </th>
+                  <th style="width: 8%" class="text-center">
+                    Status
+                  </th>
+                  <th style="width: 20%">
+                    Operations
+                  </th>
+                </tr>
               </thead>
-             <tbody>
+              <tbody>
 
-             <?php
+                <?php
 
-if(isset($_GET["act"])){
-  
-  $pid = $_GET["pid"];
-  $asfun->dbcon->query("delete from projects where id='$pid'");
-  ?>
-  <script>
-alert("Project has been delete!");
+                if (isset($_GET["act"])) {
 
-  </script>
-  <?php
+                  $pid = $_GET["pid"];
+                  $asfun->dbcon->query("delete from projects where id='$pid'");
+                ?>
+                  <script>
+                    alert("Project has been delete!");
+                  </script>
+                <?php
 
-}
-
+                }
 
 
 
-             $i=1;
-               $uid = $_SESSION["id"];
-               $q = $asfun->dbcon->query("select * from projects where uid='$uid'");
-               while($row=mysqli_fetch_assoc($q)){
-                   ?>
-                   
-                   <tr>
-                      <td>
-                          <?php echo $i++; ?>
-                      </td>
-                      <td>
-                          <a href="kanban.php?pid=<?php echo $row["id"] ?>">
-                              <?php echo $row["name"] ?>
-                          </a>
-                          <br>
-                          <small>
-                              Created at: <?php echo $row["cdate"] ?>
-                          </small>
-                      </td>
-                      <td>
-                          <ul class="list-inline">
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
 
-                              </li>
-                              <li class="list-inline-item">
-                              <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
-                                  
-                                </li>
-                              <li class="list-inline-item">
-                              <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
-                                  
-                                </li>
-                              <li class="list-inline-item">
-                              <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1,15); ?>.jpg">
-                                  
-                                </li>
-                          </ul>
-                      </td>
-                      <td class="project_progress">
+                $i = 1;
+                $uid = $_SESSION["id"];
+                $q = $asfun->dbcon->query("select * from projects where uid='$uid'");
+                while ($row = mysqli_fetch_assoc($q)) {
+                ?>
 
-                    <?php 
-                    $prog= $asfun->progress($row["id"]);
-                    ?>
+                  <tr>
+                    <td>
+                      <?php echo $i++; ?>
+                    </td>
+                    <td>
+                      <a href="kanban.php?pid=<?php echo $row["id"] ?>">
+                        <?php echo $row["name"] ?>
+                      </a>
+                      <br>
+                      <small>
+                        Created at: <?php echo $row["cdate"] ?>
+                      </small>
+                    </td>
+                    <td>
+                      <ul class="list-inline">
+                        <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1, 15); ?>.jpg">
 
-                          <div class="progress progress-sm">
-                              <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $prog; ?>%">
-                              </div>
-                          </div>
-                          <small>
-                             <?php if($prog==-1){
-                                 echo "No Task Found!";
-                             }else{ ?> 
-                              <?php echo $prog; ?>% Complete
-                               <?php } ?> 
-                        </small>
-                      </td>
-                      <td class="project-state">
-                          <span class="badge badge-success"><?php echo $row["status"]; ?></span>
-                      </td>
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="projectdetail.php?pid=<?php echo $row['id'] ?>">
-                              <i class="fas fa-eye">
-                              </i>
-                              
-                          </a>
-                          <a class="btn btn-info btn-sm" href="projectnew.php?pid=<?php echo $row['id'] ?>">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              
-                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1, 15); ?>.jpg">
 
-                          <a class="btn btn-danger btn-sm" href="projectlist.php?pid=<?php echo $row['id'] ?>&act=dp">
-                              <i class="fas fa-trash">
-                              </i>
-                              
-                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1, 15); ?>.jpg">
 
-                          
-                          <!--
+                        </li>
+                        <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../frontend/dist/imgnew/<?php echo rand(1, 15); ?>.jpg">
+
+                        </li>
+                      </ul>
+                    </td>
+                    <td class="project_progress">
+
+                      <?php
+                      $prog = $asfun->progress($row["id"]);
+                      ?>
+
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $prog; ?>%">
+                        </div>
+                      </div>
+                      <small>
+                        <?php if ($prog == -1) {
+                          echo "No Task Found!";
+                        } else { ?>
+                          <?php echo $prog; ?>% Complete
+                        <?php } ?>
+                      </small>
+                    </td>
+                    <td class="project-state">
+                      <span class="badge badge-success"><?php echo $row["status"]; ?></span>
+                    </td>
+                    <td class="project-actions text-right">
+                      <div class="btn btn-warning" onclick="location.href='scripter.php?id=<?php echo $row['id'] ?>';" style="cursor:pointer;">
+                        <i class="fas fa-pencil-alt float-left" style="margin-right:10px;"></i>
+                        <h3 class="card-title">Launch Scripter </h3>
+                      </div>
+                      <a class="btn btn-primary btn-sm" href="projectdetail.php?pid=<?php echo $row['id'] ?>">
+                        <i class="fas fa-eye">
+                        </i>
+
+                      </a>
+                      <a class="btn btn-info btn-sm" href="projectnew.php?pid=<?php echo $row['id'] ?>">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+
+                      </a>
+
+                      <a class="btn btn-danger btn-sm" href="projectlist.php?pid=<?php echo $row['id'] ?>&act=dp">
+                        <i class="fas fa-trash">
+                        </i>
+
+                      </a>
+
+
+                      <!--
                           <a class="btn btn-danger btn-sm" href="projectdelete.php?pid=<?php echo $row['id'] ?>">
                               <i class="fas fa-trash">
                               </i>
                               Delete
                           </a>
                              -->
-                      </td>
+                    </td>
                   </tr>
-                   
-                   <?php
-               }
-             ?>
-           
-             </tbody>
-          </table>
+
+                <?php
+                }
+                ?>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
-      </div>
 
 
-    </section>
-</form>
+      </section>
+    </form>
     <!-- /.content -->
   </div>
- 
+
   <?php include 'bottom.php'; ?>
 
 <?php } else {

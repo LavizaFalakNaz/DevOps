@@ -203,15 +203,8 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                   while ($row = mysqli_fetch_assoc($q)) {
                   ?>
                     <li>
-                      <!--STORE FILE DATA AS A SESSION VARIABLE-->
-                      <?php
-                      $_SESSION['ActiveFile']['fid'] = $row["id"];
-                      $_SESSION['ActiveFile']['path'] = $row["file_path_address"];
-                      $_SESSION['ActiveFile']['pid'] = $row["pid"];
-                      $_SESSION['ActiveFile']['tid'] = $row["tid"];
-                      ?>
-                      <a href="viewcode.php" class="btn-link text-secondary">
-                        <i class="far fa-fw fa-file-word"></i>
+                      <a href="viewcode.php?file=<?php echo $row["id"]; ?>" class="btn-link text-secondary">
+                        <i class="far fa-fw fa-file-code"></i>
                         <?php echo basename($row["file_path_address"]) ?>
                       </a>
                     </li>

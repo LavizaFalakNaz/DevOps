@@ -8,6 +8,21 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     $title = "Code View";
     include 'top.php';
     $pic = $_SESSION['display-photo-path'];
+
+    if (isset($_GET['file'])) {
+        $f_id = $_GET["file"];
+        $get_files = "SELECT * FROM attachment_files WHERE id = '$f_id'";
+        $file_results = mysqli_query($con, $get_files);
+        while ($row = mysqli_fetch_assoc($file_results)) {
+
+            $_SESSION['ActiveFile']['fid'] = $row["id"];
+            $_SESSION['ActiveFile']['path'] = $row["file_path_address"];
+            $_SESSION['ActiveFile']['pid'] = $row["pid"];
+            $_SESSION['ActiveFile']['tid'] = $row["tid"];
+            $pid = $_SESSION['ActiveFile']['pid'];
+        }
+    }
+
     ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -112,7 +127,8 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                             <!-- /.card-footer -->
                             <div class="card-footer">
                                 <input type="submit" style="margin-left:10px; width:100px;" value="Save" class="btn btn-primary" />
-                                <button type="submit" class="btn btn-default float-right">Cancel</button>
+                                <a class="btn btn-info" style="margin-left:10px; width:100px;" href="query.php?file=<?php echo $file; ?>" target="_blank">Run</a>
+                                <button class="btn btn-default float-right">Cancel</button>
                             </div>
                             <!-- /.card-footer -->
                         </form>
@@ -123,7 +139,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
                 <div class="col-lg-4">
                     <div class="card card-warning">
-                        <div class="card-header" onclick="location.href='scripter.php?id=<?php echo $fid; ?>';" style="cursor:pointer;">
+                        <div class="card-header" onclick="location.href='scripter.php?id=<?php echo $pid; ?>';" style="cursor:pointer;">
                             <h3 class="card-title">Launch Scripter</h3>
                             <i class="fas fa-pencil-alt float-right">
                             </i>
