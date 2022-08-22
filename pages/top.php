@@ -232,7 +232,7 @@
 
                 <li class="nav-item">
                   <a href="gkanban.php" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i>
+                    <i class="fas fa-chalkboard nav-icon"></i>
                     <!--square-kanban-->
                     <p>Kanban Board</p>
                   </a>

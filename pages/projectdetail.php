@@ -219,12 +219,19 @@ if(isset($_GET["pid"])){
               <?php
               
               $q=$asfun->dbcon->query("select * from attachment_files where pid='$pid'");
-               while($row=mysqli_fetch_assoc($q)){
-                   ?>
-                <li>
-                  <a href="<?php echo $row["file_path_address"] ?>" target="_blank" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
-                  <?php echo basename($row["file_path_address"]) ?></a>
-                </li>
+              while($row=mysqli_fetch_assoc($q)){
+                  ?>
+               <li>
+               <!--STORE FILE DATA AS A SESSION VARIABLE-->
+               <?php
+                   $_SESSION['ActiveFile']['fid'] = $row["id"];
+                   $_SESSION['ActiveFile']['path'] = $row["file_path_address"];
+                   $_SESSION['ActiveFile']['pid'] = $row["pid"];
+                   $_SESSION['ActiveFile']['tid'] = $row["tid"];
+                 ?>  
+               <a href="viewcode.php" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> 
+                 <?php echo basename($row["file_path_address"]) ?></a>
+               </li>
                    
                    <?php
                }

@@ -96,7 +96,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-header">
-                            <h3 class="card-title">Edit Code</h3>
+                            <h3 class="card-title">Edit Code <?php echo basename($file) ?></h3>
                         </div>
                         <!-- /.card-header -->
 
