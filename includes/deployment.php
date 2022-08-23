@@ -1,5 +1,5 @@
 <!--SECTION 3-->
-<div class="collapse" id="Sec3">
+<div class="collapse show" id="Sec3">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Deployment & Servers</h3>

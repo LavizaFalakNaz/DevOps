@@ -19,7 +19,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
             $_SESSION['ActiveFile']['path'] = $row["file_path_address"];
             $_SESSION['ActiveFile']['pid'] = $row["pid"];
             $_SESSION['ActiveFile']['tid'] = $row["tid"];
-            $pid = $_SESSION['ActiveFile']['pid'];
+            $pid = $_SESSION["project_id"];
         }
     }
 
@@ -126,8 +126,10 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
                             <!-- /.card-footer -->
                             <div class="card-footer">
-                                <input type="submit" style="margin-left:10px; width:100px;" value="Save" class="btn btn-primary" />
+                                <input type="submit" style="margin-left:10px; width:100px;" name="save" value="Save" class="btn btn-warning" />
                                 <a class="btn btn-info" style="margin-left:10px; width:100px;" href="query.php?file=<?php echo $file; ?>" target="_blank">Run</a>
+                                <a class="btn btn-primary" style="margin-left:10px; width:100px;" href="../includes/validator.php?file=<?php echo $file; ?>" target="_blank">Validate</a>
+                                
                                 <button class="btn btn-default float-right">Cancel</button>
                             </div>
                             <!-- /.card-footer -->

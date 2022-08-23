@@ -7,13 +7,9 @@
                 <i class="fas fa-times">
                 </i>
             </a>
-            <a class="btn btn-warning btn-sm float-right" style="margin-right:10px;" href="#"><i class="fas fa-download" style="margin-right:10px;">
-                </i>Generate PDF Report</a>
         </div>
         <div class="card-body">
             <?php
-
-            require_once('../tcpdf/tcpdf.php');
 
             $query = "SELECT * FROM attachment_files where pid = '$pid'";
             $result = mysqli_query($con, $query);
@@ -162,7 +158,18 @@
             </script>
         </div>
         <div class="card-footer">
-            footer
+            <form class="form-horizontal" action="../includes/generate-test-report.php" method="POST">
+
+                <!--SENDING ALL DATA AS POST TO TESTING REPORT -->
+
+                <input type="hidden" name="total_files" value=<?php echo $total_files; ?>>
+                <input type="hidden" name="total_cases" value=<?php echo $total_cases; ?>>
+                <input type="hidden" name="successful_cases" value=<?php echo $successful_cases; ?>>
+                <input type="hidden" name="pending_cases" value=<?php echo $pending_cases; ?>>
+
+                <button type="submit" class="btn btn-warning btn-sm float-right" style="margin-right:10px;"><i class="fas fa-download" style="margin-right:10px;">
+                    </i>Generate PDF Report</button>
+            </form>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <!--INFORMATION 1-->
-<div class="collapse" id="info">
+<div class="collapse show" id="info">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Project Infomation</h3>

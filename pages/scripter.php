@@ -34,9 +34,9 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     <?php
     $title = "Scripter";
     include 'top.php';
+    $pid = $_SESSION["project_id"];
     $pic = $_SESSION['display-photo-path'];
 
-    $pid = 0;
     if (isset($_GET['id'])) {
         $pid = $_GET['id'];
     } else if (isset($_GET['pid'])) {
@@ -44,6 +44,8 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     } else if (isset($_SESSION['ActiveFile']['pid'])) {
         $pid = $_SESSION['ActiveFile']['pid'];
     }
+
+    $pid = $_SESSION['project_id'];
 
     $q = "SELECT * FROM project_resources WHERE pid = '$pid'";
     $q1 = "SELECT * FROM project_goals WHERE pid = '$pid' ORDER BY id";

@@ -1,5 +1,5 @@
 <!--SECTION 1-->
-<div class="collapse" id="Sec1">
+<div class="collapse show" id="Sec1">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Code Analysis</h3>
