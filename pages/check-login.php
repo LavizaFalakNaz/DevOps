@@ -33,6 +33,9 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['id'] = $row['id'];
                     $_SESSION["project_id"] = 194;
+                    $_SESSION["project_id"] = 194;
+
+                    //also save this to the database
                     $_SESSION['display-photo-path'] = '../resources/images/0.jpg';
                     if ($row['mail-server-id'] != '0') {
                         $_SESSION['mail-server-id'] = $row['mail_server_id'];

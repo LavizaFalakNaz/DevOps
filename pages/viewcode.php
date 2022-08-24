@@ -127,9 +127,9 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                             <!-- /.card-footer -->
                             <div class="card-footer">
                                 <input type="submit" style="margin-left:10px; width:100px;" name="save" value="Save" class="btn btn-warning" />
-                                <a class="btn btn-info" style="margin-left:10px; width:100px;" href="query.php?file=<?php echo $file; ?>" target="_blank">Run</a>
-                                <a class="btn btn-primary" style="margin-left:10px; width:100px;" href="../includes/validator.php?file=<?php echo $file; ?>" target="_blank">Validate</a>
-                                
+                                <a class="btn btn-info" style="margin-left:10px; width:100px;" href="query.php?file=<?php echo $file; ?>">Run</a>
+                                <a class="btn btn-primary" style="margin-left:10px; width:100px;" href="../includes/validator.php?fid=<?php echo $fid; ?>&file=<?php echo $file; ?>">Validate</a>
+
                                 <button class="btn btn-default float-right">Cancel</button>
                             </div>
                             <!-- /.card-footer -->
@@ -239,8 +239,21 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                             </div>
                         </div>
                         <div class="card-footer">
-                            <input type="submit" style="margin-left:10px; width:100px;" value="Add New" data-toggle="modal" data-target="#myModal" class="btn btn-success" />
-                            <button type="submit" class="btn btn-default float-right" class="btn tn-danger">Cancel</button>
+                            <input type="submit" style="width:160px;" value="Add New" data-toggle="modal" data-target="#myModal" class="btn btn-success" />
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Error Logs</h3>
+                            <form method="POST" action="../includes/test-case-operations.php">
+                                <input type="submit" name="get_log" style="width:160px;" value="Get Logs" class="btn btn-sm btn-warning float-right" />
+                            </form>
+                        </div>
+                        <div class="card-body">
+                            fetch error logs here
+                        </div>
+                        <div class="card-footer">
+
                         </div>
                     </div>
                 </div>

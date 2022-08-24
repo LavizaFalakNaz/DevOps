@@ -22,6 +22,10 @@ if (isset($_POST['new-case'])) {
     }
 }
 
+if (isset($_POST["get_log"])) {
+    
+}
+
 //UPDATE STATUS OF THE TEST CASE
 if ($_GET['perf'] == "update") {
     $id = $_GET['id'];

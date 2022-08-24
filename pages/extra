@@ -1,13 +1,61 @@
-<p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-  </div>
-</div>
+<?php
+include "../config/config.php";
+session_start();
+$uid = $_SESSION['id'];
+
+$num = $_SESSION["error_log_number"];
+$docString = $uid . $num;
+
+// (A) ERROR HANDLING SETTINGS
+error_reporting(E_ALL & ~E_NOTICE); // ERROR REPORTING LEVEL
+ini_set("display_errors", 0); // DO NOT SHOW ERROR MESSAGE
+ini_set("log_errors", 0); // SAVE ERROR TO LOG FILE
+ini_set("error_log", __DIR__ . DIRECTORY_SEPARATOR . "errDir" . DIRECTORY_SEPARATOR . $docString . ".log");
+
+// (B) CATCH ALL ERRORS
+set_exception_handler(function ($ex) {
+    print_r($ex);
+    error_log("YOUR EXTRA MESSAGE OR DATA");
+});
+
+set_error_handler(function ($ex) {
+    print_r($ex);
+    error_log("YOUR EXTRA MESSAGE OR DATA");
+});
+
+
+// (X) THROW EXCEPTION
+if (isset($_GET['file'])) {
+    $file = $_GET['file'];
+    while (true) {
+        try {
+            include $file;
+        } catch (Exception $e) {
+            echo "Error Agaya Bhaee!";
+            throw new Exception($ex);
+            /*$query = "SELECT id FROM attachment_files where file_path_address = '$file'";
+            $result = mysqli_query($con, $query);
+            if ($result->num_rows === 1) {
+                while ($array = mysqli_fetch_row($result)) {
+                    $insert = "INSERT INTO validation_logs (description, file_id) VALUES ('$e' , '$fid')";
+                    if (!mysqli_query($con, $insert)) {
+                        die('Error: ' . mysqli_error($con));
+                    } else {
+                        header("Location: ../pages/viewcode.php?file=" . $file . "&success=validation complete.");
+                        exit();
+                    }
+                }
+            }*/
+        } 
+    }
+
+?>
+    <a class="btn btn-warning btn-sm" href="../pages/viewcode.php?file='<?php echo $file; ?>'">
+        <i class="fas fa-back">
+        </i>Go Back
+    </a>
+<?php
+}
+
+header("Location: ../pages/viewcode.php?file=" . $file . "&success=validation complete.");
+exit();

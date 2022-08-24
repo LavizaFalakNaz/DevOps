@@ -1,0 +1,4 @@
+[24-Aug-2022 13:42:35 UTC] PHP Fatal error:  Call to undefined function condrella() in C:\Users\ZULKUFIL\Downloads\laragon-portable\www\DevOps\resources\files\report.php on line 3
+[24-Aug-2022 13:42:58 UTC] PHP Fatal error:  Call to undefined function condrella() in C:\Users\ZULKUFIL\Downloads\laragon-portable\www\DevOps\resources\files\report.php on line 3
+[24-Aug-2022 13:43:10 UTC] PHP Fatal error:  Call to undefined function someUndefinedFunction() in C:\Users\ZULKUFIL\Downloads\laragon-portable\www\DevOps\resources\files\report.php on line 3
+[24-Aug-2022 14:21:42 UTC] PHP Fatal error:  Call to undefined function someUndefinedFunction() in C:\Users\ZULKUFIL\Downloads\laragon-portable\www\DevOps\resources\files\report.php on line 3
