@@ -13,22 +13,23 @@
 
             $query = "SELECT * FROM attachment_files where pid = '$pid'";
             $result = mysqli_query($con, $query);
+            $total_cases = 0;
+            $successful_cases = 0;
+            $pending_cases = 0;
+            $total_files = 0;
             if (!empty($result)) {
+                //if the code reaches here that means the project has file.
+
                 while ($array = mysqli_fetch_row($result)) {
-                    $fid = $array[0];
-                    $que1 = "SELECT * FROM test_cases where file_id = '$fid'";
+                    $f_id = $array[0];
+                    $que1 = "SELECT * FROM test_cases where file_id = '$f_id'";
                     $res1 = mysqli_query($con, $que1);
-                    $total_files = 0;
-                    $total_cases = 0;
-                    $successful_cases = 0;
-                    $pending_cases = 0;
                     if (!empty($res1)) {
-                        //if the code reaches here that means the project has file.
-                        $total_files = $total_files + 1;
             ?>
                         <div class="card-header">
                             <h3 class='card-title'>
                                 <a href="viewcode.php?file=<?php echo $cases; ?>"><?php echo "File: " . basename($array[3]); ?></a>
+                                <?php $total_files = $total_files + 1; ?>
                             </h3>
                         </div><?php
                                 while ($cases = mysqli_fetch_row($res1)) {
@@ -58,7 +59,6 @@
                                         <p class="badge badge-success">Success</p>
                                     <?php
                                     }
-
                                     ?>
                                 </div>
                             </div>
@@ -93,6 +93,7 @@
                     <div class="row">
                         <div class="col"><canvas id="files" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
                         <div class="col"><canvas id="cases" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
+                        <div class="col"><canvas id="logs" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -132,6 +133,32 @@
                     //-------------
                     // Get context with jQuery - using jQuery's .get() method.
                     var donutChartCanvas = $('#cases').get(0).getContext('2d')
+                    var donutData = {
+                        labels: [
+                            'Files',
+                            'Cases',
+                        ],
+                        datasets: [{
+                            data: [<?php echo $total_files; ?>, <?php echo $total_cases; ?>],
+                            backgroundColor: ['#00c0ef', '#3c8dbc'],
+                        }]
+                    }
+                    var donutOptions = {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                    }
+                    //Create pie or douhnut chart
+                    // You can switch between pie and douhnut using the method below.
+                    new Chart(donutChartCanvas, {
+                        type: 'doughnut',
+                        data: donutData,
+                        options: donutOptions
+                    })
+
+                    //- DONUT CHART -
+                    //-------------
+                    // Get context with jQuery - using jQuery's .get() method.
+                    var donutChartCanvas = $('#logs').get(0).getContext('2d')
                     var donutData = {
                         labels: [
                             'Files',

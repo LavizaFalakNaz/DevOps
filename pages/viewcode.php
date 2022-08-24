@@ -127,10 +127,9 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                             <!-- /.card-footer -->
                             <div class="card-footer">
                                 <input type="submit" style="margin-left:10px; width:100px;" name="save" value="Save" class="btn btn-warning" />
-                                <a class="btn btn-info" style="margin-left:10px; width:100px;" href="query.php?file=<?php echo $file; ?>">Run</a>
                                 <a class="btn btn-primary" style="margin-left:10px; width:100px;" href="../includes/validator.php?fid=<?php echo $fid; ?>&file=<?php echo $file; ?>">Validate</a>
 
-                                <button class="btn btn-default float-right">Cancel</button>
+                                <a class="btn btn-info float-right" style="margin-left:10px; width:100px;" href="query.php?file=<?php echo $file; ?>">Run</a>
                             </div>
                             <!-- /.card-footer -->
                         </form>
@@ -245,12 +244,91 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Error Logs</h3>
-                            <form method="POST" action="../includes/test-case-operations.php">
+                            <form method="POST" action="">
                                 <input type="submit" name="get_log" style="width:160px;" value="Get Logs" class="btn btn-sm btn-warning float-right" />
                             </form>
                         </div>
                         <div class="card-body">
-                            fetch error logs here
+                            <?php
+
+                            if (isset($_POST['get_log'])) {
+                                $timer = 0;
+                                $prev = "";
+                                $fid = $_SESSION['ActiveFile']['fid'];
+                                $uid = $_SESSION['id'];
+                                $q = "SELECT * FROM user_logs WHERE uid = '$uid' AND fid = '$fid'";
+                                $all_logs = mysqli_query($con, $q);
+                                if ($all_logs->num_rows > 0) {
+                                    while ($a_id = mysqli_fetch_assoc($all_logs)) {
+                                        $n_id = $a_id['error_log_number'];
+                                        $msgs = "SELECT DISTINCT descp FROM validation_logs WHERE id = '$n_id' AND fid = '$fid' AND status = '0'";
+                                        $error_logs = mysqli_query($con, $msgs);
+                                        if ($error_logs->num_rows > 0) {
+                            ?>
+                                            <table class="table">
+                                                <tbody>
+                                                    <?php
+                                                    while ($err = mysqli_fetch_row($error_logs)) {
+                                                        // condition for the first run
+                                                        if ($timer == 0 && $prev == "") {
+                                                    ?>
+                                                            <tr>
+                                                                <td style="width:70%;"><?php echo $err[0]; ?></td>
+                                                                <td style="width:30%;">
+                                                                    <a class="btn btn-success btn-sm" style="width:150px;" href="../includes/test-case-operations.php?id=<?php echo $n_id; ?>&perf=log">
+                                                                        <i class="fas fa-exchange-alt">
+                                                                        </i> Generate Test Case
+                                                                    </a><br>
+                                                                    <a class="btn btn-danger btn-sm" style="width:150px; margin-top:5px;" href="../includes/test-case-operations.php?id=<?php echo $n_id; ?>&perf=discard">
+                                                                        <i class="fas fa-trash">
+                                                                        </i> Discard
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <?php
+                                                            $timer = $timer + 1;
+                                                            $prev = $err[0];
+                                                        } else {
+                                                            if ($err[0] == $prev) {
+                                                                continue;
+                                                            } else {
+                                                            ?>
+                                                                <tr>
+                                                                    <td style="width:70%;"><?php echo $err[0]; ?></td>
+                                                                    <td style="width:30%;">
+                                                                        <a class="btn btn-success btn-sm" style="width:150px;" href="../includes/test-case-operations.php?id=<?php echo $n_id; ?>&perf=log">
+                                                                            <i class="fas fa-exchange-alt">
+                                                                            </i> Generate Test Case
+                                                                        </a><br>
+                                                                        <a class="btn btn-danger btn-sm" style="width:150px; margin-top:5px;" href="../includes/test-case-operations.php?id=<?php echo $n_id; ?>&perf=discard">
+                                                                            <i class="fas fa-trash">
+                                                                            </i> Discard
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php
+                                                            }
+                                                            ?>
+
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                            <?php
+                                        } else {
+                                            $log_message = "There are no logs maintained in validation.";
+                                            //echo $log_message;
+                                        }
+                                    }
+                                } else {
+                                    $log_message = "There are no logs maintained in users.";
+                                    //echo $log_message;
+                                }
+                            }
+
+                            ?>
                         </div>
                         <div class="card-footer">
 
