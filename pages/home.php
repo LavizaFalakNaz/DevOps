@@ -285,31 +285,65 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
             </div>
           </div>
         </div>
-        <!-- /.row -->
-        <!-- Main row -->
+
         <div class="row">
           <div class="col">
+            <!-- AREA CHART -->
             <div class="card card-light">
               <div class="card-header">
-                <h3 class="card-title">Some heading</h3>
+                <h3 class="card-title">Project Progress</h3>
               </div>
-              <div class="card-body"></div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
             </div>
+            <!-- /.card -->
           </div>
+
           <div class="col">
+            <!-- BAR CHART -->
             <div class="card card-light">
               <div class="card-header">
-                <h3 class="card-title">Some heading</h3>
+                <h3 class="card-title">Employee Performance</h3>
               </div>
-              <div class="card-body"></div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <!-- DONUT CHART -->
+            <div class="card card-light">
+              <div class="card-header">
+                <h3 class="card-title">Testing Analysis</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col"><canvas id="files" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
+                  <div class="col"><canvas id="cases" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
+                  <div class="col"><canvas id="logs" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
             </div>
           </div>
         </div>
+
         <div class="row">
 
           <!-- Left col -->
           <section class="col-lg 4 ">
-            <div class="card card-secondary">
+            <div class="card card-light">
               <div class="card-header">
                 <h3 class="card-title">Files Overview</h3>
               </div>
@@ -342,7 +376,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
           <section class="col-lg-4">
-            <div class="card card-secondary">
+            <div class="card card-light">
               <div class="card-header">
                 <h3 class="card-title">Pending Tests Overview</h3>
               </div>
@@ -385,7 +419,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
 
           </section>
           <section class="col-lg-4">
-            <div class="card card-secondary">
+            <div class="card card-light">
               <div class="card-header">
                 <h3 class="card-title">Pending Logs Overview</h3>
               </div>
@@ -413,109 +447,8 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
             </div>
           </section>
         </div>
-        <div class="row">
-          <div class="col">
-            <!-- DONUT CHART -->
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Testing Analysis</h3>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col"><canvas id="files" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
-                  <div class="col"><canvas id="cases" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
-                  <div class="col"><canvas id="logs" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-          </div>
-          <script>
-            $(function() {
-              //- DONUT CHART -
-              //-------------
-              // Get context with jQuery - using jQuery's .get() method.
-              var donutChartCanvas = $('#files').get(0).getContext('2d')
-              var donutData = {
-                labels: [
-                  'Pending Cases',
-                  'Successful Cases',
-                  'Total Test Cases',
-                ],
-                datasets: [{
-                  data: [<?php echo $num_pending_test; ?>, <?php echo $num_complete_test; ?>, <?php echo $num_total_tests; ?>],
-                  backgroundColor: ['#f56954', '#00a65a', '#f39c12'],
-                }]
-              }
-              var donutOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-              }
-              //Create pie or douhnut chart
-              // You can switch between pie and douhnut using the method below.
-              new Chart(donutChartCanvas, {
-                type: 'doughnut',
-                data: donutData,
-                options: donutOptions
-              })
 
-              //- DONUT CHART -
-              //-------------
-              // Get context with jQuery - using jQuery's .get() method.
-              var donutChartCanvas = $('#cases').get(0).getContext('2d')
-              var donutData = {
-                labels: [
-                  'Total Files',
-                  'Total Cases',
-                  'Total Logs',
-                ],
-                datasets: [{
-                  data: [<?php echo $num_total_files; ?>, <?php echo $num_total_tests; ?>, <?php echo $num_total_logs; ?>],
-                  backgroundColor: ['#00c0ef', '#f39c12', '#3c8dbc'],
-                }]
-              }
-              var donutOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-              }
-              //Create pie or douhnut chart
-              // You can switch between pie and douhnut using the method below.
-              new Chart(donutChartCanvas, {
-                type: 'doughnut',
-                data: donutData,
-                options: donutOptions
-              })
 
-              //- DONUT CHART -
-              //-------------
-              // Get context with jQuery - using jQuery's .get() method.
-              var donutChartCanvas = $('#logs').get(0).getContext('2d')
-              var donutData = {
-                labels: [
-                  'Pending Logs',
-                  'Addressed Logs',
-                  'Total Logs',
-                ],
-                datasets: [{
-                  data: [<?php echo $num_pending_logs; ?>, <?php echo $num_complete_logs; ?>, <?php echo $num_total_logs; ?>],
-                  backgroundColor: ['#f56954', '#00c0ef', '#00a65a'],
-                }]
-              }
-              var donutOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-              }
-              //Create pie or douhnut chart
-              // You can switch between pie and douhnut using the method below.
-              new Chart(donutChartCanvas, {
-                type: 'doughnut',
-                data: donutData,
-                options: donutOptions
-              })
-
-            })
-          </script>
-        </div>
         <!-- /.card -->
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
@@ -523,6 +456,175 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <script>
+    $(function() {
+      //- DONUT CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var donutChartCanvas = $('#files').get(0).getContext('2d')
+      var donutData = {
+        labels: [
+          'Pending Cases',
+          'Successful Cases',
+          'Total Test Cases',
+        ],
+        datasets: [{
+          data: [<?php echo $num_pending_test; ?>, <?php echo $num_complete_test; ?>, <?php echo $num_total_tests; ?>],
+          backgroundColor: ['#f56954', '#00a65a', '#f39c12'],
+        }]
+      }
+      var donutOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+      }
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      new Chart(donutChartCanvas, {
+        type: 'doughnut',
+        data: donutData,
+        options: donutOptions
+      })
+
+      //- DONUT CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var donutChartCanvas = $('#cases').get(0).getContext('2d')
+      var donutData = {
+        labels: [
+          'Total Files',
+          'Total Cases',
+          'Total Logs',
+        ],
+        datasets: [{
+          data: [<?php echo $num_total_files; ?>, <?php echo $num_total_tests; ?>, <?php echo $num_total_logs; ?>],
+          backgroundColor: ['#00c0ef', '#f39c12', '#3c8dbc'],
+        }]
+      }
+      var donutOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+      }
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      new Chart(donutChartCanvas, {
+        type: 'doughnut',
+        data: donutData,
+        options: donutOptions
+      })
+
+      //- DONUT CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var donutChartCanvas = $('#logs').get(0).getContext('2d')
+      var donutData = {
+        labels: [
+          'Pending Logs',
+          'Addressed Logs',
+          'Total Logs',
+        ],
+        datasets: [{
+          data: [<?php echo $num_pending_logs; ?>, <?php echo $num_complete_logs; ?>, <?php echo $num_total_logs; ?>],
+          backgroundColor: ['#f56954', '#00c0ef', '#00a65a'],
+        }]
+      }
+      var donutOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+      }
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      new Chart(donutChartCanvas, {
+        type: 'doughnut',
+        data: donutData,
+        options: donutOptions
+      })
+
+      //--------------
+      //- AREA CHART -
+      //--------------
+
+      // Get context with jQuery - using jQuery's .get() method.
+      var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+      var areaChartData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'Project 1',
+            backgroundColor: 'rgba(60,141,188,0.9)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: [28, 48, 40, 19, 86, 27, 90]
+          },
+          {
+            label: 'Project 2',
+            backgroundColor: 'rgba(210, 214, 222, 1)',
+            borderColor: 'rgba(210, 214, 222, 1)',
+            pointRadius: false,
+            pointColor: 'rgba(210, 214, 222, 1)',
+            pointStrokeColor: '#c1c7d1',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data: [65, 59, 80, 81, 56, 55, 40]
+          },
+        ]
+      }
+
+      var areaChartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        legend: {
+          display: true,
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false,
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: false,
+            }
+          }]
+        }
+      }
+
+      // This will get the first returned node in the jQuery collection.
+      new Chart(areaChartCanvas, {
+        type: 'line',
+        data: areaChartData,
+        options: areaChartOptions
+      })
+
+      //-------------
+      //- BAR CHART -
+      //-------------
+      var barChartCanvas = $('#barChart').get(0).getContext('2d')
+      var barChartData = $.extend(true, {}, areaChartData)
+      var temp0 = areaChartData.datasets[0]
+      var temp1 = areaChartData.datasets[1]
+      barChartData.datasets[0] = temp0
+      barChartData.datasets[1] = temp1
+
+      var barChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        datasetFill: false
+      }
+
+      new Chart(barChartCanvas, {
+        type: 'bar',
+        data: barChartData,
+        options: barChartOptions
+      })
+
+    });
+  </script>
 
   <?php include 'bottom.php'; ?>
 

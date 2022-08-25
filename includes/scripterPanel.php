@@ -53,16 +53,6 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <p>Deployment Server
-                                <a class="btn btn-success btn-sm float-right" style="width:40px;" data-toggle="collapse" href="#Sec3" role="button" aria-expanded="false" aria-controls="Sec3">
-                                    <i class="fas fa-server">
-                                    </i>
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
                             <p>Report Logs
                                 <a class="btn btn-success btn-sm float-right" style="width:40px;" data-toggle="collapse" href="#Sec4" role="button" aria-expanded="false" aria-controls="Sec4">
                                     <i class="fas fa-file">

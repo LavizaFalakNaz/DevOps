@@ -76,6 +76,27 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
         <!-- /.content-header -->
         <section class="content">
 
+            <?php if (isset($zip_msg)) {
+            ?>
+                <!-- POP UP FOR SUCCESS ALERTS -->
+                <div class="row">
+                    <div class="col">
+                        <div class="card-body">
+                            <div class="alert alert-warning alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h5><i class="icon fas fa-info"></i> Success!</h5>
+                                <?php echo $zip_msg; ?>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+                <!-- END OF ALERT -->
+            <?php
+            } ?>
+
             <?php if (isset($_GET['success'])) {
             ?>
                 <!-- POP UP FOR SUCCESS ALERTS -->
@@ -121,24 +142,26 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                     <!--SCRRIPTER PANEL-->
                     <?php include "../includes/scripterPanel.php"; ?>
                     <div class="col-lg-9">
-                        <?php if ($re->num_rows > 0 && $re1->num_rows > 0) {
-                        ?>
-                            <!--INFORMATION PANEL-->
-                            <?php include "../includes/information.php"; ?>
-                        <?php
-                        } else {
-                        ?>
-                            <!--SETTINGS PANEL-->
-                            <?php include "../includes/settings.php"; ?>
-                        <?php
-                        }
-                        ?>
-
-                        <!--SECTION 2 FILE ARCHITECTURE-->
-                        <?php include "../includes/architecture.php"; ?>
-
-                        <!--SECTION 3 DEPLOYMENT AND SERVERS-->
-                        <?php include "../includes/deployment.php"; ?>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <?php if ($re->num_rows > 0 && $re1->num_rows > 0) {
+                                ?>
+                                    <!--INFORMATION PANEL-->
+                                    <?php include "../includes/information.php"; ?>
+                                <?php
+                                } else {
+                                ?>
+                                    <!--SETTINGS PANEL-->
+                                    <?php include "../includes/settings.php"; ?>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                            <div class="col-sm-4">
+                                <!--SECTION 2 FILE ARCHITECTURE-->
+                                <?php include "../includes/architecture.php"; ?>
+                            </div>
+                        </div>
 
                         <!--SECTION 4 GENERAL REPORTS-->
                         <?php include "../includes/report.php"; ?>

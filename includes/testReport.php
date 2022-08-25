@@ -37,13 +37,13 @@
                                     $total_cases = $total_cases + 1;
                                 ?>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <?php echo $cases[1]; ?>
                                 </div>
                                 <div class="col">
                                     <?php echo $cases[2]; ?>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-1">
                                     <?php
                                     // NOW ACCORDING TO THE STATUS, ADD BADGES
                                     if ($cases[5] == '0') {

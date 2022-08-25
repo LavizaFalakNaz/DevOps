@@ -45,7 +45,7 @@
                         ?>
                             <td>
                                 <div class="card-body">
-                                    <p class="alert alert-warning" role="alert"><?php echo get_goal_name($arr1[3]); ?></p>
+                                    <p class="alert alert-light" role="alert"><?php echo get_goal_name($arr1[3]); ?></p>
                                 </div>
                             </td>
                         <?php } ?>
