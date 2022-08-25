@@ -76,7 +76,7 @@ if (isset($_POST['zip'])) {
     $uid = $_SESSION['id'];
 
     $zip = new ZipArchive;
-    $base_path = "C:\\Users\\ZULKUFIL\\Desktop\\";
+    $base_path = "C:\\Users\\DELL\\Desktop\\";
     $zip_name = $base_path . 'deployment-v1_' . $uid . '.zip';
 
     if ($zip->open($zip_name, ZipArchive::CREATE) === TRUE) {
