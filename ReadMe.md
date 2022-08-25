@@ -15,14 +15,6 @@
 * WOO HOOO!
 > to commit to main repo, choose SOURCE CONTROL from VS code and commit with  message. then go to github desktop and commit to main repo hosted online.
 * To manage data on ClearDB, install mySQL workbench and login to the database with the same credentials. 
- 
-## Heroku Deployed App:
-( https://devops-fyp.herokuapp.com/ )
-
-## Infinity free
-Cpanel: ( https://app.infinityfree.net/accounts/epiz_30686719 ) <br />
-SQL server: ( https://cpanel.epizy.com/panel/indexpl.php?option=mysql ) <br />
-PHP my admin: ( http://185.27.134.10/db_structure.php?db=epiz_30686719_devops ) <br />
 
 ## Github Link:
 ( https://github.com/LavizaFalakNaz/DevOps )
