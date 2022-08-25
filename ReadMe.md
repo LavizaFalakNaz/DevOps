@@ -32,11 +32,6 @@
 4. Password: dd32e024
 5. Port number: 3306
 
-# FRONTEND TO DO LIST: 
-* login and sign in up function in extra to shift to clicking on the admin name
-* Open chat room window on clicking on the chat
-* Kanban boards don’t generate to do list, create action, doesn’t click on labels 
-
 # CODE NOTES 
 Must include this line in every php page for database connection. the connection works successfully
 ```
