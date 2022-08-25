@@ -43,16 +43,6 @@
                     ?>
                     <div class="row">
                         <div class="col-sm-12">
-                            <p>Code Analysis
-                                <a class="btn btn-success btn-sm float-right" style="width:40px;" data-toggle="collapse" href="#Sec1" role="button" aria-expanded="false" aria-controls="Sec1">
-                                    <i class="fas fa-code">
-                                    </i>
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
                             <p>File Architecture
                                 <a class="btn btn-success btn-sm float-right" style="width:40px;" data-toggle="collapse" href="#Sec2" role="button" aria-expanded="false" aria-controls="Sec2">
                                     <i class="fas fa-project-diagram">

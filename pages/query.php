@@ -2,12 +2,13 @@
 session_start();
 include "../config/config.php";
 
-if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
+if (isset($_SESSION['email']) && isset($_SESSION['id']) && isset($_GET['file'])) {
 ?>
     <?php
     $title = "Query Mode";
     include 'top.php';
     $pic = $_SESSION['display-photo-path'];
+    $file = $_GET['file'];
     ?>
 
     <!-- Content Wrapper. Contains page content -->
@@ -32,37 +33,21 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
         <!-- /.content-header -->
         <section class="content">
 
-            <!--   ###################    REMOVE FROM HERE  ###################  -->
-
-            <div class="error-page">
-                <h2 class="headline text-warning"> 404</h2>
-
-                <div class="error-content">
-                    <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Page not found.</h3>
-
-                    <p>
-                        We could not find the page you were looking for.
-                        Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
-                    </p>
-
-                    <form class="search-form">
-                        <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search">
-
-                            <div class="input-group-append">
-                                <button type="submit" name="submit" class="btn btn-warning"><i class="fas fa-search"></i>
-                                </button>
-                            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Model Run: <?php echo basename($file); ?></h3>
                         </div>
-                        <!-- /.input-group -->
-                    </form>
+                        <div class="card-body">
+                            <?php include $file; ?>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-danger float-right" style="margin-left:10px; width:200px;" href="viewcode.php?file=<?php echo $file; ?>">End Query Mode</a>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.error-content -->
             </div>
-            <!-- /.error-page -->
-
-
-            <!-- ###################  REMOVE TILL HERE  ###################  -->
 
         </section>
 

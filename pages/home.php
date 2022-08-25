@@ -1,10 +1,143 @@
 <?php
 session_start();
-  
+include "../config/config.php";
+
 if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
-  
+
   $title = "Home";
   include 'top.php';
+  $uid = $_SESSION['id'];
+
+  //RETRIEVE ALL PROJECTS 
+  $projects_query = "SELECT * FROM projects WHERE uid = '$uid'";
+  $all_projects = mysqli_query($con, $projects_query);
+  if ($all_projects->num_rows > 0) {
+
+    ################################################################################################
+    //TOTAL NUMBER OF PROJECTS
+    $num_total_projects = $all_projects->num_rows;
+    ################################################################################################
+
+    $num_total_tasks = 0;
+    $num_pending_tasks = 0;
+    $num_active_tasks = 0;
+    $num_complete_tasks = 0;
+    $num_total_files = 0;
+    $num_total_tests = 0;
+    $num_pending_test = 0;
+    $num_complete_test = 0;
+    $num_total_logs = 0;
+    $num_pending_logs = 0;
+    $num_complete_logs = 0;
+    $test_iterator = 0;
+    $log_iterator = 0;
+    $file_iterator = 0;
+    $no_logs = null;
+    $no_tests = null;
+
+    while ($single_project = mysqli_fetch_row($all_projects)) {
+      $project_id = $single_project[0];
+      $tasks_query = "SELECT * FROM task WHERE pid = '$project_id'";
+      $all_tasks = mysqli_query($con, $tasks_query);
+      if ($all_tasks->num_rows > 0) {
+
+        ################################################################################################
+        //TOTAL NUMBER OF TASKS
+        $num_total_tasks = $num_total_tasks + $all_tasks->num_rows;
+        ################################################################################################
+
+        while ($single_task = mysqli_fetch_row($all_tasks)) {
+          $task_id = $single_task[0];
+
+          if ($single_task[7] == '1') {
+            $num_pending_tasks = $num_pending_tasks + 1;
+          } else if ($single_task[7] == '2') {
+            $num_active_tasks = $num_active_tasks + 1;
+          } else if ($single_task[7] == '3') {
+            $num_complete_tasks = $num_complete_tasks + 1;
+          }
+
+          //RETRIVE ALL FILES ACCORDING TO TASKS
+          $files_query = "SELECT * FROM attachment_files WHERE tid = '$task_id'";
+          $all_files = mysqli_query($con, $files_query);
+          if ($all_files->num_rows > 0) {
+
+            ################################################################################################
+            //TOTAL NUMBER OF TASKS
+            $num_total_files = $num_total_files + $all_files->num_rows;
+            ################################################################################################
+
+            while ($single_file = mysqli_fetch_row($all_files)) {
+              //get file id
+              $file_id = $single_file[0];
+              $dashboard_files[$file_iterator][0] = $single_file[0];
+              $dashboard_files[$file_iterator][1] = $single_file[3];
+              $dashboard_files[$file_iterator][2] = basename($single_file[3]);
+
+              //RETRIEVE ALL TEST CASES
+              $tests_query = "SELECT * FROM test_cases WHERE file_id='$file_id'";
+              $all_tests = mysqli_query($con, $tests_query);
+              if ($all_tests->num_rows > 0) {
+                ################################################################################################
+                //TOTAL NUMBER OF TASKS
+                $num_total_tests = $num_total_tests + $all_tests->num_rows;
+                ################################################################################################                
+
+                while ($single_test = mysqli_fetch_row($all_tests)) {
+                  if ($single_test[5] == '0') {
+                    $num_pending_test = $num_pending_test + 1;
+                    $dashboard_tests[$test_iterator][0] = $single_test[0];
+                    $dashboard_tests[$test_iterator][1] = $single_test[1];
+                    $dashboard_tests[$test_iterator][2] = substr($single_test[2], 0, 100) . "...";
+                    $dashboard_tests[$test_iterator][3] = $single_test[3];
+                    $dashboard_tests[$test_iterator][4] = $single_test[4];
+                    $dashboard_tests[$test_iterator][5] = $single_test[5];
+                  } else if ($single_test[5] == '1') {
+                    $num_complete_test = $num_complete_test + 1;
+                  }
+
+                  $test_iterator++;
+                }
+              } else {
+                $no_tests = '1';
+              }
+
+              //RETRIEVE ALL LOGS
+              $logs_query = "SELECT * FROM validation_logs WHERE fid='$file_id'";
+              $all_logs = mysqli_query($con, $logs_query);
+              if ($all_logs->num_rows > 0) {
+
+                ################################################################################################
+                //TOTAL NUMBER OF TASKS
+                $num_total_logs = $num_total_logs + $all_logs->num_rows;
+                ################################################################################################
+
+                while ($single_log = mysqli_fetch_row($all_logs)) {
+                  if ($single_log[2] == '0') {
+                    $num_pending_logs = $num_pending_logs + 1;
+                    $dashboard_logs[$log_iterator][0] = $single_log[0];
+                    $dashboard_logs[$log_iterator][1] = substr($single_log[1], 0, 100) . "...";
+                    $dashboard_logs[$log_iterator][2] = $single_log[3];
+                  } else if ($single_log[2] == '1') {
+                    $num_complete_logs = $num_complete_logs + 1;
+                  }
+                  $log_iterator++;
+                }
+              } else {
+                //$no_log = '1';
+              }
+              $file_iterator++;
+            }
+          }
+        }
+      } else {
+        $no_files = '1';
+      }
+    }
+  } else {
+    $num_total_projects = 0;
+  }
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -32,570 +165,358 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3><?php echo $num_total_projects ?></h3>
+                <p>Total Projects</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-1 col-8">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
-                <p>New Orders</p>
+                <h3><?php echo $num_total_tasks ?></h3>
+                <p>Total Tasks</p>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-sm-1 col-8">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                <p>Bounce Rate</p>
+                <h3><?php echo $num_complete_tasks ?></h3>
+                <p>Completed Tasks</p>
               </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-sm-1 col-8">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
-                <p>User Registrations</p>
+                <h3><?php echo $num_active_tasks ?></h3>
+                <p>Active Tasks</p>
               </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-sm-1 col-8">
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
-                <p>Unique Visitors</p>
+                <h3><?php echo $num_pending_tasks ?></h3>
+                <p>Pending Tasks</p>
               </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3><?php echo $num_total_files ?></h3>
+                <p>Total Files</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?php echo $num_total_tests ?></h3>
+                <p>Total Tests</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $num_complete_test ?></h3>
+                <p>Complete Tests</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?php echo $num_pending_test ?></h3>
+                <p>Pending Tests</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?php echo $num_total_logs ?></h3>
+                <p>Total Logs</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $num_complete_logs; ?></h3>
+                <p>Complete Logs</p>
+              </div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-1 col-8">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?php echo $num_pending_logs; ?></h3>
+                <p>Pending Logs</p>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
+          <div class="col">
+            <div class="card card-light">
+              <div class="card-header">
+                <h3 class="card-title">Some heading</h3>
+              </div>
+              <div class="card-body"></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card card-light">
+              <div class="card-header">
+                <h3 class="card-title">Some heading</h3>
+              </div>
+              <div class="card-body"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
           <!-- Left col -->
-          <section class="col-lg-7 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
-            <div class="card">
+          <section class="col-lg 4 ">
+            <div class="card card-secondary">
               <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-chart-pie mr-1"></i>
-                  Sales
-                </h3>
-                <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                    </li>
-                  </ul>
-                </div>
-              </div><!-- /.card-header -->
+                <h3 class="card-title">Files Overview</h3>
+              </div>
               <div class="card-body">
-                <div class="tab-content p-0">
-                  <!-- Morris chart - Sales -->
-                  <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                    <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                  </div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                  </div>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- DIRECT CHAT -->
-            <div class="card direct-chat direct-chat-primary">
-              <div class="card-header">
-                <h3 class="card-title">Direct Chat</h3>
-                <div class="card-tools">
-                  <span title="3 New Messages" class="badge badge-primary">3</span>
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
-                    <i class="fas fa-comments"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages">
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                <?php if (isset($no_files)) {
+                ?>
+                  <p>You dont have any files!
+                    <?php
+                  } else {
+                    foreach ($dashboard_files as $file) {
+                    ?>
+                  <div class="row">
+                    <div class="col-sm-1">
+                      <i class="fas fa-file icon-success"></i>
                     </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="../frontend/dist/img/user1-128x128.jpg" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Is this template really for free? That's unbelievable!
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="../frontend/dist/img/user3-128x128.jpg" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="../frontend/dist/img/user1-128x128.jpg" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Working with AdminLTE on a great new app! Wanna join?
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="../frontend/dist/img/user3-128x128.jpg" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      I would love to.
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-
-                </div>
-                <!--/.direct-chat-messages-->
-
-                <!-- Contacts are loaded here -->
-                <div class="direct-chat-contacts">
-                  <ul class="contacts-list">
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="../frontend/dist/img/user1-128x128.jpg" alt="User Avatar">
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Count Dracula
-                            <small class="contacts-list-date float-right">2/28/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">How have you been? I was...</span>
-                        </div>
-                        <!-- /.contacts-list-info -->
+                    <div class="col">
+                      <a href="viewcode.php?file=<?php echo $file[1]; ?>" class="btn-link text-dark">
+                        <?php echo $file[2]; ?>
                       </a>
-                    </li>
-                    <!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="../frontend/dist/img/user7-128x128.jpg" alt="User Avatar">
-
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Sarah Doe
-                            <small class="contacts-list-date float-right">2/23/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">I will be waiting for...</span>
-                        </div>
-                        <!-- /.contacts-list-info -->
-                      </a>
-                    </li>
-                    <!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="../frontend/dist/img/user3-128x128.jpg" alt="User Avatar">
-
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Nadia Jolie
-                            <small class="contacts-list-date float-right">2/20/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">I'll call you back at...</span>
-                        </div>
-                        <!-- /.contacts-list-info -->
-                      </a>
-                    </li>
-                    <!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="../frontend/dist/img/user5-128x128.jpg" alt="User Avatar">
-
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Nora S. Vans
-                            <small class="contacts-list-date float-right">2/10/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">Where is your new...</span>
-                        </div>
-                        <!-- /.contacts-list-info -->
-                      </a>
-                    </li>
-                    <!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="../frontend/dist/img/user6-128x128.jpg" alt="User Avatar">
-
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            John K.
-                            <small class="contacts-list-date float-right">1/27/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">Can I take a look at...</span>
-                        </div>
-                        <!-- /.contacts-list-info -->
-                      </a>
-                    </li>
-                    <!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="../frontend/dist/img/user8-128x128.jpg" alt="User Avatar">
-
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Kenneth M.
-                            <small class="contacts-list-date float-right">1/4/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">Never mind I found...</span>
-                        </div>
-                        <!-- /.contacts-list-info -->
-                      </a>
-                    </li>
-                    <!-- End Contact Item -->
-                  </ul>
-                  <!-- /.contacts-list -->
-                </div>
-                <!-- /.direct-chat-pane -->
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <form action="#" method="post">
-                  <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                    <span class="input-group-append">
-                      <button type="button" class="btn btn-primary">Send</button>
-                    </span>
+                    </div>
                   </div>
-                </form>
-              </div>
-              <!-- /.card-footer-->
-            </div>
-            <!--/.direct-chat -->
-
-            <!-- TO DO List -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="ion ion-clipboard mr-1"></i>
-                  To Do List
-                </h3>
-
-                <div class="card-tools">
-                  <ul class="pagination pagination-sm">
-                    <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-                  </ul>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <ul class="todo-list" data-widget="todo-list">
-                  <li>
-                    <!-- drag handle -->
-                    <span class="handle">
-                      <i class="fas fa-ellipsis-v"></i>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </span>
-                    <!-- checkbox -->
-                    <div class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo1" id="todoCheck1">
-                      <label for="todoCheck1"></label>
-                    </div>
-                    <!-- todo text -->
-                    <span class="text">Design a nice theme</span>
-                    <!-- Emphasis label -->
-                    <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
-                    <!-- General tools such as edit or delete-->
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="handle">
-                      <i class="fas fa-ellipsis-v"></i>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </span>
-                    <div class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
-                      <label for="todoCheck2"></label>
-                    </div>
-                    <span class="text">Make the theme responsive</span>
-                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="handle">
-                      <i class="fas fa-ellipsis-v"></i>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </span>
-                    <div class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo3" id="todoCheck3">
-                      <label for="todoCheck3"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="handle">
-                      <i class="fas fa-ellipsis-v"></i>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </span>
-                    <div class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo4" id="todoCheck4">
-                      <label for="todoCheck4"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="handle">
-                      <i class="fas fa-ellipsis-v"></i>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </span>
-                    <div class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo5" id="todoCheck5">
-                      <label for="todoCheck5"></label>
-                    </div>
-                    <span class="text">Check your messages and notifications</span>
-                    <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                  <li>
-                    <span class="handle">
-                      <i class="fas fa-ellipsis-v"></i>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </span>
-                    <div class="icheck-primary d-inline ml-2">
-                      <input type="checkbox" value="" name="todo6" id="todoCheck6">
-                      <label for="todoCheck6"></label>
-                    </div>
-                    <span class="text">Let theme shine like a star</span>
-                    <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
-                    <div class="tools">
-                      <i class="fas fa-edit"></i>
-                      <i class="fas fa-trash-o"></i>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
+              <?php
+                    }
+                  }
+              ?>
               </div>
             </div>
-            <!-- /.card -->
           </section>
+
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
-          <section class="col-lg-5 connectedSortable">
-
-            <!-- Map card -->
-            <div class="card bg-gradient-primary">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-map-marker-alt mr-1"></i>
-                  Visitors
-                </h3>
-                <!-- card tools -->
-                <div class="card-tools">
-                  <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
-                    <i class="far fa-calendar-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-                <!-- /.card-tools -->
+          <section class="col-lg-4">
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Pending Tests Overview</h3>
               </div>
               <div class="card-body">
-                <div id="world-map" style="height: 250px; width: 100%;"></div>
-              </div>
-              <!-- /.card-body-->
-              <div class="card-footer bg-transparent">
-                <div class="row">
-                  <div class="col-4 text-center">
-                    <div id="sparkline-1"></div>
-                    <div class="text-white">Visitors</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <div id="sparkline-2"></div>
-                    <div class="text-white">Online</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <div id="sparkline-3"></div>
-                    <div class="text-white">Sales</div>
-                  </div>
-                  <!-- ./col -->
-                </div>
-                <!-- /.row -->
-              </div>
-            </div>
-            <!-- /.card -->
-
-            <!-- solid sales graph -->
-            <div class="card bg-gradient-info">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-th mr-1"></i>
-                  Sales Graph
-                </h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer bg-transparent">
-                <div class="row">
-                  <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                    <div class="text-white">Mail-Orders</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                    <div class="text-white">Online</div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-4 text-center">
-                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                    <div class="text-white">In-Store</div>
-                  </div>
-                  <!-- ./col -->
-                </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.card-footer -->
-            </div>
-            <!-- /.card -->
-
-            <!-- Calendar -->
-            <div class="card bg-gradient-success">
-              <div class="card-header border-0">
-
-                <h3 class="card-title">
-                  <i class="far fa-calendar-alt"></i>
-                  Calendar
-                </h3>
-                <!-- tools card -->
-                <div class="card-tools">
-                  <!-- button with a dropdown -->
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                      <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="dropdown-menu" role="menu">
-                      <a href="#" class="dropdown-item">Add new event</a>
-                      <a href="#" class="dropdown-item">Clear events</a>
-                      <div class="dropdown-divider"></div>
-                      <a href="#" class="dropdown-item">View calendar</a>
+                <?php if (isset($no_tests)) {
+                ?>
+                  <p>You dont have any test cases!
+                    <?php
+                  } else {
+                    foreach ($dashboard_tests as $test) {
+                    ?>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <b><?php echo $test[1]; ?></b>
+                    </div>
+                    <div class="col">
+                      <?php echo $test[2]; ?>
+                    </div>
+                    <div class="col-sm-1" style="margin-right:10px;">
+                      <?php
+                      // NOW ACCORDING TO THE STATUS, ADD BADGES
+                      if ($test[5] == '0') {
+                      ?>
+                        <p class=" badge badge-danger">Pending</p>
+                      <?php
+                      } else if ($test[5] == '1') {
+                      ?>
+                        <p class="badge badge-success">Success</p>
+                      <?php
+                      }
+                      ?>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-                <!-- /. tools -->
+              <?php
+                    }
+                  }
+              ?>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body pt-0">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
+            </div>
+
+          </section>
+          <section class="col-lg-4">
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Pending Logs Overview</h3>
+              </div>
+              <div class="card-body">
+                <?php if (isset($no_log)) {
+                ?>
+                  <p>You dont have any pending logs!
+                    <?php
+                  } else {
+                    foreach ($dashboard_logs as $log) {
+                    ?>
+                  <div class="row">
+                    <div class="col">
+                      <?php echo $log[1]; ?>
+                    </div>
+                    <div class="col-sm-2">
+                      <p class="badge badge-danger">Pending</p>
+                    </div>
+                  </div>
+              <?php
+                    }
+                  }
+              ?>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- DONUT CHART -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Testing Analysis</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col"><canvas id="files" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
+                  <div class="col"><canvas id="cases" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
+                  <div class="col"><canvas id="logs" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas></div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-          </section>
-          <!-- right col -->
+          </div>
+          <script>
+            $(function() {
+              //- DONUT CHART -
+              //-------------
+              // Get context with jQuery - using jQuery's .get() method.
+              var donutChartCanvas = $('#files').get(0).getContext('2d')
+              var donutData = {
+                labels: [
+                  'Pending Cases',
+                  'Successful Cases',
+                  'Total Test Cases',
+                ],
+                datasets: [{
+                  data: [<?php echo $num_pending_test; ?>, <?php echo $num_complete_test; ?>, <?php echo $num_total_tests; ?>],
+                  backgroundColor: ['#f56954', '#00a65a', '#f39c12'],
+                }]
+              }
+              var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+              }
+              //Create pie or douhnut chart
+              // You can switch between pie and douhnut using the method below.
+              new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+              })
+
+              //- DONUT CHART -
+              //-------------
+              // Get context with jQuery - using jQuery's .get() method.
+              var donutChartCanvas = $('#cases').get(0).getContext('2d')
+              var donutData = {
+                labels: [
+                  'Total Files',
+                  'Total Cases',
+                  'Total Logs',
+                ],
+                datasets: [{
+                  data: [<?php echo $num_total_files; ?>, <?php echo $num_total_tests; ?>, <?php echo $num_total_logs; ?>],
+                  backgroundColor: ['#00c0ef', '#f39c12', '#3c8dbc'],
+                }]
+              }
+              var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+              }
+              //Create pie or douhnut chart
+              // You can switch between pie and douhnut using the method below.
+              new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+              })
+
+              //- DONUT CHART -
+              //-------------
+              // Get context with jQuery - using jQuery's .get() method.
+              var donutChartCanvas = $('#logs').get(0).getContext('2d')
+              var donutData = {
+                labels: [
+                  'Pending Logs',
+                  'Addressed Logs',
+                  'Total Logs',
+                ],
+                datasets: [{
+                  data: [<?php echo $num_pending_logs; ?>, <?php echo $num_complete_logs; ?>, <?php echo $num_total_logs; ?>],
+                  backgroundColor: ['#f56954', '#00c0ef', '#00a65a'],
+                }]
+              }
+              var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+              }
+              //Create pie or douhnut chart
+              // You can switch between pie and douhnut using the method below.
+              new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+              })
+
+            })
+          </script>
         </div>
+        <!-- /.card -->
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>

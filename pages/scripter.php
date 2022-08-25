@@ -133,8 +133,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['id'])) {
                         <?php
                         }
                         ?>
-                        <!--SECTION 1 CODE ANALYSIS-->
-                        <?php include "../includes/codeAnalysis.php"; ?>
 
                         <!--SECTION 2 FILE ARCHITECTURE-->
                         <?php include "../includes/architecture.php"; ?>

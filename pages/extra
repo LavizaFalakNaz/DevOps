@@ -1,61 +1,41 @@
-<?php
-include "../config/config.php";
-session_start();
-$uid = $_SESSION['id'];
-
-$num = $_SESSION["error_log_number"];
-$docString = $uid . $num;
-
-// (A) ERROR HANDLING SETTINGS
-error_reporting(E_ALL & ~E_NOTICE); // ERROR REPORTING LEVEL
-ini_set("display_errors", 0); // DO NOT SHOW ERROR MESSAGE
-ini_set("log_errors", 0); // SAVE ERROR TO LOG FILE
-ini_set("error_log", __DIR__ . DIRECTORY_SEPARATOR . "errDir" . DIRECTORY_SEPARATOR . $docString . ".log");
-
-// (B) CATCH ALL ERRORS
-set_exception_handler(function ($ex) {
-    print_r($ex);
-    error_log("YOUR EXTRA MESSAGE OR DATA");
-});
-
-set_error_handler(function ($ex) {
-    print_r($ex);
-    error_log("YOUR EXTRA MESSAGE OR DATA");
-});
-
-
-// (X) THROW EXCEPTION
-if (isset($_GET['file'])) {
-    $file = $_GET['file'];
-    while (true) {
-        try {
-            include $file;
-        } catch (Exception $e) {
-            echo "Error Agaya Bhaee!";
-            throw new Exception($ex);
-            /*$query = "SELECT id FROM attachment_files where file_path_address = '$file'";
-            $result = mysqli_query($con, $query);
-            if ($result->num_rows === 1) {
-                while ($array = mysqli_fetch_row($result)) {
-                    $insert = "INSERT INTO validation_logs (description, file_id) VALUES ('$e' , '$fid')";
-                    if (!mysqli_query($con, $insert)) {
-                        die('Error: ' . mysqli_error($con));
-                    } else {
-                        header("Location: ../pages/viewcode.php?file=" . $file . "&success=validation complete.");
-                        exit();
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Pending Logs Overview</h3>
+    </div>
+    <div class="card-body">
+        <?php if (isset($no_logs)) {
+        ?>
+            <p>You dont have any pending logs!
+                <?php
+            } else {
+                foreach ($dashboard_logs as $log) {
+                ?>
+            <div class="row">
+                <div class="col-sm-3">
+                    <b><?php echo $log[1]; ?></b>
+                </div>
+                <div class="col">
+                    <?php echo $log[2]; ?>
+                </div>
+                <div class="col-sm-2">
+                    <?php
+                    // NOW ACCORDING TO THE STATUS, ADD BADGES
+                    if ($log[5] == '0') {
+                    ?>
+                        <p class="badge badge-danger">Pending</p>
+                    <?php
+                    } else if ($log[5] == '1') {
+                    ?>
+                        <p class="badge badge-success">Success</p>
+                    <?php
                     }
+                    ?>
+                </div>
+            </div>
+    <?php
                 }
-            }*/
-        } 
-    }
+            }
+    ?>
 
-?>
-    <a class="btn btn-warning btn-sm" href="../pages/viewcode.php?file='<?php echo $file; ?>'">
-        <i class="fas fa-back">
-        </i>Go Back
-    </a>
-<?php
-}
-
-header("Location: ../pages/viewcode.php?file=" . $file . "&success=validation complete.");
-exit();
+    </div>
+</div>

@@ -72,6 +72,32 @@
                 <p> Oops, you dont have any files or test cases. </p>
             <?php
             }
+
+            //CALCULATE LOGS 
+            $total_logs = 0;
+            $total_pending = 0;
+            $total_addressed = 0;
+            $uid = $_SESSION['id'];
+            $q = "SELECT * FROM user_logs WHERE uid = '$uid'";
+            $all_logs = mysqli_query($con, $q);
+            if ($all_logs->num_rows > 0) {
+                while ($a_id = mysqli_fetch_assoc($all_logs)) {
+                    $n_id = $a_id['error_log_number'];
+                    $msgs = "SELECT * FROM validation_logs WHERE id = '$n_id'";
+                    $error_logs = mysqli_query($con, $msgs);
+                    if ($error_logs->num_rows > 0) {
+                        while ($err = mysqli_fetch_row($error_logs)) {
+                            // condition for the first run
+                            $total_logs = $total_logs + 1;
+                            if ($err[2] == '0') {
+                                $total_pending = $total_pending + 1;
+                            } else if ($err[2] == '1') {
+                                $total_addressed = $total_addressed + 1;
+                            }
+                        }
+                    }
+                }
+            }
             ?>
         </div>
         <div class="card-body">
@@ -108,9 +134,9 @@
                     var donutChartCanvas = $('#files').get(0).getContext('2d')
                     var donutData = {
                         labels: [
-                            'Pending',
-                            'Successful',
-                            'Total',
+                            'Pending Cases',
+                            'Successful Cases',
+                            'Total Test Cases',
                         ],
                         datasets: [{
                             data: [<?php echo $pending_cases; ?>, <?php echo $successful_cases; ?>, <?php echo $total_cases; ?>],
@@ -135,8 +161,8 @@
                     var donutChartCanvas = $('#cases').get(0).getContext('2d')
                     var donutData = {
                         labels: [
-                            'Files',
-                            'Cases',
+                            'Total Files',
+                            'Total Cases',
                         ],
                         datasets: [{
                             data: [<?php echo $total_files; ?>, <?php echo $total_cases; ?>],
@@ -161,12 +187,13 @@
                     var donutChartCanvas = $('#logs').get(0).getContext('2d')
                     var donutData = {
                         labels: [
-                            'Files',
-                            'Cases',
+                            'Pending Logs',
+                            'Addressed Logs',
+                            'Total Logs',
                         ],
                         datasets: [{
-                            data: [<?php echo $total_files; ?>, <?php echo $total_cases; ?>],
-                            backgroundColor: ['#00c0ef', '#3c8dbc'],
+                            data: [<?php echo $total_pending; ?>, <?php echo $total_addressed; ?>, <?php echo $total_logs; ?>],
+                            backgroundColor: ['#f56954', '#00a65a', '#f39c12'],
                         }]
                     }
                     var donutOptions = {

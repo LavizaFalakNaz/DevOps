@@ -59,6 +59,11 @@ if (isset($_GET['id']) && $_GET['perf'] == "log") {
         $r = mysqli_fetch_row($res);
         $name = "Case From Logs";
         $desc = $r[1];
+
+        $desc = str_replace('"', "\'", $desc);
+        $desc = str_replace('*', "\*", $desc);
+        $desc = str_replace("'", "\'", $desc);
+
         $fid = $r[3];
         $insert = "INSERT INTO test_cases (name, description, file_id) VALUES ('$name' , '$desc', '$fid')";
         if (!mysqli_query($con, $insert)) {

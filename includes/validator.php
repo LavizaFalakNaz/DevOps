@@ -24,14 +24,15 @@ function myerror($error_no, $error_msg, $err_file, $err_line)
 
     //echo "Error: [$error_no] $error_msg ";
 
-    $error_msg = str_replace('"', "\"", $error_msg);
+    $error_msg = str_replace('"', "\'", $error_msg);
     $error_msg = str_replace('*', "\*", $error_msg);
     $error_msg = str_replace("'", "\'", $error_msg);
-    $msg = $error_msg;
 
-    //$e = "<b>My ERROR</b> [$error_no] $msg<br />\nFatal error on line $err_line in file $err_file";
+    /*$msg = $error_msg. " <br> ".$err_file. "<br> " . $err_line;*/
 
-    $insert = "INSERT INTO validation_logs (descp, fid) VALUES ('$msg','$fid')";
+    $e = "<b>My ERROR</b> [$error_no] $error_msg <br />\An error on line $err_line in file $err_file";
+
+    $insert = "INSERT INTO validation_logs (descp, fid) VALUES ('$e','$fid')";
     if (!mysqli_query($con, $insert)) {
         header("Location: ../pages/viewcode.php?file=" . $file . "&error=Validator Error: " . mysqli_error($con));
         exit();
